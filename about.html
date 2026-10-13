@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About T&A Engraving — 37 years of master craftsmanship, precision engraving and premium award creation. Meet our team and discover our story.">
+  <title>About Us | T&A Engraving — Premium Trophy & Awards Shop</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ABOUT PAGE STYLES */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-5);
+    }
+
+    .value-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+      transition: all var(--transition-base);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .value-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--grad-gold);
+      transform: scaleX(0);
+      transition: transform var(--transition-base);
+    }
+
+    .value-card:hover::before { transform: scaleX(1); }
+    .value-card:hover { border-color: var(--border-color); box-shadow: var(--shadow-gold); }
+
+    .value-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-lg);
+      background: rgba(198,161,91,0.1);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-5);
+    }
+
+    .value-icon svg { width: 28px; height: 28px; stroke: var(--gold); fill: none; stroke-width: 1.8; }
+    .value-title { font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 700; color: var(--text-primary); margin-bottom: var(--space-3); }
+    .value-desc { font-size: var(--fs-sm); color: var(--text-muted); line-height: 1.8; }
+
+    /* Timeline */
+    .timeline { max-width: 800px; margin: 0 auto; position: relative; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--gold), var(--gold), transparent);
+      transform: translateX(-50%);
+      opacity: 0.3;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8);
+      margin-bottom: var(--space-12);
+      position: relative;
+    }
+
+    .timeline-item::nth-child(even) .timeline-year { order: 2; }
+    .timeline-item::nth-child(even) .timeline-content { order: 1; text-align: right; }
+
+    .timeline-year-wrap {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 60px;
+      border-radius: var(--radius-full);
+      background: var(--bg-card);
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .timeline-year-wrap span {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+    }
+
+    .timeline-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      transition: all var(--transition-base);
+    }
+
+    .timeline-card:hover {
+      border-color: var(--border-color);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .timeline-card h3 { font-family: var(--font-display); font-size: var(--fs-md); font-weight: 700; color: var(--gold); margin-bottom: var(--space-2); }
+    .timeline-card p { font-size: var(--fs-sm); color: var(--text-muted); line-height: 1.7; }
+
+    /* Team grid */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-5);
+    }
+
+    .team-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      transition: all var(--transition-base);
+      text-align: center;
+    }
+
+    .team-card:hover { border-color: var(--border-color); box-shadow: var(--shadow-gold); transform: translateY(-6px); }
+
+    .team-img-wrap {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+    }
+
+    .team-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-slow);
+    }
+
+    .team-card:hover .team-img-wrap img { transform: scale(1.06); }
+
+    .team-info { padding: var(--space-5); }
+    .team-name { font-family: var(--font-display); font-size: var(--fs-base); font-weight: 700; color: var(--text-primary); margin-bottom: var(--space-1); }
+    .team-role { font-size: var(--fs-sm); color: var(--gold); font-weight: 600; letter-spacing: 0.05em; margin-bottom: var(--space-3); }
+    .team-bio { font-size: var(--fs-sm); color: var(--text-muted); line-height: 1.6; }
+
+    /* Awards wall */
+    .awards-wall {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-5);
+    }
+
+    .award-plaque {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .award-plaque::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--grad-gold);
+      opacity: 0;
+      transition: opacity var(--transition-base);
+      z-index: 0;
+    }
+
+    .award-plaque:hover::after { opacity: 0.05; }
+
+    .award-plaque-icon { display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-3); color: var(--gold); }
+    .award-plaque-icon svg { width: 38px; height: 38px; }
+    .award-plaque-title { font-family: var(--font-display); font-size: var(--fs-sm); font-weight: 700; color: var(--text-primary); margin-bottom: var(--space-1); }
+    .award-plaque-year { font-size: var(--fs-xs); color: var(--gold); }
+
+    /* Mission Visual */
+    .mission-banner {
+      background: var(--grad-burgundy);
+      border-radius: var(--radius-xl);
+      padding: var(--space-16) var(--space-12);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-12);
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mission-banner::before {
+      content: '"';
+      position: absolute;
+      font-family: var(--font-display);
+      font-size: 30rem;
+      color: rgba(255,255,255,0.03);
+      top: -5rem;
+      left: -2rem;
+      line-height: 1;
+    }
+
+    .mission-banner .quote-text {
+      font-family: var(--font-display);
+      font-size: var(--fs-2xl);
+      font-weight: 700;
+      color: var(--ivory);
+      line-height: 1.4;
+      position: relative;
+      z-index: 1;
+    }
+
+    .mission-banner .quote-text em { color: var(--gold); font-style: normal; }
+
+    .mission-stats { display: flex; flex-direction: column; gap: var(--space-6); }
+
+    .mission-stat {
+      border-left: 3px solid var(--gold);
+      padding-left: var(--space-5);
+    }
+
+    .mission-stat .num { font-family: var(--font-display); font-size: var(--fs-3xl); font-weight: 900; color: var(--gold); line-height: 1; display: block; }
+    .mission-stat .desc { font-size: var(--fs-sm); color: rgba(248,245,239,0.7); margin-top: var(--space-1); }
+
+    @media (max-width: 900px) {
+      .values-grid { grid-template-columns: 1fr 1fr; }
+      .team-grid { grid-template-columns: 1fr 1fr; }
+      .awards-wall { grid-template-columns: 1fr 1fr; }
+      .mission-banner { grid-template-columns: 1fr; }
+      .timeline::before { left: 20px; }
+      .timeline-item { grid-template-columns: 1fr; padding-left: 50px; }
+      .timeline-year-wrap { left: 20px; top: 0; }
+    }
+
+    @media (max-width: 640px) {
+      .values-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr 1fr; }
+      .awards-wall { grid-template-columns: 1fr 1fr; }
+      .mission-banner { padding: var(--space-8) var(--space-6); }
+    }
+  </style>
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <main id="main">
+
+    <!-- ==========================================
+         PAGE HERO
+    =========================================== -->
+    <header class="page-hero">
+      <img class="page-hero-bg" src="images/team-photo.jpg" alt="T&A Engraving Team">
+      <div class="page-hero-overlay"></div>
+      <div class="page-hero-content">
+        <div class="container">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="sep">›</span>
+            <span>About Us</span>
+          </nav>
+          <h1 class="page-hero-title">Our <span style="color:var(--gold);">Story</span> of Excellence</h1>
+          <p class="page-hero-subtitle">37 years of passion, precision and the relentless pursuit of perfection in every award we craft.</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- ==========================================
+         SECTION 1: MISSION
+    =========================================== -->
+    <section class="section" aria-labelledby="mission-h">
+      <div class="container">
+        <div class="mission-banner reveal">
+          <div class="quote-text">
+            "Every trophy is a <em>promise kept</em> — a promise to honour the extraordinary people who dare to push beyond ordinary limits."
+            <div style="margin-top:var(--space-6);font-size:var(--fs-sm);color:rgba(248,245,239,0.6);font-family:var(--font-body);font-weight:400;">
+              — Rajesh Trophywala, Founder
+            </div>
+          </div>
+          <div class="mission-stats">
+            <div class="mission-stat">
+              <span class="num" data-count="50000" data-suffix="+">0+</span>
+              <span class="desc">Awards crafted and delivered worldwide</span>
+            </div>
+            <div class="mission-stat">
+              <span class="num" data-count="37" data-suffix=" Years">0</span>
+              <span class="desc">Of master craftsmanship heritage</span>
+            </div>
+            <div class="mission-stat">
+              <span class="num" data-count="5000" data-suffix="+">0+</span>
+              <span class="desc">Satisfied corporate and event clients</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 2: VALUES
+    =========================================== -->
+    <section class="section" style="background:var(--bg-surface);" aria-labelledby="values-h">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">What Drives Us</div>
+          <h2 id="values-h" class="section-title reveal">Our Core <span class="text-gold">Values</span></h2>
+          <p class="section-subtitle reveal reveal-delay-1">The principles that guide every chisel stroke, every laser pass and every delivery we make.</p>
+        </div>
+
+        <div class="values-grid">
+          <div class="value-card reveal">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3 class="value-title">Uncompromising Quality</h3>
+            <p class="value-desc">Every award undergoes 12-point quality inspection before leaving our workshop. Zero compromises on materials, finish or engraving precision.</p>
+          </div>
+
+          <div class="value-card reveal reveal-delay-1">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <h3 class="value-title">Heritage of Craft</h3>
+            <p class="value-desc">We preserve time-honoured hand-engraving traditions while embracing cutting-edge laser technology — the perfect union of old and new.</p>
+          </div>
+
+          <div class="value-card reveal reveal-delay-2">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3 class="value-title">Client Partnership</h3>
+            <p class="value-desc">We don't just take orders — we form partnerships. Your vision becomes our obsession until the final award exceeds your wildest expectations.</p>
+          </div>
+
+          <div class="value-card reveal reveal-delay-3">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <h3 class="value-title">Prestige Materials</h3>
+            <p class="value-desc">Only the finest K9 crystal, solid walnut, 24K gold plating, sterling silver and premium acrylic enter our workshop. Quality materials = quality awards.</p>
+          </div>
+
+          <div class="value-card reveal reveal-delay-4">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h3 class="value-title">On-Time Delivery</h3>
+            <p class="value-desc">We know events don't wait. Our promise: your awards arrive perfectly packaged and on time, every time. Express 48-hour service available.</p>
+          </div>
+
+          <div class="value-card reveal reveal-delay-5">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+            </div>
+            <h3 class="value-title">Bespoke Personalization</h3>
+            <p class="value-desc">Every client is unique. Our design team works with you to create truly custom awards — from concept sketches to finished masterpieces.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 3: TIMELINE / HISTORY
+    =========================================== -->
+    <section class="section" aria-labelledby="history-h">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">Our Journey</div>
+          <h2 id="history-h" class="section-title reveal">37 Years of <span class="text-gold">Milestones</span></h2>
+          <p class="section-subtitle reveal reveal-delay-1">From a small workshop in Mumbai to India's most trusted award manufacturer.</p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item reveal">
+            <div class="timeline-year-wrap"><span>1987</span></div>
+            <div class="timeline-card">
+              <h3>The Beginning</h3>
+              <p>Rajesh Trophywala opens a small engraving workshop in Dharavi, Mumbai, with two hand tools and a dream to honour achievement.</p>
+            </div>
+            <div></div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-year-wrap"><span>1995</span></div>
+            <div></div>
+            <div class="timeline-card">
+              <h3>First Corporate Contract</h3>
+              <p>Wins a landmark contract with Tata Group for 500 customized executive plaques, catapulting T&A into the corporate awards space.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-year-wrap"><span>2003</span></div>
+            <div class="timeline-card">
+              <h3>Laser Technology Adopted</h3>
+              <p>First engraver in Western India to introduce state-of-the-art fiber laser engraving, enabling unprecedented detail and volume capacity.</p>
+            </div>
+            <div></div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-year-wrap"><span>2012</span></div>
+            <div></div>
+            <div class="timeline-card">
+              <h3>ISO Certification</h3>
+              <p>Achieved ISO 9001:2012 certification and expanded to a 10,000 sq ft purpose-built manufacturing facility in Andheri, Mumbai.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-year-wrap"><span>2019</span></div>
+            <div class="timeline-card">
+              <h3>National Award Winners</h3>
+              <p>Honoured to supply awards for 3 consecutive National Games events, reaching over 15,000 athletes across India.</p>
+            </div>
+            <div></div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-year-wrap"><span>2024</span></div>
+            <div></div>
+            <div class="timeline-card">
+              <h3>Digital Engraving Studio</h3>
+              <p>Launched our revolutionary online Live Engraving Preview tool — the first in India — allowing clients to design and proof awards instantly online.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 4: TEAM
+    =========================================== -->
+    <section class="section" style="background:var(--bg-surface);" aria-labelledby="team-h">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">The Artisans</div>
+          <h2 id="team-h" class="section-title reveal">The Hands Behind<br>Every <span class="text-gold">Masterpiece</span></h2>
+        </div>
+
+        <div class="team-grid">
+          <div class="team-card reveal">
+            <div class="team-img-wrap">
+              <img src="images/team-photo.jpg" alt="Rajesh Trophywala — Founder">
+            </div>
+            <div class="team-info">
+              <div class="team-name">Rajesh Trophywala</div>
+              <div class="team-role">Founder & Master Engraver</div>
+              <p class="team-bio">37 years of hand-engraving mastery. Trained under Italian masters in Florence and brought luxury trophy craftsmanship to India.</p>
+            </div>
+          </div>
+
+          <div class="team-card reveal reveal-delay-1">
+            <div class="team-img-wrap">
+              <img src="images/team-photo.jpg" alt="Meera Trophywala — Creative Director">
+            </div>
+            <div class="team-info">
+              <div class="team-name">Meera Trophywala</div>
+              <div class="team-role">Creative Director</div>
+              <p class="team-bio">NIFT graduate with 18 years in luxury product design. Leads our bespoke award design studio with a philosophy of purposeful beauty.</p>
+            </div>
+          </div>
+
+          <div class="team-card reveal reveal-delay-2">
+            <div class="team-img-wrap">
+              <img src="images/team-photo.jpg" alt="Aditya Sharma — Head of Production">
+            </div>
+            <div class="team-info">
+              <div class="team-name">Aditya Sharma</div>
+              <div class="team-role">Head of Production</div>
+              <p class="team-bio">CNC and laser engraving specialist. Ensures every piece meets our exacting quality standards before shipping — zero defect policy.</p>
+            </div>
+          </div>
+
+          <div class="team-card reveal reveal-delay-3">
+            <div class="team-img-wrap">
+              <img src="images/team-photo.jpg" alt="Kavitha Rajan — Client Relations">
+            </div>
+            <div class="team-info">
+              <div class="team-name">Kavitha Rajan</div>
+              <div class="team-role">Head of Client Relations</div>
+              <p class="team-bio">Manages corporate partnerships and bulk order portfolios. Known for turning complex event requirements into seamless award experiences.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 5: CERTIFICATIONS
+    =========================================== -->
+    <section class="section" aria-labelledby="cert-h">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">Recognition</div>
+          <h2 id="cert-h" class="section-title reveal">Industry-Recognized<br><span class="text-gold">Excellence</span></h2>
+        </div>
+
+        <div class="awards-wall">
+          <div class="award-plaque reveal">
+            <span class="award-plaque-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </span>
+            <div class="award-plaque-title">ISO 9001:2015</div>
+            <div class="award-plaque-year">Certified Quality Management</div>
+          </div>
+          <div class="award-plaque reveal reveal-delay-1">
+            <span class="award-plaque-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2"/><path d="M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/><path d="M6 3h12v7a6 6 0 0 1-12 0V3z"/><line x1="12" y1="16" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></svg>
+            </span>
+            <div class="award-plaque-title">Best Award Manufacturer</div>
+            <div class="award-plaque-year">India Manufacturing Awards 2023</div>
+          </div>
+          <div class="award-plaque reveal reveal-delay-2">
+            <span class="award-plaque-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </span>
+            <div class="award-plaque-title">5-Star Rated</div>
+            <div class="award-plaque-year">4,800+ Google Reviews</div>
+          </div>
+          <div class="award-plaque reveal reveal-delay-3">
+            <span class="award-plaque-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="14" r="7"/><polyline points="8 3 12 10 16 3"/></svg>
+            </span>
+            <div class="award-plaque-title">National Supplier</div>
+            <div class="award-plaque-year">Sports Authority of India 2019–2024</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 6: FAQ
+    =========================================== -->
+    <section class="section" style="background:var(--bg-surface);" aria-labelledby="faq-h">
+      <div class="container">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-16);align-items:start;">
+          <div class="reveal">
+            <div class="section-label no-line" style="justify-content:flex-start;margin-bottom:var(--space-4);">Common Questions</div>
+            <h2 id="faq-h" class="section-title" style="text-align:left;font-size:var(--fs-3xl);">Everything You <span class="text-gold">Need to Know</span></h2>
+            <div class="gold-divider left"></div>
+            <p style="color:var(--text-secondary);margin-top:var(--space-4);line-height:1.9;">Can't find your answer? Contact our team directly and we'll respond within 2 hours.</p>
+            <a href="contact.html" class="btn btn-primary mt-6">Contact Us</a>
+          </div>
+
+          <div class="reveal reveal-delay-2" id="faq-list">
+            <!-- FAQs rendered by JS below -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // FAQ Accordion
+    const faqs = [
+      { q: 'What is the minimum order quantity?', a: 'We accommodate orders from 1 piece for custom awards to bulk orders of 10,000+. No minimum for standard products. Minimum 25 for custom die-cast medals.' },
+      { q: 'How long does production take?', a: 'Standard orders ship in 5–7 business days. Our express service delivers in 48–72 hours. Large bulk orders are quoted with specific timelines.' },
+      { q: 'Can I provide my own logo or design?', a: 'Absolutely! Send us your logo in vector format (AI, EPS, SVG, PDF) and our design team will prepare an engraving proof for your approval before production begins.' },
+      { q: 'What materials are available?', a: 'We work with K9 crystal, 24K gold-plated zinc alloy, sterling silver, solid walnut, mahogany, oak, brushed stainless steel, acrylic and bronze.' },
+      { q: 'Do you offer a satisfaction guarantee?', a: 'Yes — if your award doesn\'t meet our quality standards, we reproduce it at no charge. We\'ve maintained a 99.8% satisfaction rate across 37 years.' },
+      { q: 'Can you engrave logos on crystal?', a: 'Yes! We use sub-surface laser engraving to create stunning 3D images inside crystal awards. Any logo or portrait can be recreated with remarkable detail.' },
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('faq-list');
+      container.innerHTML = faqs.map((f, i) => `
+        <div class="faq-item" style="border:1px solid var(--border-subtle);border-radius:var(--radius-lg);margin-bottom:var(--space-3);overflow:hidden;">
+          <button class="faq-q" onclick="toggleFaq(this)" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:var(--space-4) var(--space-5);background:var(--bg-card);color:var(--text-primary);font-family:var(--font-body);font-size:var(--fs-sm);font-weight:600;text-align:left;cursor:pointer;gap:1rem;">
+            ${f.q}
+            <svg style="width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:2;flex-shrink:0;transition:transform 0.3s;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-a" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease;">
+            <p style="padding:var(--space-4) var(--space-5) var(--space-5);font-size:var(--fs-sm);color:var(--text-muted);line-height:1.8;background:var(--bg-surface);">${f.a}</p>
+          </div>
+        </div>
+      `).join('');
+    });
+
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const answer = item.querySelector('.faq-a');
+      const icon = btn.querySelector('svg');
+      const isOpen = answer.style.maxHeight !== '0px' && answer.style.maxHeight !== '';
+
+      // Close all
+      document.querySelectorAll('.faq-a').forEach(a => a.style.maxHeight = '0');
+      document.querySelectorAll('.faq-q svg').forEach(svg => svg.style.transform = '');
+
+      if (!isOpen) {
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        icon.style.transform = 'rotate(180deg)';
+      }
+    }
+  </script>
+</body>
+</html>

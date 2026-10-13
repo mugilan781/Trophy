@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact T&A Engraving — get a custom quote, ask about bulk orders, or visit our Mumbai showroom. We respond within 2 business hours.">
+  <title>Contact Us | T&A Engraving — Get a Custom Award Quote</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* CONTACT PAGE */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 480px;
+      gap: var(--space-12);
+      align-items: start;
+    }
+
+    /* Info cards */
+    .contact-info-cards { display: flex; flex-direction: column; gap: var(--space-5); }
+
+    .contact-info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      display: flex;
+      gap: var(--space-5);
+      align-items: flex-start;
+      transition: all var(--transition-base);
+    }
+
+    .contact-info-card:hover {
+      border-color: var(--border-color);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .contact-info-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-lg);
+      background: rgba(198,161,91,0.1);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-info-icon svg { width: 24px; height: 24px; stroke: var(--gold); fill: none; stroke-width: 1.8; }
+
+    .contact-info-label {
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: var(--space-2);
+    }
+
+    .contact-info-value {
+      font-family: var(--font-display);
+      font-size: var(--fs-md);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: var(--space-1);
+    }
+
+    .contact-info-sub { font-size: var(--fs-sm); color: var(--text-muted); line-height: 1.6; }
+
+    /* Map */
+    .map-container {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      height: 280px;
+      border: 1px solid var(--border-subtle);
+      position: relative;
+      background: var(--bg-card);
+    }
+
+    .map-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-4);
+      background: radial-gradient(ellipse at center, rgba(198,161,91,0.05) 0%, var(--bg-surface) 70%);
+    }
+
+    .map-placeholder svg { width: 48px; height: 48px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+
+    /* Form */
+    .contact-form-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+      position: sticky;
+      top: calc(var(--navbar-h) + var(--space-6));
+    }
+
+    .form-panel-title {
+      font-family: var(--font-display);
+      font-size: var(--fs-xl);
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .form-panel-sub {
+      font-size: var(--fs-sm);
+      color: var(--text-muted);
+      margin-bottom: var(--space-6);
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+
+    .inquiry-types { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-5); }
+    .inquiry-type {
+      padding: var(--space-2) var(--space-3);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      background: transparent;
+    }
+    .inquiry-type.active, .inquiry-type:hover { border-color: var(--gold); color: var(--gold); background: rgba(198,161,91,0.08); }
+
+    /* Hours */
+    .hours-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); }
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-md);
+      font-size: var(--fs-sm);
+      background: var(--bg-surface);
+    }
+    .hours-row.today { background: rgba(198,161,91,0.08); border: 1px solid var(--border-color); }
+    .hours-day { color: var(--text-secondary); }
+    .hours-time { color: var(--text-primary); font-weight: 600; }
+
+    /* Team contact */
+    .team-contact-card {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: var(--space-5);
+      transition: all var(--transition-base);
+    }
+
+    .team-contact-card:hover { border-color: var(--border-color); }
+
+    .team-contact-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--grad-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      color: var(--obsidian);
+      flex-shrink: 0;
+    }
+
+    .team-contact-name { font-family: var(--font-display); font-size: var(--fs-sm); font-weight: 700; color: var(--text-primary); }
+    .team-contact-role { font-size: var(--fs-xs); color: var(--gold); margin-bottom: var(--space-1); }
+    .team-contact-availability { font-size: var(--fs-xs); color: var(--text-muted); }
+    .team-contact-btn { margin-left: auto; flex-shrink: 0; }
+
+    /* Social links */
+    .social-links-row { display: flex; gap: var(--space-3); }
+    .social-link {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-full);
+      border: 1.5px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .social-link:hover { border-color: var(--gold); color: var(--gold); background: rgba(198,161,91,0.08); }
+
+    @media (max-width: 900px) {
+      .contact-layout { grid-template-columns: 1fr; }
+      .contact-form-panel { position: static; }
+      .form-row { grid-template-columns: 1fr; }
+      .hours-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .contact-form-panel { padding: var(--space-5); }
+    }
+  </style>
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <main id="main">
+
+    <!-- Page Hero -->
+    <header class="page-hero" style="min-height:300px;">
+      <img class="page-hero-bg" src="images/hero-banner.jpg" alt="T&A Engraving Showroom">
+      <div class="page-hero-overlay"></div>
+      <div class="page-hero-content">
+        <div class="container">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a><span class="sep">›</span><span>Contact Us</span>
+          </nav>
+          <h1 class="page-hero-title">Let's Create Something <span style="color:var(--gold);">Extraordinary</span></h1>
+          <p class="page-hero-subtitle">We typically respond within 2 business hours. For urgent orders, call us directly.</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- ==========================================
+         SECTION 1: CONTACT INFO + FORM
+    =========================================== -->
+    <section class="section" aria-label="Contact Information and Form">
+      <div class="container">
+        <div class="contact-layout">
+
+          <!-- Left: Info -->
+          <div>
+            <div class="section-label no-line" style="justify-content:flex-start;margin-bottom:var(--space-4);">Get In Touch</div>
+            <h2 class="section-title reveal" style="text-align:left;font-size:var(--fs-3xl);margin-bottom:var(--space-2);">We're Here to <span class="text-gold">Help</span></h2>
+            <div class="gold-divider left"></div>
+            <p style="color:var(--text-secondary);margin-top:var(--space-4);margin-bottom:var(--space-8);line-height:1.9;max-width:480px;">Whether you need a single personalized trophy or 10,000 medals for a national event, our team is ready to create the perfect solution for you.</p>
+
+            <div class="contact-info-cards">
+              <div class="contact-info-card reveal">
+                <div class="contact-info-icon">
+                  <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 6 6l.9-.9a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <div>
+                  <div class="contact-info-label">Call or WhatsApp</div>
+                  <div class="contact-info-value">+91 98765 43210</div>
+                  <div class="contact-info-sub">Mon–Sat, 9am–7pm IST<br>WhatsApp available 24/7</div>
+                </div>
+              </div>
+
+              <div class="contact-info-card reveal reveal-delay-1">
+                <div class="contact-info-icon">
+                  <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </div>
+                <div>
+                  <div class="contact-info-label">Email Us</div>
+                  <div class="contact-info-value">hello@tandengraving.in</div>
+                  <div class="contact-info-sub">Response within 2 business hours<br>Bulk quote: bulk@tandengraving.in</div>
+                </div>
+              </div>
+
+              <div class="contact-info-card reveal reveal-delay-2">
+                <div class="contact-info-icon">
+                  <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                  <div class="contact-info-label">Showroom & Factory</div>
+                  <div class="contact-info-value">Andheri (East), Mumbai</div>
+                  <div class="contact-info-sub">Plot 47, MIDC Industrial Area<br>Andheri East, Mumbai 400093<br>Walk-in welcome Mon–Sat</div>
+                </div>
+              </div>
+
+              <div class="contact-info-card reveal reveal-delay-3">
+                <div class="contact-info-icon">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div>
+                  <div class="contact-info-label">Production Turnaround</div>
+                  <div class="contact-info-value">5–7 Days Standard</div>
+                  <div class="contact-info-sub">48-hour express available<br>Bulk orders: discussed individually</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Map -->
+            <div class="map-container reveal" style="margin-top:var(--space-6);">
+              <div class="map-placeholder">
+                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <div style="font-family:var(--font-display);font-size:var(--fs-base);font-weight:700;color:var(--text-primary);">T&A Engraving — Mumbai</div>
+                <div style="font-size:var(--fs-sm);color:var(--text-muted);">Plot 47, MIDC, Andheri East</div>
+                <a href="https://maps.google.com" target="_blank" rel="noopener" class="btn btn-outline btn-sm" style="margin-top:var(--space-2);">Open in Google Maps</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Form -->
+          <div class="contact-form-panel reveal">
+            <div class="form-panel-title">Send Us a Message</div>
+            <p class="form-panel-sub">Fill in the form and our team will get back to you within 2 hours during business hours.</p>
+
+            <!-- Inquiry Type -->
+            <div style="margin-bottom:var(--space-5);">
+              <div class="form-label" style="margin-bottom:var(--space-3);">I'm inquiring about:</div>
+              <div class="inquiry-types">
+                <button class="inquiry-type active" onclick="selectInquiry(this)">Custom Award</button>
+                <button class="inquiry-type" onclick="selectInquiry(this)">Bulk Order</button>
+                <button class="inquiry-type" onclick="selectInquiry(this)">Product Info</button>
+                <button class="inquiry-type" onclick="selectInquiry(this)">Engraving</button>
+                <button class="inquiry-type" onclick="selectInquiry(this)">Other</button>
+              </div>
+            </div>
+
+            <form id="contact-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="cf-name">Full Name *</label>
+                  <input type="text" id="cf-name" class="form-control" placeholder="John Smith" data-validate="required">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="cf-company">Company / Organization</label>
+                  <input type="text" id="cf-company" class="form-control" placeholder="Pinnacle Corp">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="cf-email">Email Address *</label>
+                  <input type="email" id="cf-email" class="form-control" placeholder="john@company.com" data-validate="required,email">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="cf-phone">Phone Number</label>
+                  <input type="tel" id="cf-phone" class="form-control" placeholder="+91 98765 00000">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="cf-product">Award Type</label>
+                  <select id="cf-product" class="form-control">
+                    <option value="">Select award type</option>
+                    <option>Trophy</option>
+                    <option>Crystal Award</option>
+                    <option>Medal</option>
+                    <option>Plaque</option>
+                    <option>Acrylic Award</option>
+                    <option>Custom Design</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="cf-quantity">Quantity</label>
+                  <select id="cf-quantity" class="form-control">
+                    <option value="">Select quantity</option>
+                    <option>1–5 pieces</option>
+                    <option>6–25 pieces</option>
+                    <option>26–100 pieces</option>
+                    <option>101–500 pieces</option>
+                    <option>500+ pieces</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="cf-event">Event Date (if applicable)</label>
+                <input type="date" id="cf-event" class="form-control">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="cf-message">Message *</label>
+                <textarea id="cf-message" class="form-control" rows="4" placeholder="Describe your award requirements, occasion, personalization needs..." data-validate="required" style="resize:vertical;"></textarea>
+              </div>
+
+              <!-- File Upload -->
+              <div class="form-group">
+                <label class="form-label" for="cf-file">Attach Logo / Reference Image</label>
+                <div style="border:2px dashed var(--border-subtle);border-radius:var(--radius-lg);padding:var(--space-4);text-align:center;cursor:pointer;" onclick="document.getElementById('cf-file').click()">
+                  <div style="display:flex;align-items:center;justify-content:center;gap:var(--space-2);font-size:var(--fs-sm);color:var(--text-muted);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+                    <span>Click to upload or drag &amp; drop</span>
+                  </div>
+                  <div style="font-size:var(--fs-xs);color:var(--text-muted);margin-top:4px;">SVG, PNG, JPG, PDF (Max 20MB)</div>
+                  <input type="file" id="cf-file" style="display:none;" accept=".svg,.png,.jpg,.pdf,.ai,.eps">
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary w-full btn-lg" style="justify-content:center;">
+                Send Message
+                <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </button>
+
+              <p style="font-size:var(--fs-xs);color:var(--text-muted);text-align:center;margin-top:var(--space-3);">By submitting, you agree to our Privacy Policy. We never share your details.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 2: BUSINESS HOURS
+    =========================================== -->
+    <section class="section" style="background:var(--bg-surface);" aria-labelledby="hours-h">
+      <div class="container">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-12);align-items:center;">
+          <div class="reveal">
+            <div class="section-label no-line" style="justify-content:flex-start;margin-bottom:var(--space-4);">Opening Hours</div>
+            <h2 id="hours-h" class="section-title" style="text-align:left;font-size:var(--fs-3xl);">Visit Our <span class="text-gold">Showroom</span></h2>
+            <div class="gold-divider left"></div>
+            <p style="color:var(--text-secondary);margin-top:var(--space-4);margin-bottom:var(--space-6);line-height:1.9;">Our 4,000 sq ft Andheri showroom displays over 400 award samples. Walk in and experience the quality in person — no appointment needed Mon–Sat.</p>
+            <div class="hours-grid" style="gap:var(--space-3);">
+              <div class="hours-row today">
+                <span class="hours-day">Monday (Today)</span>
+                <span class="hours-time">9am – 7pm</span>
+              </div>
+              <div class="hours-row">
+                <span class="hours-day">Tuesday</span>
+                <span class="hours-time">9am – 7pm</span>
+              </div>
+              <div class="hours-row">
+                <span class="hours-day">Wednesday</span>
+                <span class="hours-time">9am – 7pm</span>
+              </div>
+              <div class="hours-row">
+                <span class="hours-day">Thursday</span>
+                <span class="hours-time">9am – 7pm</span>
+              </div>
+              <div class="hours-row">
+                <span class="hours-day">Friday</span>
+                <span class="hours-time">9am – 7pm</span>
+              </div>
+              <div class="hours-row">
+                <span class="hours-day">Saturday</span>
+                <span class="hours-time">10am – 5pm</span>
+              </div>
+              <div class="hours-row" style="opacity:0.5;">
+                <span class="hours-day">Sunday</span>
+                <span class="hours-time" style="color:var(--text-muted);">Closed</span>
+              </div>
+            </div>
+          </div>
+          <div class="reveal reveal-delay-2">
+            <img src="images/craftsmanship.jpg" alt="T&A Engraving Showroom" style="width:100%;border-radius:var(--radius-xl);box-shadow:var(--shadow-xl);">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 3: TEAM CONTACTS
+    =========================================== -->
+    <section class="section" aria-labelledby="team-contact-h">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">Direct Lines</div>
+          <h2 id="team-contact-h" class="section-title reveal">Speak to the <span class="text-gold">Right Person</span></h2>
+        </div>
+        <div class="grid grid-2" style="gap:var(--space-5);">
+          <div class="team-contact-card reveal">
+            <div class="team-contact-avatar">KR</div>
+            <div>
+              <div class="team-contact-name">Kavitha Rajan</div>
+              <div class="team-contact-role">Corporate & Bulk Orders</div>
+              <div class="team-contact-availability" style="display:flex;align-items:center;gap:6px;">
+                <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#4caf50;box-shadow:0 0 8px #4caf50;"></span>
+                <span>Available now · Responds in 30 min</span>
+              </div>
+            </div>
+            <button class="btn btn-outline btn-sm team-contact-btn" onclick="Toast.show('WhatsApp opening...','info')">WhatsApp</button>
+          </div>
+          <div class="team-contact-card reveal reveal-delay-1">
+            <div class="team-contact-avatar">MD</div>
+            <div>
+              <div class="team-contact-name">Manish Desai</div>
+              <div class="team-contact-role">Custom Design & Engraving</div>
+              <div class="team-contact-availability" style="display:flex;align-items:center;gap:6px;">
+                <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#4caf50;box-shadow:0 0 8px #4caf50;"></span>
+                <span>Available now · Responds in 1 hr</span>
+              </div>
+            </div>
+            <button class="btn btn-outline btn-sm team-contact-btn" onclick="Toast.show('WhatsApp opening...','info')">WhatsApp</button>
+          </div>
+          <div class="team-contact-card reveal reveal-delay-2">
+            <div class="team-contact-avatar">SP</div>
+            <div>
+              <div class="team-contact-name">Sanjay Pillai</div>
+              <div class="team-contact-role">Sports & Events Awards</div>
+              <div class="team-contact-availability" style="display:flex;align-items:center;gap:6px;">
+                <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#ef5350;box-shadow:0 0 8px #ef5350;"></span>
+                <span>In production · Returns by 3pm</span>
+              </div>
+            </div>
+            <button class="btn btn-outline btn-sm team-contact-btn" onclick="Toast.show('Email sent!','success')">Email</button>
+          </div>
+          <div class="team-contact-card reveal reveal-delay-3">
+            <div class="team-contact-avatar">AR</div>
+            <div>
+              <div class="team-contact-name">Arjun Reddy</div>
+              <div class="team-contact-role">Express & Urgent Orders</div>
+              <div class="team-contact-availability" style="display:flex;align-items:center;gap:6px;">
+                <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#4caf50;box-shadow:0 0 8px #4caf50;"></span>
+                <span>Available now · Responds in 15 min</span>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-sm team-contact-btn" onclick="Toast.show('Calling now...','info')">Call Now</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 4: SOCIAL + QUICK LINKS
+    =========================================== -->
+    <section class="section" style="background:var(--bg-surface);" aria-label="Social Media">
+      <div class="container" style="text-align:center;">
+        <div class="section-label">Connect With Us</div>
+        <h2 class="section-title reveal" style="margin-bottom:var(--space-6);">Follow Our <span class="text-gold">Journey</span></h2>
+        <p style="color:var(--text-secondary);max-width:480px;margin:0 auto var(--space-8);line-height:1.9;">See our latest work, behind-the-scenes craftsmanship, client celebrations and award design inspiration.</p>
+        <div style="display:flex;gap:var(--space-4);justify-content:center;flex-wrap:wrap;" class="reveal">
+          <a href="#" class="social-link" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="var(--bg-main)"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="WhatsApp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.9 11.9 0 0 0 12.04 0C5.47 0 .12 5.35.12 11.92c0 2.1.55 4.14 1.59 5.95L0 24l6.32-1.66a11.87 11.87 0 0 0 5.72 1.46h.01c6.57 0 11.92-5.35 11.92-11.92 0-3.18-1.24-6.18-3.45-8.4zm-8.48 18.27h-.01a9.86 9.86 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.23-.37a9.88 9.88 0 0 1-1.52-5.2c0-5.45 4.44-9.89 9.9-9.89 2.64 0 5.12 1.03 6.98 2.9 1.87 1.86 2.9 4.34 2.9 6.98 0 5.46-4.44 9.9-9.89 9.9zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.09 4.49.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.58-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35z"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 5: FAQ QUICK
+    =========================================== -->
+    <section class="section" aria-labelledby="contact-faq-h">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">Quick Answers</div>
+          <h2 id="contact-faq-h" class="section-title reveal">Frequently Asked <span class="text-gold">Questions</span></h2>
+        </div>
+        <div class="grid grid-2" style="gap:var(--space-5);">
+          <div class="card reveal" style="padding:var(--space-6);">
+            <h3 style="font-family:var(--font-display);font-size:var(--fs-base);margin-bottom:var(--space-3);">What's the minimum order quantity?</h3>
+            <p style="font-size:var(--fs-sm);color:var(--text-muted);line-height:1.8;">No minimum for standard products. For custom die-cast medals, minimum 25 pieces. Bulk pricing starts from 10+ units.</p>
+          </div>
+          <div class="card reveal reveal-delay-1" style="padding:var(--space-6);">
+            <h3 style="font-family:var(--font-display);font-size:var(--fs-base);margin-bottom:var(--space-3);">How fast can you deliver?</h3>
+            <p style="font-size:var(--fs-sm);color:var(--text-muted);line-height:1.8;">Standard orders ship in 5–7 business days. Express 48-hour service available for an additional ₹799 flat fee.</p>
+          </div>
+          <div class="card reveal" style="padding:var(--space-6);">
+            <h3 style="font-family:var(--font-display);font-size:var(--fs-base);margin-bottom:var(--space-3);">Can I see a proof before production?</h3>
+            <p style="font-size:var(--fs-sm);color:var(--text-muted);line-height:1.8;">Yes, always. We email a digital proof within 4 hours of order confirmation. Production starts only after your explicit approval.</p>
+          </div>
+          <div class="card reveal reveal-delay-1" style="padding:var(--space-6);">
+            <h3 style="font-family:var(--font-display);font-size:var(--fs-base);margin-bottom:var(--space-3);">Do you ship pan-India?</h3>
+            <p style="font-size:var(--fs-sm);color:var(--text-muted);line-height:1.8;">Yes! We ship to all 28 states via insured courier. International shipping available to 45+ countries on request.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 6: GUARANTEE BANNER
+    =========================================== -->
+    <section class="section" style="background:var(--bg-surface);" aria-label="Our Guarantee">
+      <div class="container">
+        <div style="background:var(--grad-burgundy);border-radius:var(--radius-xl);padding:var(--space-12);text-align:center;" class="reveal">
+          <h2 style="font-size:var(--fs-3xl);font-weight:900;color:var(--ivory);margin-bottom:var(--space-4);">Our <span style="color:var(--gold);">100% Satisfaction</span> Promise</h2>
+          <p style="font-size:var(--fs-lg);color:rgba(248,245,239,0.8);max-width:580px;margin:0 auto var(--space-8);">If your award doesn't meet our quality standards in any way, we will reproduce it completely free of charge. No questions asked. 30-day guarantee on every order.</p>
+          <div style="display:flex;gap:var(--space-4);justify-content:center;flex-wrap:wrap;">
+            <a href="products.html" class="btn btn-primary btn-lg">Browse Products</a>
+            <a href="engraving.html" class="btn btn-ghost btn-lg" style="color:var(--ivory);border-color:rgba(255,255,255,0.3);">Design Your Award</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    function selectInquiry(btn) {
+      document.querySelectorAll('.inquiry-type').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      FormValidator.init('#contact-form');
+    });
+  </script>
+</body>
+</html>

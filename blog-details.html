@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Lost Art of Hand Engraving — discover how T&A Engraving preserves traditional craftsmanship alongside modern laser technology.">
+  <title>The Lost Art of Hand Engraving | T&A Engraving Blog</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* BLOG DETAILS */
+    .article-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: var(--space-12);
+      align-items: start;
+    }
+
+    /* Article */
+    .article-header { margin-bottom: var(--space-8); }
+
+    .article-meta-top {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      margin-bottom: var(--space-5);
+      flex-wrap: wrap;
+    }
+
+    .article-tag {
+      display: inline-block;
+      padding: var(--space-1) var(--space-3);
+      background: var(--burgundy);
+      color: var(--ivory);
+      border-radius: var(--radius-sm);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .article-date { font-size: var(--fs-sm); color: var(--text-muted); }
+    .article-read-time { font-size: var(--fs-sm); color: var(--text-muted); }
+
+    .article-title {
+      font-size: clamp(var(--fs-2xl), 4vw, var(--fs-4xl));
+      font-weight: 900;
+      line-height: 1.15;
+      color: var(--text-primary);
+      margin-bottom: var(--space-5);
+    }
+
+    .article-subtitle {
+      font-size: var(--fs-lg);
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: var(--space-6);
+    }
+
+    .article-author {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-4) 0;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .author-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--grad-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      color: var(--obsidian);
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .author-name { font-family: var(--font-display); font-size: var(--fs-sm); font-weight: 700; color: var(--text-primary); }
+    .author-role { font-size: var(--fs-xs); color: var(--text-muted); }
+
+    .article-shares { margin-left: auto; display: flex; align-items: center; gap: var(--space-3); }
+    .share-label { font-size: var(--fs-xs); color: var(--text-muted); }
+    .share-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      background: transparent;
+      color: var(--text-muted);
+    }
+    .share-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(198,161,91,0.08); }
+
+    /* Hero image */
+    .article-hero-img {
+      width: 100%;
+      aspect-ratio: 16/7;
+      object-fit: cover;
+      border-radius: var(--radius-xl);
+      margin-bottom: var(--space-8);
+    }
+
+    /* Article body */
+    .article-body { max-width: 100%; }
+
+    .article-body h2 {
+      font-size: var(--fs-2xl);
+      font-weight: 800;
+      color: var(--text-primary);
+      margin: var(--space-10) 0 var(--space-4);
+      line-height: 1.2;
+    }
+
+    .article-body h3 {
+      font-size: var(--fs-xl);
+      font-weight: 700;
+      color: var(--gold);
+      margin: var(--space-8) 0 var(--space-3);
+    }
+
+    .article-body p {
+      font-size: var(--fs-md);
+      color: var(--text-secondary);
+      line-height: 1.9;
+      margin-bottom: var(--space-5);
+    }
+
+    .article-body blockquote {
+      border-left: 4px solid var(--gold);
+      padding: var(--space-5) var(--space-8);
+      margin: var(--space-8) 0;
+      background: rgba(198,161,91,0.05);
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+      font-size: var(--fs-lg);
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.7;
+    }
+
+    .article-body blockquote cite {
+      display: block;
+      font-size: var(--fs-sm);
+      font-style: normal;
+      color: var(--gold);
+      margin-top: var(--space-3);
+      font-weight: 600;
+    }
+
+    .article-body ul, .article-body ol {
+      padding-left: var(--space-6);
+      margin-bottom: var(--space-5);
+      color: var(--text-secondary);
+      line-height: 1.9;
+    }
+
+    .article-body li { margin-bottom: var(--space-2); font-size: var(--fs-md); }
+
+    .article-body img {
+      width: 100%;
+      border-radius: var(--radius-xl);
+      margin: var(--space-6) 0;
+    }
+
+    .article-body .callout {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      margin: var(--space-8) 0;
+      display: flex;
+      gap: var(--space-4);
+    }
+
+    .article-body .callout-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .article-body .callout p { margin-bottom: 0; }
+
+    /* Tags + share bottom */
+    .article-footer {
+      margin-top: var(--space-10);
+      padding-top: var(--space-8);
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .article-tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-6); }
+    .article-tag-pill {
+      padding: var(--space-1) var(--space-3);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+    }
+
+    /* Author bio */
+    .author-bio {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      display: flex;
+      gap: var(--space-6);
+      margin-top: var(--space-8);
+    }
+
+    .author-bio-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--grad-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--obsidian);
+      flex-shrink: 0;
+    }
+
+    .author-bio-name { font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 700; margin-bottom: var(--space-1); }
+    .author-bio-role { color: var(--gold); font-size: var(--fs-sm); margin-bottom: var(--space-3); }
+    .author-bio-text { font-size: var(--fs-sm); color: var(--text-muted); line-height: 1.8; }
+
+    /* Related posts */
+    .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
+
+    .related-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      transition: all var(--transition-base);
+      display: block;
+    }
+
+    .related-card:hover { border-color: var(--border-color); transform: translateY(-4px); box-shadow: var(--shadow-gold); }
+
+    .related-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+
+    .related-card-body { padding: var(--space-4); }
+    .related-card-tag { font-size: var(--fs-xs); color: var(--gold); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: var(--space-2); }
+    .related-card-title { font-family: var(--font-display); font-size: var(--fs-sm); font-weight: 700; color: var(--text-primary); line-height: 1.3; }
+
+    /* Comments */
+    .comment-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      margin-bottom: var(--space-4);
+    }
+
+    .comment-header { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3); }
+    .comment-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--grad-gold); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; color: var(--obsidian); font-family: var(--font-display); flex-shrink: 0; }
+    .comment-name { font-size: var(--fs-sm); font-weight: 700; color: var(--text-primary); }
+    .comment-date { font-size: var(--fs-xs); color: var(--text-muted); }
+    .comment-text { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.8; }
+
+    /* Sidebar sticky */
+    .article-sidebar {
+      position: sticky;
+      top: calc(var(--navbar-h) + var(--space-6));
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+
+    /* TOC */
+    .toc-widget { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: var(--space-5); }
+    .toc-title { font-size: var(--fs-xs); font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: var(--space-4); }
+    .toc-list { display: flex; flex-direction: column; gap: var(--space-2); }
+    .toc-link { font-size: var(--fs-sm); color: var(--text-muted); padding: var(--space-2) var(--space-3); border-radius: var(--radius-md); transition: all var(--transition-fast); display: block; }
+    .toc-link:hover, .toc-link.active { background: rgba(198,161,91,0.08); color: var(--gold); }
+
+    /* Progress bar */
+    .reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--grad-gold);
+      z-index: 9999;
+      transition: width 0.1s;
+    }
+
+    @media (max-width: 900px) {
+      .article-layout { grid-template-columns: 1fr; }
+      .article-sidebar { position: static; }
+      .related-grid { grid-template-columns: 1fr 1fr; }
+      .author-bio { flex-direction: column; align-items: center; text-align: center; }
+    }
+
+    @media (max-width: 640px) {
+      .related-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress" id="reading-progress" role="progressbar" aria-label="Reading progress"></div>
+
+  <div id="navbar-placeholder"></div>
+
+  <main id="main">
+
+    <!-- ==========================================
+         SECTION 1: ARTICLE HERO + CONTENT
+    =========================================== -->
+    <section class="section" aria-label="Article">
+      <div class="container">
+        <nav class="breadcrumb" style="margin-bottom:var(--space-6);" aria-label="Breadcrumb">
+          <a href="index.html">Home</a><span class="sep">›</span>
+          <a href="blog.html">Blog</a><span class="sep">›</span>
+          <span>The Lost Art of Hand Engraving</span>
+        </nav>
+
+        <div class="article-layout">
+
+          <!-- Main Article -->
+          <article itemscope itemtype="https://schema.org/Article">
+
+            <!-- Article Header -->
+            <header class="article-header">
+              <div class="article-meta-top">
+                <span class="article-tag">Craftsmanship</span>
+                <span class="article-date">October 10, 2026</span>
+                <span class="article-read-time">· 8 min read</span>
+              </div>
+
+              <h1 class="article-title" itemprop="headline">The Lost Art of Hand Engraving: How We Keep Tradition Alive in a Digital Age</h1>
+
+              <p class="article-subtitle">In an era of automated laser systems, we believe the human hand still creates something no machine can replicate. Here's why we still train master engravers — and what they produce.</p>
+
+              <div class="article-author">
+                <div class="author-avatar">RT</div>
+                <div>
+                  <div class="author-name">Rajesh Trophywala</div>
+                  <div class="author-role">Founder & Master Engraver · 37 years experience</div>
+                </div>
+                <div class="article-shares">
+                  <span class="share-label">Share:</span>
+                  <button class="share-btn" onclick="copyLink()" aria-label="Copy link">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                  </button>
+                  <button class="share-btn" aria-label="Share on X">𝕏</button>
+                  <button class="share-btn" aria-label="Share on LinkedIn">in</button>
+                </div>
+              </div>
+            </header>
+
+            <!-- Hero Image -->
+            <img class="article-hero-img" src="images/craftsmanship.jpg" alt="Master engraver at work with traditional hand tools" itemprop="image" data-lightbox>
+
+            <!-- Article Body -->
+            <div class="article-body" id="article-content">
+
+              <p>When I first learned engraving from my father in 1987, the only tool available was a sharp steel graver and a steady hand. There were no computers, no lasers, no digital previews. Just metal, tool and intention. Today, we have all those technologies — and we use them enthusiastically. But we have never stopped teaching hand engraving.</p>
+
+              <p>Why? Because in the 37 years I have spent in this craft, I have seen something remarkable: when a recipient holds a hand-engraved award and runs their finger across the letters, something happens that never occurs with laser-engraved work. They slow down. They feel it. They understand that another human being made that mark specifically for them.</p>
+
+              <h2>The Physics of the Hand</h2>
+
+              <p>A laser engraves by burning material at consistent, programmable depths. The result is technically perfect — uniform depth, uniform width, precisely spaced. It's beautiful work, and for many applications, it's ideal.</p>
+
+              <p>Hand engraving is different. The pressure, angle and speed of the graver change with each stroke. On a trophy's curved surface, the engraver compensates instinctively for the changing plane. Each letter gains a subtle variation in line weight — heavier at the start of a stroke where pressure is highest, tapering as the hand lifts. This is called <em>shading</em>, and it's what gives traditional engraving its three-dimensional quality.</p>
+
+              <blockquote>
+                "A machine can cut a letter. Only a human can give it character."
+                <cite>— Rajesh Trophywala, Master Engraver</cite>
+              </blockquote>
+
+              <p>This shading quality has been prized since the Roman Empire. The inscriptions on Trajan's Column in Rome show the same technique — thick strokes and thin serifs that catch light differently at every angle, making the letters readable from 30 metres below.</p>
+
+              <h2>What We Teach Our Apprentices</h2>
+
+              <img src="images/craftsmanship.jpg" alt="Young engraver learning the craft from Rajesh" data-lightbox>
+
+              <p>Our apprentice programme lasts three years. In the first year, students do nothing but practice cuts on scrap metal — straight lines, curved lines, spirals, crosshatching. They are not permitted to engrave a single letter until their cuts are consistent and controlled. This seems cruel to impatient 22-year-olds, but it mirrors the training method used by European guilds for centuries.</p>
+
+              <h3>The Six Core Cuts</h3>
+
+              <p>Every engraving tradition builds from six fundamental graver cuts. Our apprentices must master all six before advancing:</p>
+
+              <ul>
+                <li><strong>The Straight Line</strong> — the foundation of all Roman lettering, requiring perfectly consistent pressure</li>
+                <li><strong>The Concave Curve</strong> — used for the interior of O, C, G, D and similar rounded letters</li>
+                <li><strong>The Convex Curve</strong> — for exterior curves on letters and decorative flourishes</li>
+                <li><strong>The Flick</strong> — a finishing stroke used to create tapering serifs and fine hairlines</li>
+                <li><strong>The Crosshatch</strong> — for shading backgrounds and creating texture in relief work</li>
+                <li><strong>The Bright Cut</strong> — an angled cut that creates a bright, reflective face on metal</li>
+              </ul>
+
+              <div class="callout">
+                <span class="callout-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"/></svg>
+                </span>
+                <p>For truly special awards — retirements, lifetime achievements, royal commendations — we always recommend a hand-engraved piece. The recipient will notice the difference immediately, and so will anyone who handles it.</p>
+              </div>
+
+              <h2>Where Laser and Hand Engraving Work Best Together</h2>
+
+              <p>We don't treat this as an either/or question. The most extraordinary awards we create combine both techniques. The laser handles large areas of consistent text — names and dates on 200 medals, for instance. Our master engravers then add hand-finished borders, decorative flourishes and any custom artwork that requires artistic sensitivity.</p>
+
+              <p>Crystal awards are always laser-engraved from the interior — hand engraving on crystal is technically impossible without risking fracture. But the base plaques on our premium crystal trophies are frequently hand-engraved, creating a beautiful contrast between the precision of the laser and the warmth of the hand.</p>
+
+              <h2>Preserving the Craft for Future Generations</h2>
+
+              <p>In 2023, we launched the T&A Engraving Apprenticeship Foundation, offering fully-funded three-year training to young craftspeople from across India. Our goal is to graduate 50 master engravers over the next decade — enough to seed studios in every major city and ensure this extraordinary skill never disappears from India's creative heritage.</p>
+
+              <p>If you have ever wondered whether the awards you commission are truly made with human craft — at T&A, the answer is always yes. Every piece carries the mark of human hands, human intention and 37 years of accumulated wisdom about what it means to honour someone with a physical, lasting object of beauty.</p>
+
+              <p>The tools have changed. The hand has not.</p>
+
+            </div>
+
+            <!-- Article Footer -->
+            <div class="article-footer">
+              <div class="article-tags">
+                <span class="article-tag-pill">Craftsmanship</span>
+                <span class="article-tag-pill">Hand Engraving</span>
+                <span class="article-tag-pill">Tradition</span>
+                <span class="article-tag-pill">Master Engraver</span>
+                <span class="article-tag-pill">Laser Technology</span>
+                <span class="article-tag-pill">Awards</span>
+              </div>
+
+              <div style="display:flex;align-items:center;gap:var(--space-4);flex-wrap:wrap;">
+                <span style="font-size:var(--fs-sm);color:var(--text-muted);">Share this article:</span>
+                <button class="btn btn-outline btn-sm" onclick="copyLink()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  Copy Link
+                </button>
+                <button class="btn btn-ghost btn-sm">𝕏 Tweet</button>
+                <button class="btn btn-ghost btn-sm">in Share</button>
+              </div>
+            </div>
+
+            <!-- Author Bio -->
+            <div class="author-bio">
+              <div class="author-bio-avatar">RT</div>
+              <div>
+                <div class="author-bio-name">Rajesh Trophywala</div>
+                <div class="author-bio-role">Founder & Master Engraver</div>
+                <p class="author-bio-text">Rajesh founded T&A Engraving in 1987 with a small workshop and two hand tools. Over 37 years, he has trained over 200 engravers and crafted awards for heads of state, Olympic athletes and Fortune 500 companies. He writes about craft, precision and the philosophy of honouring human achievement.</p>
+              </div>
+            </div>
+
+          </article>
+
+          <!-- Sidebar -->
+          <aside class="article-sidebar">
+
+            <!-- Table of Contents -->
+            <div class="toc-widget">
+              <div class="toc-title">In This Article</div>
+              <nav class="toc-list" aria-label="Table of contents">
+                <a href="#" class="toc-link active">The Physics of the Hand</a>
+                <a href="#" class="toc-link">What We Teach Apprentices</a>
+                <a href="#" class="toc-link">The Six Core Cuts</a>
+                <a href="#" class="toc-link">Laser vs Hand Engraving</a>
+                <a href="#" class="toc-link">Preserving the Craft</a>
+              </nav>
+            </div>
+
+            <!-- Related widget -->
+            <div class="sidebar-widget" style="background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius-xl);padding:var(--space-5);">
+              <div class="widget-title" style="font-size:var(--fs-xs);font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:var(--space-4);padding-bottom:var(--space-3);border-bottom:1px solid var(--border-subtle);">Related Posts</div>
+              <a href="blog-details.html" style="display:flex;gap:var(--space-3);padding:var(--space-3) 0;border-bottom:1px solid var(--border-subtle);text-decoration:none;">
+                <img src="images/crystal-awards.jpg" alt="Crystal Trophy" style="width:64px;height:48px;object-fit:cover;border-radius:var(--radius-md);flex-shrink:0;">
+                <div>
+                  <div style="font-size:var(--fs-sm);font-weight:600;color:var(--text-primary);line-height:1.3;">How to Choose Crystal Trophy Grade</div>
+                  <div style="font-size:var(--fs-xs);color:var(--text-muted);margin-top:4px;">Oct 8, 2026</div>
+                </div>
+              </a>
+              <a href="blog-details.html" style="display:flex;gap:var(--space-3);padding:var(--space-3) 0;text-decoration:none;">
+                <img src="images/wooden-plaques.jpg" alt="Wooden Plaques" style="width:64px;height:48px;object-fit:cover;border-radius:var(--radius-md);flex-shrink:0;">
+                <div>
+                  <div style="font-size:var(--fs-sm);font-weight:600;color:var(--text-primary);line-height:1.3;">Why Walnut Makes the Best Award Plaques</div>
+                  <div style="font-size:var(--fs-xs);color:var(--text-muted);margin-top:4px;">Sep 28, 2026</div>
+                </div>
+              </a>
+            </div>
+
+            <!-- Order CTA -->
+            <div style="background:var(--grad-burgundy);border-radius:var(--radius-xl);padding:var(--space-6);text-align:center;">
+              <div style="width:48px;height:48px;margin:0 auto var(--space-3);border-radius:var(--radius-full);background:rgba(198,161,91,0.18);display:flex;align-items:center;justify-content:center;color:var(--gold);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/></svg>
+              </div>
+              <h3 style="font-family:var(--font-display);font-size:var(--fs-base);color:var(--ivory);margin-bottom:var(--space-3);">Design Your Award</h3>
+              <p style="font-size:var(--fs-sm);color:rgba(248,245,239,0.7);margin-bottom:var(--space-4);">Try our live engraving studio and preview your award before ordering.</p>
+              <a href="engraving.html" class="btn btn-primary w-full" style="justify-content:center;">Open Studio</a>
+            </div>
+
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 2: COMMENTS
+    =========================================== -->
+    <section class="section-sm" style="background:var(--bg-surface);" aria-label="Comments">
+      <div class="container" style="max-width:800px;">
+        <h2 style="font-family:var(--font-display);font-size:var(--fs-2xl);margin-bottom:var(--space-8);">Comments <span class="text-gold">(12)</span></h2>
+
+        <div class="comment-card">
+          <div class="comment-header">
+            <div class="comment-avatar">PM</div>
+            <div>
+              <div class="comment-name">Priya Menon</div>
+              <div class="comment-date">October 11, 2026</div>
+            </div>
+          </div>
+          <p class="comment-text">This article gave me chills. I ordered hand-engraved plaques for our board members last year and every single one of them mentioned how different they felt from the laser-engraved ones we used before. The depth of the lettering is something else entirely.</p>
+        </div>
+
+        <div class="comment-card">
+          <div class="comment-header">
+            <div class="comment-avatar">AS</div>
+            <div>
+              <div class="comment-name">Arun Sharma</div>
+              <div class="comment-date">October 10, 2026</div>
+            </div>
+          </div>
+          <p class="comment-text">Rajeshji, I trained under you for 6 months in 2019 and this article captures everything you taught us about the flick cut perfectly. The six core cuts framework changed how I approach all engraving work. Thank you for writing this.</p>
+        </div>
+
+        <!-- Comment Form -->
+        <div style="background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius-xl);padding:var(--space-6);margin-top:var(--space-6);">
+          <h3 style="font-family:var(--font-display);font-size:var(--fs-lg);margin-bottom:var(--space-5);">Leave a <span class="text-gold">Comment</span></h3>
+          <form id="comment-form" novalidate>
+            <div class="control-row" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4);">
+              <div class="form-group">
+                <label class="form-label" for="comment-name">Name *</label>
+                <input type="text" id="comment-name" class="form-control" placeholder="Your name" data-validate="required">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="comment-email">Email *</label>
+                <input type="email" id="comment-email" class="form-control" placeholder="your@email.com" data-validate="required,email">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="comment-text">Your Comment *</label>
+              <textarea id="comment-text" class="form-control" rows="4" placeholder="Share your thoughts..." data-validate="required" style="resize:vertical;"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Post Comment</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 3: RELATED ARTICLES
+    =========================================== -->
+    <section class="section" aria-labelledby="related-h">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">More Reading</div>
+          <h2 id="related-h" class="section-title reveal">You Might Also <span class="text-gold">Enjoy</span></h2>
+        </div>
+        <div class="related-grid">
+          <a href="blog-details.html" class="related-card reveal">
+            <img src="images/crystal-awards.jpg" alt="Crystal Trophy Guide" loading="lazy">
+            <div class="related-card-body">
+              <div class="related-card-tag">Guide</div>
+              <div class="related-card-title">How to Choose the Perfect Crystal Trophy Grade for Your Event</div>
+            </div>
+          </a>
+          <a href="blog-details.html" class="related-card reveal reveal-delay-1">
+            <img src="images/medals-collection.jpg" alt="Medal Design" loading="lazy">
+            <div class="related-card-body">
+              <div class="related-card-tag">Trends</div>
+              <div class="related-card-title">2026 Medal Design Trends: Innovation in Sports Recognition</div>
+            </div>
+          </a>
+          <a href="blog-details.html" class="related-card reveal reveal-delay-2">
+            <img src="images/corporate-awards.jpg" alt="Corporate Awards" loading="lazy">
+            <div class="related-card-body">
+              <div class="related-card-tag">Corporate</div>
+              <div class="related-card-title">5 Ways Custom Awards Transform Corporate Culture</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTIONS 4-6: CTA Panels
+    =========================================== -->
+    <section class="section" style="background:var(--bg-surface);" aria-label="Newsletter">
+      <div class="container" style="max-width:640px;text-align:center;">
+        <div class="section-label">Stay Informed</div>
+        <h2 class="section-title reveal">Enjoyed This Article?<br><span class="text-gold">Get More Like It</span></h2>
+        <p style="color:var(--text-secondary);margin:0 auto var(--space-6);line-height:1.9;">Join 12,000+ award enthusiasts and industry professionals who receive our monthly insights on craftsmanship, trends and recognition strategies.</p>
+        <form id="article-newsletter" style="display:flex;gap:var(--space-3);max-width:480px;margin:0 auto;" novalidate>
+          <input type="email" class="form-control" placeholder="Enter your email" data-validate="required,email" style="flex:1;">
+          <button type="submit" class="btn btn-primary" style="flex-shrink:0;">Subscribe</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Reading progress
+    window.addEventListener('scroll', () => {
+      const content = document.getElementById('article-content');
+      if (!content) return;
+      const total = content.offsetTop + content.offsetHeight - window.innerHeight;
+      const progress = Math.min(100, Math.max(0, ((window.scrollY - content.offsetTop) / total) * 100));
+      document.getElementById('reading-progress').style.width = progress + '%';
+    });
+
+    // Copy link
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href);
+      Toast.show('Link copied to clipboard!', 'success');
+    }
+
+    // Forms
+    document.addEventListener('DOMContentLoaded', () => {
+      FormValidator.init('#comment-form');
+      document.getElementById('article-newsletter').addEventListener('submit', e => {
+        e.preventDefault();
+        Toast.show('You are now subscribed! Thank you.', 'success');
+        e.target.reset();
+      });
+    });
+  </script>
+</body>
+</html>

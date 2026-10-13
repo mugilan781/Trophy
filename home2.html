@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="T&A Engraving Home 2 — Modern editorial layout showcasing premium trophies, awards and engraving services with bold photography.">
+  <title>Home 2 — Modern | T&A Engraving Premium Awards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* HOME 2 SPECIFIC — Bold Editorial Magazine Layout */
+
+    /* Marquee */
+    .marquee-band {
+      background: var(--grad-gold);
+      padding: var(--space-3) 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: var(--space-8);
+      animation: marqueeScroll 25s linear infinite;
+      white-space: nowrap;
+      width: max-content;
+    }
+
+    [dir="rtl"] .marquee-track { animation-direction: reverse; }
+
+    @keyframes marqueeScroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--obsidian);
+    }
+
+    .marquee-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--burgundy);
+      flex-shrink: 0;
+    }
+
+    /* Editorial Hero */
+    .editorial-hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+      padding-top: var(--navbar-h);
+    }
+
+    .editorial-left {
+      background: var(--bg-primary);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--space-20) var(--space-12) var(--space-20) var(--space-16);
+    }
+
+    .editorial-hero-num {
+      font-family: var(--font-display);
+      font-size: 9rem;
+      font-weight: 900;
+      color: var(--border-subtle);
+      line-height: 1;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      user-select: none;
+    }
+
+    .editorial-left .eyebrow {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: var(--space-6);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .editorial-left .eyebrow::after {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+
+    .editorial-left h1 {
+      font-size: clamp(3rem, 5.5vw, 5.5rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: var(--space-6);
+    }
+
+    .editorial-left h1 .line2 { color: var(--gold); display: block; }
+
+    .editorial-left .desc {
+      font-size: var(--fs-md);
+      color: var(--text-secondary);
+      line-height: 1.9;
+      max-width: 420px;
+      margin-bottom: var(--space-8);
+    }
+
+    .editorial-ctas { display: flex; flex-direction: column; gap: var(--space-4); max-width: 300px; }
+
+    .editorial-right {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .editorial-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .editorial-right-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--bg-primary) 0%, transparent 30%);
+    }
+
+    .editorial-scroll-indicator {
+      position: absolute;
+      bottom: var(--space-8);
+      left: var(--space-12);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-size: var(--fs-xs);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    .editorial-scroll-indicator svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--gold);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* Bento Grid */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(3, 220px);
+      gap: var(--space-4);
+    }
+
+    .bento-card {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bento-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s var(--ease-out);
+    }
+
+    .bento-card:hover img { transform: scale(1.06); }
+
+    .bento-overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--grad-overlay);
+    }
+
+    .bento-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: var(--space-5);
+    }
+
+    .bento-label {
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: var(--space-1);
+    }
+
+    .bento-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--ivory);
+    }
+
+    .bento-c1 { grid-column: 1/6; grid-row: 1/3; }
+    .bento-c2 { grid-column: 6/9; grid-row: 1/2; }
+    .bento-c3 { grid-column: 9/13; grid-row: 1/2; }
+    .bento-c4 { grid-column: 6/10; grid-row: 2/3; }
+    .bento-c5 { grid-column: 10/13; grid-row: 2/3; }
+    .bento-c6 { grid-column: 1/5; grid-row: 3/4; }
+    .bento-c7 { grid-column: 5/9; grid-row: 3/4; }
+    .bento-c8 { grid-column: 9/13; grid-row: 3/4; background: var(--bg-card); display:flex;flex-direction:column;align-items:center;justify-content:center; text-align:center; border:1px solid var(--border-color); }
+
+    .bento-stat-num {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .bento-stat-label {
+      font-size: var(--fs-sm);
+      color: var(--text-muted);
+      margin-top: var(--space-2);
+    }
+
+    /* Material Showcase */
+    .material-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+
+    .material-panel {
+      position: relative;
+      height: 480px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .material-panel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s var(--ease-out), filter 0.4s;
+      filter: saturate(0.5) brightness(0.6);
+    }
+
+    .material-panel:hover img {
+      transform: scale(1.05);
+      filter: saturate(1) brightness(0.7);
+    }
+
+    .material-panel-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(32,33,36,0.95) 0%, rgba(32,33,36,0.3) 100%);
+    }
+
+    .material-panel-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: var(--space-6);
+    }
+
+    .material-tag {
+      display: inline-block;
+      padding: var(--space-1) var(--space-3);
+      background: var(--grad-gold);
+      color: var(--obsidian);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: var(--radius-sm);
+      margin-bottom: var(--space-3);
+    }
+
+    .material-name {
+      font-family: var(--font-display);
+      font-size: var(--fs-xl);
+      font-weight: 700;
+      color: var(--ivory);
+      margin-bottom: var(--space-2);
+    }
+
+    .material-desc {
+      font-size: var(--fs-sm);
+      color: var(--platinum);
+      line-height: 1.6;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s var(--ease-out);
+    }
+
+    .material-panel:hover .material-desc {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Blog Peek */
+    .blog-peek-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: var(--space-6);
+    }
+
+    .blog-peek-featured {
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      height: 500px;
+    }
+
+    .blog-peek-featured img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .blog-peek-featured-overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--grad-overlay);
+    }
+
+    .blog-peek-featured-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: var(--space-8);
+    }
+
+    .blog-peek-featured-content .tag {
+      display: inline-block;
+      padding: var(--space-1) var(--space-3);
+      background: var(--burgundy);
+      color: var(--ivory);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: var(--radius-sm);
+      margin-bottom: var(--space-3);
+    }
+
+    .blog-peek-featured-content h3 {
+      font-size: var(--fs-2xl);
+      font-weight: 800;
+      color: var(--ivory);
+      margin-bottom: var(--space-3);
+      line-height: 1.2;
+    }
+
+    .blog-peek-featured-content .meta {
+      font-size: var(--fs-sm);
+      color: var(--platinum);
+    }
+
+    .blog-peek-list { display: flex; flex-direction: column; gap: var(--space-4); }
+
+    .blog-mini {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: var(--space-4);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all var(--transition-base);
+    }
+
+    .blog-mini:hover {
+      border-color: var(--border-color);
+      transform: translateX(4px);
+    }
+
+    .blog-mini img {
+      width: 120px;
+      height: 100px;
+      object-fit: cover;
+    }
+
+    .blog-mini-content { padding: var(--space-4) var(--space-4) var(--space-4) 0; }
+
+    .blog-mini-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: var(--space-1);
+    }
+
+    .blog-mini-title {
+      font-family: var(--font-display);
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.3;
+      margin-bottom: var(--space-2);
+    }
+
+    .blog-mini-date { font-size: var(--fs-xs); color: var(--text-muted); }
+
+    /* Testimonial Marquee */
+    .testimonial-marquee {
+      overflow: hidden;
+      padding: var(--space-8) 0;
+    }
+
+    .testimonial-marquee-track {
+      display: flex;
+      gap: var(--space-6);
+      animation: marqueeScroll 40s linear infinite;
+      width: max-content;
+    }
+
+    .testimonial-mini {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      min-width: 380px;
+      max-width: 380px;
+      flex-shrink: 0;
+    }
+
+    .testimonial-mini .quote {
+      font-size: var(--fs-sm);
+      color: var(--text-secondary);
+      font-style: italic;
+      line-height: 1.8;
+      margin-bottom: var(--space-4);
+    }
+
+    .testimonial-mini-author {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .testimonial-mini-author .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--grad-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--obsidian);
+      flex-shrink: 0;
+    }
+
+    .testimonial-mini-author .name {
+      font-family: var(--font-display);
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .testimonial-mini-author .role {
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 900px) {
+      .editorial-hero { grid-template-columns: 1fr; min-height: auto; }
+      .editorial-right { height: 50vh; }
+      .editorial-left { padding: var(--space-12) var(--space-6); }
+      .bento-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .bento-c1,.bento-c2,.bento-c3,.bento-c4,.bento-c5,.bento-c6,.bento-c7,.bento-c8 { grid-column: auto; grid-row: auto; height: 220px; }
+      .material-showcase { grid-template-columns: 1fr; }
+      .material-panel { height: 280px; }
+      .blog-peek-grid { grid-template-columns: 1fr; }
+      .blog-peek-featured { height: 300px; }
+    }
+
+    @media (max-width: 640px) {
+      .bento-grid { grid-template-columns: 1fr; }
+      .blog-mini { grid-template-columns: 80px 1fr; }
+      .blog-mini img { width: 80px; height: 80px; }
+      .testimonial-mini { min-width: 300px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <main id="main">
+
+    <!-- Marquee Top -->
+    <div class="marquee-band" aria-hidden="true">
+      <div class="marquee-track">
+        <span class="marquee-item"><span class="marquee-dot"></span>Premium Trophies</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Custom Engraving</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Crystal Awards</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Sports Medals</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Corporate Plaques</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Personalized Gifts</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Bulk Orders Welcome</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>72-Hour Production</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Premium Trophies</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Custom Engraving</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Crystal Awards</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Sports Medals</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Corporate Plaques</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Personalized Gifts</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>Bulk Orders Welcome</span>
+        <span class="marquee-item"><span class="marquee-dot"></span>72-Hour Production</span>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SECTION 1: EDITORIAL HERO
+    =========================================== -->
+    <section class="editorial-hero" aria-label="Hero">
+      <div class="editorial-left">
+        <div class="eyebrow">Award-Winning Craftsmanship</div>
+        <h1>
+          Honour <br>
+          <span class="line2">Greatness</span>
+        </h1>
+        <p class="desc">We don't just make trophies — we forge legacies. Every award is a declaration that this moment, this achievement, this person deserves to be remembered.</p>
+        <div class="editorial-ctas">
+          <a href="engraving.html" class="btn btn-primary btn-lg w-full" style="justify-content:center;">Design Your Award</a>
+          <a href="products.html" class="btn btn-ghost btn-lg w-full" style="justify-content:center;">Explore Collection</a>
+        </div>
+        <div class="editorial-scroll-indicator" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+          Scroll to Explore
+        </div>
+      </div>
+      <div class="editorial-right">
+        <img src="images/awards-collection.jpg" alt="Premium Awards Collection" loading="eager">
+        <div class="editorial-right-overlay"></div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 2: BENTO GALLERY
+    =========================================== -->
+    <section class="section" aria-labelledby="gallery-h2">
+      <div class="container-wide">
+        <div class="section-header" style="margin-bottom:var(--space-10);">
+          <div class="section-label">Award Gallery</div>
+          <h2 id="gallery-h2" class="section-title reveal">A Gallery of <span class="text-gold">Excellence</span></h2>
+        </div>
+
+        <div class="bento-grid reveal">
+          <div class="bento-card bento-c1">
+            <img src="images/craftsmanship.jpg" alt="Master craftsman at work" data-lightbox loading="lazy">
+            <div class="bento-overlay"></div>
+            <div class="bento-info">
+              <div class="bento-label">Craftsmanship</div>
+              <div class="bento-title" style="font-size:1.5rem;">Master Artisan at Work</div>
+            </div>
+          </div>
+          <div class="bento-card bento-c2">
+            <img src="images/crystal-awards.jpg" alt="Crystal awards" data-lightbox loading="lazy">
+            <div class="bento-overlay"></div>
+            <div class="bento-info">
+              <div class="bento-label">Crystal</div>
+              <div class="bento-title">Crystal Awards</div>
+            </div>
+          </div>
+          <div class="bento-card bento-c3">
+            <img src="images/medals-collection.jpg" alt="Medals collection" data-lightbox loading="lazy">
+            <div class="bento-overlay"></div>
+            <div class="bento-info">
+              <div class="bento-label">Sports</div>
+              <div class="bento-title">Championship Medals</div>
+            </div>
+          </div>
+          <div class="bento-card bento-c4">
+            <img src="images/wooden-plaques.jpg" alt="Wooden plaques" data-lightbox loading="lazy">
+            <div class="bento-overlay"></div>
+            <div class="bento-info">
+              <div class="bento-label">Premium Wood</div>
+              <div class="bento-title">Executive Plaques</div>
+            </div>
+          </div>
+          <div class="bento-card bento-c5">
+            <img src="images/corporate-awards.jpg" alt="Corporate awards" data-lightbox loading="lazy">
+            <div class="bento-overlay"></div>
+            <div class="bento-info">
+              <div class="bento-label">Corporate</div>
+              <div class="bento-title">Leadership Awards</div>
+            </div>
+          </div>
+          <div class="bento-card bento-c6">
+            <img src="images/sports-trophies.jpg" alt="Sports trophies" data-lightbox loading="lazy">
+            <div class="bento-overlay"></div>
+            <div class="bento-info">
+              <div class="bento-label">Sports</div>
+              <div class="bento-title">Championship Cups</div>
+            </div>
+          </div>
+          <div class="bento-card bento-c7">
+            <img src="images/acrylic-award.jpg" alt="Acrylic award" data-lightbox loading="lazy">
+            <div class="bento-overlay"></div>
+            <div class="bento-info">
+              <div class="bento-label">Acrylic</div>
+              <div class="bento-title">Modern LED Awards</div>
+            </div>
+          </div>
+          <div class="bento-card bento-c8">
+            <div class="bento-stat-num">50K+</div>
+            <div class="bento-stat-label">Awards Crafted<br>Worldwide</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 3: MATERIAL SHOWCASE
+    =========================================== -->
+    <section class="section" style="background:var(--bg-surface);" aria-labelledby="material-h2">
+      <div class="container">
+        <div class="section-header" style="margin-bottom:var(--space-10);">
+          <div class="section-label">Materials & Finishes</div>
+          <h2 id="material-h2" class="section-title reveal">Crafted from the<br><span class="text-gold">Finest Materials</span></h2>
+          <p class="section-subtitle reveal reveal-delay-1">Hover to discover our premium material options — each with unique character and finish possibilities.</p>
+        </div>
+        <div class="material-showcase reveal">
+          <div class="material-panel">
+            <img src="images/crystal-awards.jpg" alt="Crystal Awards Material">
+            <div class="material-panel-overlay"></div>
+            <div class="material-panel-content">
+              <span class="material-tag">Premium Crystal</span>
+              <div class="material-name">K9 Crystal</div>
+              <div class="material-desc">Optically pure crystal with unrivalled clarity. Laser engraved from the inside for stunning 3D effects that catch every light.</div>
+            </div>
+          </div>
+          <div class="material-panel">
+            <img src="images/sports-trophies.jpg" alt="Gold & Silver Metal Awards">
+            <div class="material-panel-overlay"></div>
+            <div class="material-panel-content">
+              <span class="material-tag">Metalwork</span>
+              <div class="material-name">Gold & Silver</div>
+              <div class="material-desc">24K gold plated and sterling silver finished trophies. Hand-polished to a mirror shine with intricate engraving details.</div>
+            </div>
+          </div>
+          <div class="material-panel">
+            <img src="images/wooden-plaques.jpg" alt="Solid Wood Awards">
+            <div class="material-panel-overlay"></div>
+            <div class="material-panel-content">
+              <span class="material-tag">Natural Wood</span>
+              <div class="material-name">Walnut & Oak</div>
+              <div class="material-desc">Hand-selected solid walnut, mahogany and oak with deep-carved engraving. Each plaque carries a unique grain story.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 4: TESTIMONIAL MARQUEE
+    =========================================== -->
+    <section class="section-sm" aria-label="Client Testimonials">
+      <div class="container" style="margin-bottom:var(--space-8);">
+        <div class="section-header">
+          <div class="section-label">Testimonials</div>
+          <h2 class="section-title reveal">Voices of <span class="text-gold">Excellence</span></h2>
+        </div>
+      </div>
+      <div class="testimonial-marquee" aria-hidden="true">
+        <div class="testimonial-marquee-track">
+          <!-- Cards -->
+          <div class="testimonial-mini">
+            <div class="stars" style="margin-bottom:var(--space-3);">★★★★★</div>
+            <p class="quote">"The crystal trophies for our annual gala were absolutely breathtaking. Every recipient was moved to tears. T&A Engraving exceeded every expectation."</p>
+            <div class="testimonial-mini-author">
+              <div class="avatar">SK</div>
+              <div>
+                <div class="name">Suresh Kumar</div>
+                <div class="role">CEO, Pinnacle Corp</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-mini">
+            <div class="stars" style="margin-bottom:var(--space-3);">★★★★★</div>
+            <p class="quote">"Ordered 200 medals for our state championship. Perfect quality, on time and the custom engraving was flawless. Will order again without hesitation."</p>
+            <div class="testimonial-mini-author">
+              <div class="avatar">PM</div>
+              <div>
+                <div class="name">Priya Menon</div>
+                <div class="role">Sports Director, Karnataka</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-mini">
+            <div class="stars" style="margin-bottom:var(--space-3);">★★★★★</div>
+            <p class="quote">"The personalized wooden plaques for our board members were exquisite. The grain, the engraving depth, the finish — pure luxury. Highly recommended."</p>
+            <div class="testimonial-mini-author">
+              <div class="avatar">AR</div>
+              <div>
+                <div class="name">Anjali Rao</div>
+                <div class="role">HR Director, TechGiant India</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-mini">
+            <div class="stars" style="margin-bottom:var(--space-3);">★★★★★</div>
+            <p class="quote">"Fast, professional and the live preview tool made ordering so easy. Our school awards ceremony was a massive success thanks to these beautiful trophies."</p>
+            <div class="testimonial-mini-author">
+              <div class="avatar">VP</div>
+              <div>
+                <div class="name">Vijay Patel</div>
+                <div class="role">Principal, Delhi International School</div>
+              </div>
+            </div>
+          </div>
+          <!-- Repeat for infinite scroll -->
+          <div class="testimonial-mini">
+            <div class="stars" style="margin-bottom:var(--space-3);">★★★★★</div>
+            <p class="quote">"The crystal trophies for our annual gala were absolutely breathtaking. Every recipient was moved to tears. T&A Engraving exceeded every expectation."</p>
+            <div class="testimonial-mini-author">
+              <div class="avatar">SK</div>
+              <div>
+                <div class="name">Suresh Kumar</div>
+                <div class="role">CEO, Pinnacle Corp</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-mini">
+            <div class="stars" style="margin-bottom:var(--space-3);">★★★★★</div>
+            <p class="quote">"Ordered 200 medals for our state championship. Perfect quality, on time and the custom engraving was flawless. Will order again without hesitation."</p>
+            <div class="testimonial-mini-author">
+              <div class="avatar">PM</div>
+              <div>
+                <div class="name">Priya Menon</div>
+                <div class="role">Sports Director, Karnataka</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-mini">
+            <div class="stars" style="margin-bottom:var(--space-3);">★★★★★</div>
+            <p class="quote">"The personalized wooden plaques for our board members were exquisite. The grain, the engraving depth, the finish — pure luxury. Highly recommended."</p>
+            <div class="testimonial-mini-author">
+              <div class="avatar">AR</div>
+              <div>
+                <div class="name">Anjali Rao</div>
+                <div class="role">HR Director, TechGiant India</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-mini">
+            <div class="stars" style="margin-bottom:var(--space-3);">★★★★★</div>
+            <p class="quote">"Fast, professional and the live preview tool made ordering so easy. Our school awards ceremony was a massive success thanks to these beautiful trophies."</p>
+            <div class="testimonial-mini-author">
+              <div class="avatar">VP</div>
+              <div>
+                <div class="name">Vijay Patel</div>
+                <div class="role">Principal, Delhi International School</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 5: BLOG PEEK
+    =========================================== -->
+    <section class="section" style="background:var(--bg-surface);" aria-labelledby="blog-h2">
+      <div class="container">
+        <div class="flex-between" style="margin-bottom:var(--space-10);">
+          <div>
+            <div class="section-label no-line" style="justify-content:flex-start;margin-bottom:var(--space-3);">Latest Articles</div>
+            <h2 id="blog-h2" class="section-title reveal" style="text-align:left;">From Our <span class="text-gold">Journal</span></h2>
+          </div>
+          <a href="blog.html" class="btn btn-outline">All Articles</a>
+        </div>
+
+        <div class="blog-peek-grid">
+          <a href="blog-details.html" class="blog-peek-featured reveal">
+            <img src="images/craftsmanship.jpg" alt="The Art of Trophy Engraving">
+            <div class="blog-peek-featured-overlay"></div>
+            <div class="blog-peek-featured-content">
+              <span class="tag">Craftsmanship</span>
+              <h3>The Lost Art of Hand Engraving: How We Keep Tradition Alive in a Digital Age</h3>
+              <div class="meta">October 10, 2026 · 8 min read</div>
+            </div>
+          </a>
+
+          <div class="blog-peek-list">
+            <a href="blog-details.html" class="blog-mini reveal reveal-delay-1">
+              <img src="images/crystal-awards.jpg" alt="Crystal Trophy Guide">
+              <div class="blog-mini-content">
+                <div class="blog-mini-tag">Guide</div>
+                <div class="blog-mini-title">How to Choose the Perfect Crystal Trophy for Your Event</div>
+                <div class="blog-mini-date">Oct 8, 2026</div>
+              </div>
+            </a>
+            <a href="blog-details.html" class="blog-mini reveal reveal-delay-2">
+              <img src="images/corporate-awards.jpg" alt="Corporate Awards Tips">
+              <div class="blog-mini-content">
+                <div class="blog-mini-tag">Corporate</div>
+                <div class="blog-mini-title">5 Ways Custom Awards Boost Employee Morale and Retention</div>
+                <div class="blog-mini-date">Oct 5, 2026</div>
+              </div>
+            </a>
+            <a href="blog-details.html" class="blog-mini reveal reveal-delay-3">
+              <img src="images/medals-collection.jpg" alt="Medal Design Trends">
+              <div class="blog-mini-content">
+                <div class="blog-mini-tag">Trends</div>
+                <div class="blog-mini-title">2026 Medal Design Trends: What's Hot in Sports Awards</div>
+                <div class="blog-mini-date">Oct 2, 2026</div>
+              </div>
+            </a>
+            <a href="blog-details.html" class="blog-mini reveal reveal-delay-4">
+              <img src="images/wooden-plaques.jpg" alt="Sustainable Awards">
+              <div class="blog-mini-content">
+                <div class="blog-mini-tag">Sustainability</div>
+                <div class="blog-mini-title">Eco-Friendly Awards: Our Commitment to Sustainable Craftsmanship</div>
+                <div class="blog-mini-date">Sep 28, 2026</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 6: NEWSLETTER + CTA
+    =========================================== -->
+    <section class="section" aria-label="Newsletter">
+      <div class="container">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-8);align-items:center;">
+          <div class="reveal">
+            <div class="section-label no-line" style="justify-content:flex-start;margin-bottom:var(--space-4);">Stay Inspired</div>
+            <h2 class="section-title" style="text-align:left;font-size:var(--fs-3xl);">Join Our <span class="text-gold">Inner Circle</span></h2>
+            <div class="gold-divider left"></div>
+            <p style="color:var(--text-secondary);margin-top:var(--space-4);line-height:1.9;">Get exclusive access to new collections, engraving inspiration, bulk order discounts and award ceremony tips delivered to your inbox monthly.</p>
+          </div>
+          <div class="reveal reveal-delay-2">
+            <div style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:var(--radius-xl);padding:var(--space-8);">
+              <form id="newsletter-form" novalidate>
+                <div class="form-group">
+                  <label class="form-label" for="nl-name">Your Name</label>
+                  <input type="text" id="nl-name" class="form-control" placeholder="John Smith" data-validate="required">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="nl-email">Email Address</label>
+                  <input type="email" id="nl-email" class="form-control" placeholder="john@company.com" data-validate="required,email">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="nl-interest">I'm Interested In</label>
+                  <select id="nl-interest" class="form-control">
+                    <option value="">Select your interest</option>
+                    <option>Corporate Awards</option>
+                    <option>Sports Trophies</option>
+                    <option>Custom Engraving</option>
+                    <option>Bulk Orders</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary w-full" style="justify-content:center;">
+                  Subscribe & Get 10% Off
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      FormValidator.init('#newsletter-form');
+    });
+  </script>
+</body>
+</html>

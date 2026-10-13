@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create your free T&A Engraving account and get 10% off your first order. Track orders, save designs and access exclusive member pricing.">
+  <title>Sign Up | T&A Engraving — Create Your Account</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* SIGNUP PAGE */
+    .auth-page { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+
+    .auth-visual { position: relative; overflow: hidden; min-height: 100vh; }
+    .auth-visual img { width: 100%; height: 100%; object-fit: cover; }
+    .auth-visual-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(112,45,59,0.85) 0%, rgba(32,33,36,0.7) 100%); }
+
+    .auth-visual-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--space-12);
+    }
+
+    .auth-benefits-list { display: flex; flex-direction: column; gap: var(--space-5); margin-top: var(--space-8); }
+
+    .auth-benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-4);
+    }
+
+    .benefit-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-lg);
+      background: rgba(198,161,91,0.15);
+      border: 1px solid rgba(198,161,91,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .benefit-icon svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+
+    .benefit-text strong { display: block; color: var(--ivory); font-family: var(--font-display); font-size: var(--fs-base); margin-bottom: 2px; }
+    .benefit-text span { font-size: var(--fs-sm); color: rgba(248,245,239,0.6); }
+
+    .auth-panel {
+      background: var(--bg-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-10) var(--space-10);
+      min-height: 100vh;
+      overflow-y: auto;
+    }
+
+    .auth-form-wrap { width: 100%; max-width: 460px; }
+
+    .auth-logo { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-8); }
+    .auth-logo-icon { width: 44px; height: 44px; border-radius: var(--radius-lg); background: var(--grad-gold); display: flex; align-items: center; justify-content: center; color: var(--obsidian); flex-shrink: 0; }
+    .auth-logo-icon svg { width: 22px; height: 22px; stroke: var(--obsidian); fill: none; stroke-width: 2; }
+    .auth-logo-text { font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 800; color: var(--text-primary); }
+    .auth-logo-text span { color: var(--gold); }
+
+    .auth-title { font-size: var(--fs-3xl); font-weight: 900; color: var(--text-primary); margin-bottom: var(--space-2); }
+    .auth-subtitle { font-size: var(--fs-base); color: var(--text-muted); margin-bottom: var(--space-7); }
+
+    /* Offer banner */
+    .signup-offer {
+      background: rgba(198,161,91,0.1);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+    }
+
+    .signup-offer-icon { display: flex; align-items: center; justify-content: center; color: var(--gold); flex-shrink: 0; }
+    .signup-offer-icon svg { width: 22px; height: 22px; fill: currentColor; }
+    .signup-offer-text strong { display: block; font-size: var(--fs-sm); color: var(--gold); font-family: var(--font-display); }
+    .signup-offer-text span { font-size: var(--fs-xs); color: var(--text-muted); }
+
+    /* Social logins */
+    .social-logins { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); margin-bottom: var(--space-5); }
+
+    .social-login-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-4);
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .social-login-btn:hover { border-color: var(--border-color); background: var(--bg-surface); }
+
+    .divider-or { display: flex; align-items: center; gap: var(--space-4); margin: var(--space-4) 0; }
+    .divider-or::before, .divider-or::after { content: ''; flex: 1; height: 1px; background: var(--border-subtle); }
+    .divider-or span { font-size: var(--fs-xs); color: var(--text-muted); white-space: nowrap; }
+
+    /* Input with icon */
+    .input-icon-wrap { position: relative; }
+    .input-icon { position: absolute; left: var(--space-4); top: 50%; transform: translateY(-50%); width: 18px; height: 18px; stroke: var(--text-muted); fill: none; stroke-width: 2; pointer-events: none; }
+    .input-icon-wrap .form-control { padding-left: 3rem; }
+
+    .toggle-password {
+      position: absolute;
+      right: var(--space-4);
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .toggle-password svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* Password strength */
+    .password-strength { margin-top: var(--space-2); }
+    .strength-bar { height: 4px; background: var(--bg-surface); border-radius: 2px; overflow: hidden; }
+    .strength-fill { height: 100%; border-radius: 2px; transition: all 0.3s; width: 0%; }
+    .strength-label { font-size: var(--fs-xs); color: var(--text-muted); margin-top: 4px; }
+
+    /* Account type */
+    .account-types { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); margin-bottom: var(--space-5); }
+
+    .account-type {
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      text-align: center;
+    }
+
+    .account-type.active { border-color: var(--gold); background: rgba(198,161,91,0.05); }
+    .account-type:hover { border-color: var(--border-color); }
+
+    .account-type-icon { display: flex; align-items: center; justify-content: center; height: 30px; margin-bottom: var(--space-2); color: var(--text-secondary); }
+    .account-type.active .account-type-icon { color: var(--gold); }
+    .account-type-icon svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+    .account-type-label { font-size: var(--fs-sm); font-weight: 700; color: var(--text-primary); }
+    .account-type-sub { font-size: var(--fs-xs); color: var(--text-muted); }
+
+    /* Terms */
+    .terms-check { display: flex; align-items: flex-start; gap: var(--space-3); margin-bottom: var(--space-5); cursor: pointer; }
+    .terms-check input { flex-shrink: 0; margin-top: 2px; }
+    .terms-check span { font-size: var(--fs-sm); color: var(--text-muted); line-height: 1.5; }
+    .terms-check a { color: var(--gold); font-weight: 600; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+
+    .auth-switch { text-align: center; margin-top: var(--space-5); font-size: var(--fs-sm); color: var(--text-muted); }
+    .auth-switch a { color: var(--gold); font-weight: 600; }
+
+    /* Progress steps */
+    .signup-steps {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: var(--space-8);
+    }
+
+    .signup-step {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      flex: 1;
+    }
+
+    .step-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 2px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      transition: all var(--transition-base);
+    }
+
+    .step-circle.active { background: var(--grad-gold); border-color: transparent; color: var(--obsidian); }
+    .step-circle.done { background: #1a3a1a; border-color: #4CAF50; color: #4CAF50; }
+
+    .step-line { flex: 1; height: 2px; background: var(--border-subtle); }
+    .step-label { font-size: var(--fs-xs); color: var(--text-muted); }
+
+    @media (max-width: 900px) {
+      .auth-page { grid-template-columns: 1fr; }
+      .auth-visual { display: none; }
+      .auth-panel { padding: var(--space-8) var(--space-5); }
+      .social-logins { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <main id="main">
+    <div class="auth-page">
+
+      <!-- Visual Side -->
+      <div class="auth-visual" role="presentation">
+        <img src="images/hero-slider3.jpg" alt="Precision Engraving">
+        <div class="auth-visual-overlay"></div>
+        <div class="auth-visual-content">
+          <a href="index.html" style="display:flex;align-items:center;gap:var(--space-3);text-decoration:none;margin-bottom:var(--space-10);">
+            <div style="width:44px;height:44px;border-radius:var(--radius-lg);background:var(--grad-gold);display:flex;align-items:center;justify-content:center;color:var(--obsidian);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2"/><path d="M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/><path d="M6 3h12v7a6 6 0 0 1-12 0V3z"/><line x1="12" y1="16" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></svg>
+            </div>
+            <span style="font-family:var(--font-display);font-size:var(--fs-lg);font-weight:800;color:var(--ivory);">T&A <span style="color:var(--gold);">Engraving</span></span>
+          </a>
+
+          <h2 style="font-size:var(--fs-2xl);font-weight:900;color:var(--ivory);margin-bottom:var(--space-3);">Join 5,000+<br>Award <span style="color:var(--gold);">Professionals</span></h2>
+          <p style="color:rgba(248,245,239,0.7);line-height:1.8;font-size:var(--fs-base);">Create your account and unlock exclusive benefits designed for companies, schools and event organizers.</p>
+
+          <div class="auth-benefits-list">
+            <div class="auth-benefit-item">
+              <div class="benefit-icon">
+                <svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+              </div>
+              <div class="benefit-text">
+                <strong>10% Off First Order</strong>
+                <span>Automatic discount applied at checkout</span>
+              </div>
+            </div>
+            <div class="auth-benefit-item">
+              <div class="benefit-icon">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              </div>
+              <div class="benefit-text">
+                <strong>Order Management Dashboard</strong>
+                <span>Track, reorder and manage all your awards</span>
+              </div>
+            </div>
+            <div class="auth-benefit-item">
+              <div class="benefit-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>
+              </div>
+              <div class="benefit-text">
+                <strong>Save Your Designs</strong>
+                <span>Unlimited engraving designs, reuse anytime</span>
+              </div>
+            </div>
+            <div class="auth-benefit-item">
+              <div class="benefit-icon">
+                <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.5"/></svg>
+              </div>
+              <div class="benefit-text">
+                <strong>Member-Only Pricing</strong>
+                <span>Up to 15% extra on top of volume discounts</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Side -->
+      <div class="auth-panel">
+        <div class="auth-form-wrap">
+
+          <!-- Logo (mobile only) -->
+          <div class="auth-logo" id="mobile-logo-signup" style="display:none;">
+            <a href="index.html" style="display:flex;align-items:center;gap:var(--space-3);text-decoration:none;">
+              <div class="auth-logo-icon">
+                <svg viewBox="0 0 24 24"><path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2"/><path d="M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/><path d="M6 3h12v7a6 6 0 0 1-12 0V3z"/><line x1="12" y1="16" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></svg>
+              </div>
+              <div class="auth-logo-text">T&A <span>Engraving</span></div>
+            </a>
+          </div>
+
+          <h1 class="auth-title">Create Account</h1>
+          <p class="auth-subtitle">Free forever · No credit card required</p>
+
+          <!-- Offer Banner -->
+          <div class="signup-offer">
+            <div class="signup-offer-icon">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div class="signup-offer-text">
+              <strong>Welcome Offer: 10% Off Your First Order</strong>
+              <span>Coupon WELCOME10 auto-applied at checkout for new members</span>
+            </div>
+          </div>
+
+          <!-- Account Type -->
+          <div style="margin-bottom:var(--space-5);">
+            <div class="form-label" style="margin-bottom:var(--space-3);">I am a:</div>
+            <div class="account-types">
+              <div class="account-type active" onclick="selectAccountType(this)" data-type="individual">
+                <div class="account-type-icon">
+                  <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <div class="account-type-label">Individual</div>
+                <div class="account-type-sub">Personal orders & gifts</div>
+              </div>
+              <div class="account-type" onclick="selectAccountType(this)" data-type="business">
+                <div class="account-type-icon">
+                  <svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="9" y1="22" x2="9" y2="2"/><line x1="8" y1="6" x2="8.01" y2="6"/><line x1="16" y1="6" x2="16.01" y2="6"/><line x1="8" y1="10" x2="8.01" y2="10"/><line x1="16" y1="10" x2="16.01" y2="10"/><line x1="8" y1="14" x2="8.01" y2="14"/><line x1="16" y1="14" x2="16.01" y2="14"/></svg>
+                </div>
+                <div class="account-type-label">Business / Org</div>
+                <div class="account-type-sub">Bulk orders & invoicing</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Signup -->
+          <div class="social-logins">
+            <button class="social-login-btn" onclick="socialSignup('Google')">
+              <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.17 0 9.99 0 12s.45 3.83 1.25 5.42l4.03-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
+              Google
+            </button>
+            <button class="social-login-btn" onclick="socialSignup('Microsoft')">
+              <svg width="18" height="18" viewBox="0 0 21 21"><rect x="1" y="1" width="9" height="9" fill="#f25022"/><rect x="11" y="1" width="9" height="9" fill="#7fba00"/><rect x="1" y="11" width="9" height="9" fill="#00a4ef"/><rect x="11" y="11" width="9" height="9" fill="#ffb900"/></svg>
+              Microsoft
+            </button>
+          </div>
+
+          <div class="divider-or"><span>or create with email</span></div>
+
+          <!-- Signup Form -->
+          <form id="signup-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="signup-fname">First Name *</label>
+                <input type="text" id="signup-fname" class="form-control" placeholder="John" data-validate="required" autocomplete="given-name">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="signup-lname">Last Name *</label>
+                <input type="text" id="signup-lname" class="form-control" placeholder="Smith" data-validate="required" autocomplete="family-name">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="signup-email">Email Address *</label>
+              <div class="input-icon-wrap">
+                <svg class="input-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <input type="email" id="signup-email" class="form-control" placeholder="john@company.com" data-validate="required,email" autocomplete="email">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="signup-phone">Phone Number</label>
+              <div class="input-icon-wrap">
+                <svg class="input-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 6 6l.9-.9a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <input type="tel" id="signup-phone" class="form-control" placeholder="+91 98765 00000" autocomplete="tel">
+              </div>
+            </div>
+
+            <div class="form-group" id="company-field" style="display:none;">
+              <label class="form-label" for="signup-company">Company / Organization *</label>
+              <div class="input-icon-wrap">
+                <svg class="input-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                <input type="text" id="signup-company" class="form-control" placeholder="Pinnacle Corp" autocomplete="organization">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="signup-password">Password *</label>
+              <div class="input-icon-wrap">
+                <svg class="input-icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <input type="password" id="signup-password" class="form-control" placeholder="Min. 8 characters" data-validate="required" autocomplete="new-password" oninput="checkPasswordStrength(this.value)">
+                <button type="button" class="toggle-password" onclick="togglePassword('signup-password', this)" aria-label="Show password">
+                  <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+              <div class="password-strength">
+                <div class="strength-bar"><div class="strength-fill" id="strength-fill"></div></div>
+                <div class="strength-label" id="strength-label">Enter a password</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="signup-confirm">Confirm Password *</label>
+              <div class="input-icon-wrap">
+                <svg class="input-icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <input type="password" id="signup-confirm" class="form-control" placeholder="Repeat password" data-validate="required" autocomplete="new-password">
+              </div>
+            </div>
+
+            <label class="terms-check">
+              <input type="checkbox" id="signup-terms" required>
+              <span>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. I consent to receiving order confirmations and promotional offers.</span>
+            </label>
+
+            <button type="submit" class="btn btn-primary w-full btn-lg" style="justify-content:center;">
+              Create My Account
+              <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+            </button>
+          </form>
+
+          <div class="auth-switch">
+            Already have an account? <a href="login.html">Sign in →</a>
+          </div>
+
+          <p style="text-align:center;font-size:var(--fs-xs);color:var(--text-muted);margin-top:var(--space-5);">Your data is safe. We never share your information with third parties. Read our <a href="#" style="color:var(--gold);">Privacy Policy</a>.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script>
+    function selectAccountType(card) {
+      document.querySelectorAll('.account-type').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      const companyField = document.getElementById('company-field');
+      if (card.dataset.type === 'business') {
+        companyField.style.display = 'block';
+        document.getElementById('signup-company').setAttribute('data-validate', 'required');
+      } else {
+        companyField.style.display = 'none';
+        document.getElementById('signup-company').removeAttribute('data-validate');
+      }
+    }
+
+    function checkPasswordStrength(pass) {
+      const fill = document.getElementById('strength-fill');
+      const label = document.getElementById('strength-label');
+      let score = 0;
+      if (pass.length >= 8) score++;
+      if (/[A-Z]/.test(pass)) score++;
+      if (/[0-9]/.test(pass)) score++;
+      if (/[^A-Za-z0-9]/.test(pass)) score++;
+
+      const configs = [
+        { w: '0%', c: 'transparent', l: 'Enter a password' },
+        { w: '25%', c: '#e53935', l: 'Weak — add more characters' },
+        { w: '50%', c: '#fb8c00', l: 'Fair — add uppercase & numbers' },
+        { w: '75%', c: '#fdd835', l: 'Good — add a special character' },
+        { w: '100%', c: '#43a047', l: 'Strong password' }
+      ];
+
+      fill.style.width = configs[score].w;
+      fill.style.background = configs[score].c;
+      label.textContent = configs[score].l;
+    }
+
+    function togglePassword(inputId, btn) {
+      const input = document.getElementById(inputId);
+      input.type = input.type === 'password' ? 'text' : 'password';
+    }
+
+    function socialSignup(provider) {
+      Toast.show('Connecting to ' + provider + '...', 'info');
+      setTimeout(() => window.location.href = 'index.html', 1500);
+    }
+
+    if (window.innerWidth <= 900) {
+      document.getElementById('mobile-logo-signup').style.display = 'flex';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('signup-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const terms = document.getElementById('signup-terms');
+        if (!terms.checked) {
+          Toast.show('Please accept the Terms of Service to continue.', 'error');
+          return;
+        }
+        const pass = document.getElementById('signup-password').value;
+        const confirm = document.getElementById('signup-confirm').value;
+        if (pass !== confirm) {
+          Toast.show('Passwords do not match!', 'error');
+          return;
+        }
+        Toast.show('Account created! Redirecting...', 'success');
+        setTimeout(() => window.location.href = 'index.html', 2000);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="T&A Engraving Blog — Expert insights on trophy design, engraving techniques, corporate award trends, sports recognition and craftsmanship stories.">
+  <title>Blog | T&A Engraving — Award Insights & Craftsmanship Stories</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* BLOG PAGE */
+    .blog-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: var(--space-12);
+      align-items: start;
+    }
+
+    /* Featured Post */
+    .blog-featured {
+      position: relative;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      height: 500px;
+      margin-bottom: var(--space-8);
+      display: block;
+    }
+
+    .blog-featured img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s var(--ease-out);
+    }
+
+    .blog-featured:hover img { transform: scale(1.04); }
+
+    .blog-featured-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(32,33,36,0.97) 0%, rgba(32,33,36,0.4) 60%, transparent 100%);
+    }
+
+    .blog-featured-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: var(--space-8);
+    }
+
+    .blog-tag {
+      display: inline-block;
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-sm);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-3);
+    }
+
+    .blog-tag.craftsmanship { background: var(--burgundy); color: var(--ivory); }
+    .blog-tag.guide { background: rgba(198,161,91,0.2); color: var(--gold); border: 1px solid var(--gold); }
+    .blog-tag.corporate { background: rgba(54,56,60,0.8); color: var(--platinum); border: 1px solid var(--border-subtle); }
+    .blog-tag.sports { background: #1a3a1a; color: #4CAF50; border: 1px solid #4CAF50; }
+    .blog-tag.trends { background: rgba(65,105,225,0.2); color: #6b9fff; border: 1px solid #4169E1; }
+
+    .blog-featured-title {
+      font-size: var(--fs-2xl);
+      font-weight: 800;
+      color: var(--ivory);
+      line-height: 1.2;
+      margin-bottom: var(--space-3);
+    }
+
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      font-size: var(--fs-sm);
+      color: var(--platinum);
+      flex-wrap: wrap;
+    }
+
+    .blog-meta-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .blog-meta-item svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--gold);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* Blog grid */
+    .blog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); margin-bottom: var(--space-8); }
+
+    .blog-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      transition: all var(--transition-base);
+      display: block;
+    }
+
+    .blog-card:hover {
+      border-color: var(--border-color);
+      box-shadow: var(--shadow-gold);
+      transform: translateY(-4px);
+    }
+
+    .blog-card-img {
+      aspect-ratio: 16/10;
+      overflow: hidden;
+    }
+
+    .blog-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s var(--ease-out);
+    }
+
+    .blog-card:hover .blog-card-img img { transform: scale(1.06); }
+
+    .blog-card-body { padding: var(--space-6); }
+
+    .blog-card-title {
+      font-family: var(--font-display);
+      font-size: var(--fs-md);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.3;
+      margin-bottom: var(--space-3);
+      transition: color var(--transition-fast);
+    }
+
+    .blog-card:hover .blog-card-title { color: var(--gold); }
+
+    .blog-card-excerpt {
+      font-size: var(--fs-sm);
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: var(--space-4);
+    }
+
+    .blog-read-more {
+      font-size: var(--fs-sm);
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .blog-read-more svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      transition: transform var(--transition-fast);
+    }
+
+    .blog-card:hover .blog-read-more svg { transform: translateX(4px); }
+
+    /* Sidebar */
+    .blog-sidebar {
+      position: sticky;
+      top: calc(var(--navbar-h) + var(--space-6));
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    .sidebar-widget {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+    }
+
+    .widget-title {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      margin-bottom: var(--space-5);
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    /* Categories */
+    .widget-categories { display: flex; flex-direction: column; gap: var(--space-2); }
+
+    .widget-cat-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-md);
+      font-size: var(--fs-sm);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .widget-cat-item:hover { background: rgba(198,161,91,0.08); color: var(--gold); }
+    .widget-cat-count { font-size: var(--fs-xs); color: var(--text-muted); background: var(--bg-surface); padding: 1px 8px; border-radius: 10px; }
+
+    /* Recent posts */
+    .recent-post {
+      display: flex;
+      gap: var(--space-3);
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .recent-post:last-child { border-bottom: none; }
+
+    .recent-post-img {
+      width: 64px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .recent-post-title {
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+      transition: color var(--transition-fast);
+    }
+
+    .recent-post:hover .recent-post-title { color: var(--gold); }
+    .recent-post-date { font-size: var(--fs-xs); color: var(--text-muted); margin-top: var(--space-1); }
+
+    /* Tags cloud */
+    .tags-cloud { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+
+    .tag-pill {
+      padding: var(--space-1) var(--space-3);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .tag-pill:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* Newsletter widget */
+    .newsletter-widget input { margin-bottom: var(--space-3); }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      margin-top: var(--space-8);
+    }
+
+    .page-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      background: transparent;
+    }
+
+    .page-btn:hover, .page-btn.active {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(198,161,91,0.08);
+    }
+
+    .page-btn.active {
+      background: var(--grad-gold);
+      color: var(--obsidian);
+      border-color: transparent;
+    }
+
+    .page-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* Email subscribe */
+    .email-cta {
+      background: var(--grad-burgundy);
+      border-radius: var(--radius-xl);
+      padding: var(--space-10) var(--space-8);
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .blog-layout { grid-template-columns: 1fr; }
+      .blog-sidebar { position: static; }
+      .blog-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <main id="main">
+
+    <!-- Page Hero -->
+    <header class="page-hero">
+      <img class="page-hero-bg" src="images/craftsmanship.jpg" alt="Award Craftsmanship">
+      <div class="page-hero-overlay"></div>
+      <div class="page-hero-content">
+        <div class="container">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a><span class="sep">›</span><span>Blog</span>
+          </nav>
+          <h1 class="page-hero-title">Award <span style="color:var(--gold);">Insights</span> & Stories</h1>
+          <p class="page-hero-subtitle">Expert guides, design trends and craftsmanship stories from India's premier engraving studio.</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- ==========================================
+         SECTION 1: BLOG CATEGORIES FILTER
+    =========================================== -->
+    <section class="section-sm" style="background:var(--bg-surface);">
+      <div class="container">
+        <div class="filter-tabs" id="blog-filter-tabs">
+          <button class="filter-tab active" data-filter="all">All Articles</button>
+          <button class="filter-tab" data-filter="craftsmanship">Craftsmanship</button>
+          <button class="filter-tab" data-filter="guide">Buyer's Guide</button>
+          <button class="filter-tab" data-filter="corporate">Corporate</button>
+          <button class="filter-tab" data-filter="sports">Sports</button>
+          <button class="filter-tab" data-filter="trends">Industry Trends</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 2: FEATURED + GRID + SIDEBAR
+    =========================================== -->
+    <section class="section" aria-label="Blog Posts">
+      <div class="container">
+        <div class="blog-layout">
+
+          <!-- Main Content -->
+          <div>
+            <!-- Featured Post -->
+            <a href="blog-details.html" class="blog-featured reveal" aria-label="Read: The Lost Art of Hand Engraving">
+              <img src="images/craftsmanship.jpg" alt="Master craftsman engraving">
+              <div class="blog-featured-overlay"></div>
+              <div class="blog-featured-content">
+                <span class="blog-tag craftsmanship">Craftsmanship</span>
+                <h2 class="blog-featured-title">The Lost Art of Hand Engraving:<br>How We Keep Tradition Alive in a Digital Age</h2>
+                <div class="blog-meta">
+                  <span class="blog-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> October 10, 2026</span>
+                  <span class="blog-meta-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Rajesh Trophywala</span>
+                  <span class="blog-meta-item"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> 8 min read</span>
+                </div>
+              </div>
+            </a>
+
+            <!-- Blog Grid -->
+            <div class="blog-grid" id="blog-grid">
+              <a href="blog-details.html" class="blog-card reveal" data-category="guide">
+                <div class="blog-card-img"><img src="images/crystal-awards.jpg" alt="Crystal Trophy Guide" loading="lazy"></div>
+                <div class="blog-card-body">
+                  <span class="blog-tag guide">Guide</span>
+                  <h3 class="blog-card-title">How to Choose the Perfect Crystal Trophy for Your Corporate Event</h3>
+                  <p class="blog-card-excerpt">From K9 to Bohemian crystal — understand the difference between grades and why it matters for your award's visual impact and longevity.</p>
+                  <div class="blog-meta" style="margin-bottom:var(--space-3);">
+                    <span class="blog-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Oct 8, 2026</span>
+                    <span class="blog-meta-item"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> 6 min</span>
+                  </div>
+                  <div class="blog-read-more">Read Article <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
+                </div>
+              </a>
+
+              <a href="blog-details.html" class="blog-card reveal reveal-delay-1" data-category="corporate">
+                <div class="blog-card-img"><img src="images/corporate-awards.jpg" alt="Corporate Awards" loading="lazy"></div>
+                <div class="blog-card-body">
+                  <span class="blog-tag corporate">Corporate</span>
+                  <h3 class="blog-card-title">5 Ways Custom Awards Transform Company Culture and Boost Retention</h3>
+                  <p class="blog-card-excerpt">Research shows recognition programs increase employee engagement by 47%. Here's how premium awards create lasting motivational impact.</p>
+                  <div class="blog-meta" style="margin-bottom:var(--space-3);">
+                    <span class="blog-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Oct 5, 2026</span>
+                    <span class="blog-meta-item"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> 7 min</span>
+                  </div>
+                  <div class="blog-read-more">Read Article <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
+                </div>
+              </a>
+
+              <a href="blog-details.html" class="blog-card reveal" data-category="sports">
+                <div class="blog-card-img"><img src="images/medals-collection.jpg" alt="Sports Medals" loading="lazy"></div>
+                <div class="blog-card-body">
+                  <span class="blog-tag sports">Sports</span>
+                  <h3 class="blog-card-title">2026 Medal Design Trends: What's Winning in Sports Recognition</h3>
+                  <p class="blog-card-excerpt">From eco-friendly materials to augmented reality QR codes — discover the innovations redefining sports awards in 2026.</p>
+                  <div class="blog-meta" style="margin-bottom:var(--space-3);">
+                    <span class="blog-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Oct 2, 2026</span>
+                    <span class="blog-meta-item"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> 5 min</span>
+                  </div>
+                  <div class="blog-read-more">Read Article <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
+                </div>
+              </a>
+
+              <a href="blog-details.html" class="blog-card reveal reveal-delay-1" data-category="craftsmanship">
+                <div class="blog-card-img"><img src="images/wooden-plaques.jpg" alt="Wood Plaque" loading="lazy"></div>
+                <div class="blog-card-body">
+                  <span class="blog-tag craftsmanship">Craftsmanship</span>
+                  <h3 class="blog-card-title">The Beauty of Wood: Why Walnut and Mahogany Make the Finest Award Plaques</h3>
+                  <p class="blog-card-excerpt">Every piece of walnut has a unique grain story. We explore why natural wood remains the most prestigious material for executive plaques.</p>
+                  <div class="blog-meta" style="margin-bottom:var(--space-3);">
+                    <span class="blog-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Sep 28, 2026</span>
+                    <span class="blog-meta-item"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> 6 min</span>
+                  </div>
+                  <div class="blog-read-more">Read Article <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
+                </div>
+              </a>
+
+              <a href="blog-details.html" class="blog-card reveal" data-category="trends">
+                <div class="blog-card-img"><img src="images/hero-slider3.jpg" alt="Laser Engraving Technology" loading="lazy"></div>
+                <div class="blog-card-body">
+                  <span class="blog-tag trends">Trends</span>
+                  <h3 class="blog-card-title">Laser vs. Hand Engraving: Which Technique is Right for Your Award?</h3>
+                  <p class="blog-card-excerpt">A deep comparison of precision, cost, turnaround and visual quality between modern laser and traditional hand-engraving methods.</p>
+                  <div class="blog-meta" style="margin-bottom:var(--space-3);">
+                    <span class="blog-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Sep 22, 2026</span>
+                    <span class="blog-meta-item"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> 9 min</span>
+                  </div>
+                  <div class="blog-read-more">Read Article <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
+                </div>
+              </a>
+
+              <a href="blog-details.html" class="blog-card reveal reveal-delay-1" data-category="guide">
+                <div class="blog-card-img"><img src="images/acrylic-award.jpg" alt="Planning Corporate Awards" loading="lazy"></div>
+                <div class="blog-card-body">
+                  <span class="blog-tag guide">Guide</span>
+                  <h3 class="blog-card-title">The Complete Guide to Planning a Corporate Awards Ceremony on Any Budget</h3>
+                  <p class="blog-card-excerpt">From intimate team lunches to grand galas — a step-by-step guide to creating memorable recognition ceremonies that inspire your entire organization.</p>
+                  <div class="blog-meta" style="margin-bottom:var(--space-3);">
+                    <span class="blog-meta-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Sep 18, 2026</span>
+                    <span class="blog-meta-item"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> 11 min</span>
+                  </div>
+                  <div class="blog-read-more">Read Article <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
+                </div>
+              </a>
+            </div>
+
+            <!-- Pagination -->
+            <nav class="pagination" aria-label="Blog pagination">
+              <button class="page-btn" aria-label="Previous page"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn">2</button>
+              <button class="page-btn">3</button>
+              <span style="color:var(--text-muted);">...</span>
+              <button class="page-btn">12</button>
+              <button class="page-btn" aria-label="Next page"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+            </nav>
+          </div>
+
+          <!-- Sidebar -->
+          <aside class="blog-sidebar">
+            <!-- Search -->
+            <div class="sidebar-widget">
+              <div class="widget-title">Search</div>
+              <div style="position:relative;">
+                <input type="text" class="form-control" placeholder="Search articles..." style="padding-right:3rem;">
+                <button style="position:absolute;right:var(--space-3);top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--gold);" aria-label="Search">
+                  <svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Categories -->
+            <div class="sidebar-widget">
+              <div class="widget-title">Categories</div>
+              <div class="widget-categories">
+                <div class="widget-cat-item"><span>All Articles</span><span class="widget-cat-count">48</span></div>
+                <div class="widget-cat-item"><span>Craftsmanship</span><span class="widget-cat-count">14</span></div>
+                <div class="widget-cat-item"><span>Buyer's Guide</span><span class="widget-cat-count">11</span></div>
+                <div class="widget-cat-item"><span>Corporate Awards</span><span class="widget-cat-count">9</span></div>
+                <div class="widget-cat-item"><span>Sports Recognition</span><span class="widget-cat-count">8</span></div>
+                <div class="widget-cat-item"><span>Industry Trends</span><span class="widget-cat-count">6</span></div>
+              </div>
+            </div>
+
+            <!-- Recent Posts -->
+            <div class="sidebar-widget">
+              <div class="widget-title">Recent Posts</div>
+              <a href="blog-details.html" class="recent-post" style="text-decoration:none;">
+                <img class="recent-post-img" src="images/crystal-awards.jpg" alt="Crystal Trophy">
+                <div>
+                  <div class="recent-post-title">Choosing Crystal Grade for Awards</div>
+                  <div class="recent-post-date">Oct 8, 2026</div>
+                </div>
+              </a>
+              <a href="blog-details.html" class="recent-post" style="text-decoration:none;">
+                <img class="recent-post-img" src="images/medals-collection.jpg" alt="Medals">
+                <div>
+                  <div class="recent-post-title">Medal Design Trends 2026</div>
+                  <div class="recent-post-date">Oct 2, 2026</div>
+                </div>
+              </a>
+              <a href="blog-details.html" class="recent-post" style="text-decoration:none;">
+                <img class="recent-post-img" src="images/wooden-plaques.jpg" alt="Wood Plaques">
+                <div>
+                  <div class="recent-post-title">Why Walnut Makes the Best Plaques</div>
+                  <div class="recent-post-date">Sep 28, 2026</div>
+                </div>
+              </a>
+              <a href="blog-details.html" class="recent-post" style="text-decoration:none;">
+                <img class="recent-post-img" src="images/corporate-awards.jpg" alt="Corporate Awards">
+                <div>
+                  <div class="recent-post-title">Corporate Award Ceremony Planning Guide</div>
+                  <div class="recent-post-date">Sep 18, 2026</div>
+                </div>
+              </a>
+            </div>
+
+            <!-- Tags -->
+            <div class="sidebar-widget">
+              <div class="widget-title">Popular Tags</div>
+              <div class="tags-cloud">
+                <span class="tag-pill">Trophies</span>
+                <span class="tag-pill">Crystal</span>
+                <span class="tag-pill">Engraving</span>
+                <span class="tag-pill">Corporate</span>
+                <span class="tag-pill">Sports</span>
+                <span class="tag-pill">Medals</span>
+                <span class="tag-pill">Plaques</span>
+                <span class="tag-pill">Custom</span>
+                <span class="tag-pill">Gold</span>
+                <span class="tag-pill">Awards</span>
+                <span class="tag-pill">Bulk Orders</span>
+                <span class="tag-pill">Laser</span>
+              </div>
+            </div>
+
+            <!-- Newsletter Widget -->
+            <div class="sidebar-widget email-cta">
+              <div class="widget-title" style="color:var(--ivory);border-bottom-color:rgba(255,255,255,0.15);">Newsletter</div>
+              <p style="font-size:var(--fs-sm);color:rgba(248,245,239,0.7);margin-bottom:var(--space-4);">Get award insights and exclusive offers delivered monthly.</p>
+              <form id="sidebar-newsletter" novalidate>
+                <input type="email" class="form-control newsletter-widget" placeholder="Your email" data-validate="required,email" style="margin-bottom:var(--space-3);">
+                <button type="submit" class="btn btn-primary w-full" style="justify-content:center;">Subscribe</button>
+              </form>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 3: TOPICS GRID
+    =========================================== -->
+    <section class="section" style="background:var(--bg-surface);" aria-labelledby="topics-h">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">Explore By Topic</div>
+          <h2 id="topics-h" class="section-title reveal">Award Knowledge <span class="text-gold">Hub</span></h2>
+        </div>
+        <div class="grid grid-4" style="gap:var(--space-5);">
+          <a href="blog.html" class="card reveal" style="padding:var(--space-6);text-align:center;">
+            <div style="width:48px;height:48px;margin:0 auto var(--space-3);border-radius:var(--radius-lg);background:rgba(198,161,91,0.12);display:flex;align-items:center;justify-content:center;color:var(--gold);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2"/><path d="M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/><path d="M6 3h12v7a6 6 0 0 1-12 0V3z"/><line x1="12" y1="16" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></svg>
+            </div>
+            <h3 style="font-family:var(--font-display);font-size:var(--fs-base);margin-bottom:var(--space-2);">Trophy Guides</h3>
+            <p style="font-size:var(--fs-sm);color:var(--text-muted);">Materials, sizes and style guides</p>
+          </a>
+          <a href="blog.html" class="card reveal reveal-delay-1" style="padding:var(--space-6);text-align:center;">
+            <div style="width:48px;height:48px;margin:0 auto var(--space-3);border-radius:var(--radius-lg);background:rgba(198,161,91,0.12);display:flex;align-items:center;justify-content:center;color:var(--gold);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="14" r="7"/><polyline points="8 3 12 10 16 3"/></svg>
+            </div>
+            <h3 style="font-family:var(--font-display);font-size:var(--fs-base);margin-bottom:var(--space-2);">Sports Awards</h3>
+            <p style="font-size:var(--fs-sm);color:var(--text-muted);">Medals, cups and tournament design</p>
+          </a>
+          <a href="blog.html" class="card reveal reveal-delay-2" style="padding:var(--space-6);text-align:center;">
+            <div style="width:48px;height:48px;margin:0 auto var(--space-3);border-radius:var(--radius-lg);background:rgba(198,161,91,0.12);display:flex;align-items:center;justify-content:center;color:var(--gold);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+            <h3 style="font-family:var(--font-display);font-size:var(--fs-base);margin-bottom:var(--space-2);">Corporate Events</h3>
+            <p style="font-size:var(--fs-sm);color:var(--text-muted);">Recognition programs that work</p>
+          </a>
+          <a href="blog.html" class="card reveal reveal-delay-3" style="padding:var(--space-6);text-align:center;">
+            <div style="width:48px;height:48px;margin:0 auto var(--space-3);border-radius:var(--radius-lg);background:rgba(198,161,91,0.12);display:flex;align-items:center;justify-content:center;color:var(--gold);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/></svg>
+            </div>
+            <h3 style="font-family:var(--font-display);font-size:var(--fs-base);margin-bottom:var(--space-2);">Engraving Tips</h3>
+            <p style="font-size:var(--fs-sm);color:var(--text-muted);">Design, fonts and techniques</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTIONS 4-6: CTA, Authors, Subscribe
+    =========================================== -->
+    <section class="section" aria-label="Write for Us">
+      <div class="container">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-8);">
+          <div class="card reveal" style="padding:var(--space-8);">
+            <div style="width:48px;height:48px;border-radius:var(--radius-lg);background:rgba(198,161,91,0.12);display:flex;align-items:center;justify-content:center;color:var(--gold);margin-bottom:var(--space-4);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </div>
+            <h3 style="font-family:var(--font-display);font-size:var(--fs-xl);margin-bottom:var(--space-3);">Write for <span class="text-gold">Our Blog</span></h3>
+            <p style="color:var(--text-muted);font-size:var(--fs-sm);line-height:1.8;margin-bottom:var(--space-5);">Are you a design expert, event planner or award enthusiast? Share your knowledge with our community of 50,000+ readers.</p>
+            <a href="contact.html" class="btn btn-outline">Submit a Pitch</a>
+          </div>
+          <div class="card reveal reveal-delay-1" style="padding:var(--space-8);">
+            <div style="width:48px;height:48px;border-radius:var(--radius-lg);background:rgba(198,161,91,0.12);display:flex;align-items:center;justify-content:center;color:var(--gold);margin-bottom:var(--space-4);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <h3 style="font-family:var(--font-display);font-size:var(--fs-xl);margin-bottom:var(--space-3);">Free <span class="text-gold">Award Guide</span></h3>
+            <p style="color:var(--text-muted);font-size:var(--fs-sm);line-height:1.8;margin-bottom:var(--space-5);">Download our 48-page comprehensive guide: "The Complete Trophy & Awards Handbook" — free, no sign-up required.</p>
+            <a href="#" class="btn btn-primary" onclick="Toast.show('Guide download started!', 'success');return false;">Download PDF</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Blog filter
+      document.querySelectorAll('#blog-filter-tabs .filter-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+          document.querySelectorAll('#blog-filter-tabs .filter-tab').forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          const filter = this.dataset.filter;
+          document.querySelectorAll('#blog-grid .blog-card').forEach(card => {
+            const cat = card.dataset.category || 'all';
+            card.style.display = (filter === 'all' || cat === filter) ? '' : 'none';
+          });
+        });
+      });
+
+      // Newsletter
+      document.getElementById('sidebar-newsletter').addEventListener('submit', e => {
+        e.preventDefault();
+        Toast.show('Thanks! You are now subscribed to our newsletter.', 'success');
+        e.target.reset();
+      });
+
+      // Pagination buttons
+      document.querySelectorAll('.page-btn:not([aria-label])').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.page-btn:not([aria-label])').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          window.scrollTo({ top: 400, behavior: 'smooth' });
+        });
+      });
+    });
+  </script>
+</body>
+</html>

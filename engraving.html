@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Design your custom engraved award online. Choose text, font, layout, material and see a live preview before ordering. Interactive engraving studio.">
+  <title>Custom Engraving Studio | T&A Engraving Premium Awards</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ENGRAVING STUDIO PAGE */
+
+    .studio-layout {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: var(--space-8);
+      align-items: start;
+    }
+
+    /* Canvas Preview */
+    .preview-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      position: sticky;
+      top: calc(var(--navbar-h) + var(--space-6));
+    }
+
+    .preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-4);
+    }
+
+    .preview-title {
+      font-family: var(--font-display);
+      font-size: var(--fs-base);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .preview-label {
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4CAF50;
+      animation: pulse 1.5s infinite;
+    }
+
+    .canvas-wrap {
+      position: relative;
+      background: #1a1a1a;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: var(--space-4);
+    }
+
+    #engraving-canvas {
+      display: block;
+      width: 100%;
+      border-radius: var(--radius-lg);
+    }
+
+    .canvas-material-bg {
+      position: absolute;
+      inset: 0;
+      opacity: 0.15;
+      transition: opacity 0.3s;
+    }
+
+    .preview-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3);
+    }
+
+    .preview-action-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: var(--space-3);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .preview-action-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .preview-action-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* Controls Panel */
+    .controls-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+
+    .control-section {
+      padding: var(--space-6);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .control-section:last-child { border-bottom: none; }
+
+    .control-section-title {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: var(--space-5);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .control-section-title svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    .control-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+
+    /* Font Selector */
+    .font-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); }
+
+    .font-option {
+      padding: var(--space-3);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      text-align: center;
+      transition: all var(--transition-fast);
+      background: transparent;
+    }
+
+    .font-option.active,
+    .font-option:hover { border-color: var(--gold); background: rgba(198,161,91,0.05); }
+
+    .font-preview-text {
+      display: block;
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .font-name {
+      display: block;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* Layout Templates */
+    .layout-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); }
+
+    .layout-option {
+      aspect-ratio: 4/3;
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-1);
+      transition: all var(--transition-fast);
+      background: var(--bg-surface);
+      position: relative;
+    }
+
+    .layout-option.active, .layout-option:hover { border-color: var(--gold); }
+
+    .layout-line {
+      background: var(--border-color);
+      border-radius: 2px;
+      transition: background var(--transition-fast);
+    }
+
+    .layout-option.active .layout-line,
+    .layout-option:hover .layout-line { background: var(--gold); }
+
+    .layout-option span {
+      position: absolute;
+      bottom: 4px;
+      font-size: 0.55rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* Color swatch */
+    .color-swatches { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+
+    .color-swatch-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      position: relative;
+    }
+
+    .color-swatch-btn.active,
+    .color-swatch-btn:hover { border-color: white; box-shadow: 0 0 0 2px var(--gold); transform: scale(1.1); }
+
+    /* Range slider */
+    .studio-range { display: flex; align-items: center; gap: var(--space-3); }
+    .studio-range input[type="range"] { flex: 1; height: 3px; appearance: none; background: var(--border-subtle); border-radius: 3px; cursor: pointer; outline: none; }
+    .studio-range input[type="range"]::-webkit-slider-thumb { appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--gold); cursor: pointer; }
+    .range-value { font-family: var(--font-display); font-size: var(--fs-sm); font-weight: 700; color: var(--gold); min-width: 40px; text-align: right; }
+
+    /* Award shape picker */
+    .shape-options { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-2); }
+
+    .shape-btn {
+      padding: var(--space-3) var(--space-2);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      text-align: center;
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: all var(--transition-fast);
+      background: transparent;
+    }
+
+    .shape-btn.active, .shape-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(198,161,91,0.05); }
+    .shape-btn .shape-icon { display: flex; align-items: center; justify-content: center; height: 26px; margin-bottom: 4px; color: var(--text-secondary); }
+    .shape-btn.active .shape-icon, .shape-btn:hover .shape-icon { color: var(--gold); }
+    .shape-btn .shape-icon svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+
+    /* Order Summary */
+    .order-summary {
+      background: var(--grad-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      margin-top: var(--space-6);
+    }
+
+    .order-summary-title {
+      font-family: var(--font-display);
+      font-size: var(--fs-base);
+      font-weight: 700;
+      margin-bottom: var(--space-5);
+      color: var(--text-primary);
+    }
+
+    .order-line { display: flex; justify-content: space-between; padding: var(--space-2) 0; font-size: var(--fs-sm); }
+    .order-line span:first-child { color: var(--text-muted); }
+    .order-line span:last-child { color: var(--text-primary); font-weight: 600; }
+
+    .order-total { border-top: 1px solid var(--border-color); margin-top: var(--space-3); padding-top: var(--space-3); }
+    .order-total span:first-child { font-weight: 700; color: var(--text-primary); }
+    .order-total span:last-child { font-family: var(--font-display); font-size: var(--fs-xl); font-weight: 900; color: var(--gold); }
+
+    /* How it works steps */
+    .engraving-steps { display: flex; gap: var(--space-6); flex-wrap: wrap; justify-content: center; }
+
+    .engraving-step {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-4);
+      max-width: 260px;
+    }
+
+    .estep-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--grad-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 0.9rem;
+      color: var(--obsidian);
+      flex-shrink: 0;
+    }
+
+    .estep-content h4 { font-family: var(--font-display); font-size: var(--fs-sm); font-weight: 700; margin-bottom: var(--space-1); }
+    .estep-content p { font-size: var(--fs-sm); color: var(--text-muted); line-height: 1.7; }
+
+    @media (max-width: 900px) {
+      .studio-layout { grid-template-columns: 1fr; }
+      .preview-panel { position: static; }
+      .control-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .font-options { grid-template-columns: 1fr 1fr; }
+      .layout-options { grid-template-columns: 1fr 1fr; }
+      .shape-options { grid-template-columns: repeat(2, 1fr); }
+      .engraving-steps { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <main id="main">
+
+    <!-- Page Hero -->
+    <header class="page-hero" style="min-height:320px;">
+      <img class="page-hero-bg" src="images/hero-slider3.jpg" alt="Precision Laser Engraving">
+      <div class="page-hero-overlay"></div>
+      <div class="page-hero-content">
+        <div class="container">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a><span class="sep">›</span><span>Custom Engraving</span>
+          </nav>
+          <h1 class="page-hero-title">Live <span style="color:var(--gold);">Engraving</span> Studio</h1>
+          <p class="page-hero-subtitle">Design your award in real-time. See exactly what you'll get before you order.</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- ==========================================
+         SECTION 1: LIVE PREVIEW STUDIO
+    =========================================== -->
+    <section class="section" aria-label="Engraving Studio">
+      <div class="container-wide">
+
+        <!-- Studio header -->
+        <div style="display:flex;align-items:center;gap:var(--space-4);margin-bottom:var(--space-8);flex-wrap:wrap;">
+          <div>
+            <h2 class="section-title" style="font-size:var(--fs-2xl);text-align:left;margin-bottom:var(--space-2);">Design Your <span class="text-gold">Perfect Award</span></h2>
+            <p style="color:var(--text-muted);font-size:var(--fs-sm);">All changes appear instantly in the preview. Save or share your design before ordering.</p>
+          </div>
+          <div style="margin-left:auto;display:flex;gap:var(--space-3);">
+            <button class="btn btn-ghost btn-sm" onclick="resetDesign()">
+              <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.91"/></svg>
+              Reset
+            </button>
+            <button class="btn btn-outline btn-sm" onclick="saveDesign()">
+              <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13"/><polyline points="7 3 7 8 15 8"/></svg>
+              Save Design
+            </button>
+          </div>
+        </div>
+
+        <div class="studio-layout">
+
+          <!-- LEFT: Controls -->
+          <div>
+            <!-- Award Shape -->
+            <div class="controls-panel">
+              <div class="control-section">
+                <div class="control-section-title">
+                  <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/></svg>
+                  Award Shape & Material
+                </div>
+                <div class="shape-options">
+                  <button class="shape-btn active" data-shape="crystal" onclick="selectShape(this)">
+                    <span class="shape-icon"><svg viewBox="0 0 24 24"><polygon points="6 3 18 3 22 9 12 22 2 9"/></svg></span>
+                    Crystal
+                  </button>
+                  <button class="shape-btn" data-shape="trophy" onclick="selectShape(this)">
+                    <span class="shape-icon"><svg viewBox="0 0 24 24"><path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2"/><path d="M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/><path d="M6 3h12v7a6 6 0 0 1-12 0V3z"/><line x1="12" y1="16" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></svg></span>
+                    Trophy
+                  </button>
+                  <button class="shape-btn" data-shape="plaque" onclick="selectShape(this)">
+                    <span class="shape-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><rect x="6" y="6" width="12" height="12" rx="1"/></svg></span>
+                    Plaque
+                  </button>
+                  <button class="shape-btn" data-shape="medal" onclick="selectShape(this)">
+                    <span class="shape-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="14" r="7"/><polyline points="8 3 12 10 16 3"/></svg></span>
+                    Medal
+                  </button>
+                  <button class="shape-btn" data-shape="shield" onclick="selectShape(this)">
+                    <span class="shape-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+                    Shield
+                  </button>
+                  <button class="shape-btn" data-shape="acrylic" onclick="selectShape(this)">
+                    <span class="shape-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span>
+                    Acrylic
+                  </button>
+                  <button class="shape-btn" data-shape="star" onclick="selectShape(this)">
+                    <span class="shape-icon"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+                    Star
+                  </button>
+                  <button class="shape-btn" data-shape="oval" onclick="selectShape(this)">
+                    <span class="shape-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="7" ry="10"/></svg></span>
+                    Oval
+                  </button>
+                </div>
+
+                <div style="height:1px;background:var(--border-subtle);margin:var(--space-5) 0;"></div>
+
+                <div class="control-section-title" style="margin-bottom:var(--space-3);">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+                  Base Material
+                </div>
+                <div class="color-swatches">
+                  <button class="color-swatch-btn active" style="background:#1a1a1a;border:1px solid #444;" data-material="black" onclick="selectMaterial(this)" title="Polished Black"></button>
+                  <button class="color-swatch-btn" style="background:linear-gradient(135deg,#C6A15B,#E8C97A);" data-material="gold" onclick="selectMaterial(this)" title="Gold"></button>
+                  <button class="color-swatch-btn" style="background:linear-gradient(135deg,#C0C0C0,#E8E8E8);" data-material="silver" onclick="selectMaterial(this)" title="Silver"></button>
+                  <button class="color-swatch-btn" style="background:linear-gradient(135deg,#8B4513,#D2691E);" data-material="walnut" onclick="selectMaterial(this)" title="Walnut Wood"></button>
+                  <button class="color-swatch-btn" style="background:linear-gradient(135deg,#6B2636,#8B3A4B);" data-material="burgundy" onclick="selectMaterial(this)" title="Deep Burgundy"></button>
+                  <button class="color-swatch-btn" style="background:linear-gradient(135deg,#B8DFFF,#E8F8FF);" data-material="crystal" onclick="selectMaterial(this)" title="Crystal Clear"></button>
+                </div>
+              </div>
+
+              <!-- Text Content -->
+              <div class="control-section">
+                <div class="control-section-title">
+                  <svg viewBox="0 0 24 24"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+                  Engraving Text
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="line1-input">Line 1 — Award Title</label>
+                  <input type="text" id="line1-input" class="form-control" placeholder="EXCELLENCE AWARD" value="EXCELLENCE AWARD" oninput="updatePreview()">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="line2-input">Line 2 — Recipient Name</label>
+                  <input type="text" id="line2-input" class="form-control" placeholder="John Smith" value="John Smith" oninput="updatePreview()">
+                </div>
+
+                <div class="control-row">
+                  <div class="form-group">
+                    <label class="form-label" for="line3-input">Line 3 — Organization</label>
+                    <input type="text" id="line3-input" class="form-control" placeholder="Pinnacle Corp" value="Pinnacle Corp" oninput="updatePreview()">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="line4-input">Line 4 — Date / Year</label>
+                    <input type="text" id="line4-input" class="form-control" placeholder="2026" value="2026" oninput="updatePreview()">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Font Selection -->
+              <div class="control-section">
+                <div class="control-section-title">
+                  <svg viewBox="0 0 24 24"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+                  Font Style
+                </div>
+                <div class="font-options">
+                  <button class="font-option active" data-font="Cinzel" onclick="selectFont(this)">
+                    <span class="font-preview-text" style="font-family:'Cinzel',serif;">Aa</span>
+                    <span class="font-name">Cinzel</span>
+                  </button>
+                  <button class="font-option" data-font="Georgia" onclick="selectFont(this)">
+                    <span class="font-preview-text" style="font-family:Georgia,serif;">Aa</span>
+                    <span class="font-name">Serif</span>
+                  </button>
+                  <button class="font-option" data-font="Manrope" onclick="selectFont(this)">
+                    <span class="font-preview-text" style="font-family:'Manrope',sans-serif;">Aa</span>
+                    <span class="font-name">Modern</span>
+                  </button>
+                  <button class="font-option" data-font="'Courier New'" onclick="selectFont(this)">
+                    <span class="font-preview-text" style="font-family:'Courier New',monospace;">Aa</span>
+                    <span class="font-name">Script</span>
+                  </button>
+                  <button class="font-option" data-font="Impact" onclick="selectFont(this)">
+                    <span class="font-preview-text" style="font-family:Impact,sans-serif;">Aa</span>
+                    <span class="font-name">Bold</span>
+                  </button>
+                  <button class="font-option" data-font="Palatino" onclick="selectFont(this)">
+                    <span class="font-preview-text" style="font-family:Palatino,serif;">Aa</span>
+                    <span class="font-name">Elegant</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Text Size & Spacing -->
+              <div class="control-section">
+                <div class="control-section-title">
+                  <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+                  Size & Spacing
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Title Size</label>
+                  <div class="studio-range">
+                    <input type="range" min="14" max="40" value="24" id="title-size" oninput="updateRangeLabel(this,'title-size-val');updatePreview()">
+                    <span class="range-value" id="title-size-val">24px</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Letter Spacing</label>
+                  <div class="studio-range">
+                    <input type="range" min="0" max="20" value="4" id="letter-spacing" oninput="updateRangeLabel(this,'letter-spacing-val','px');updatePreview()">
+                    <span class="range-value" id="letter-spacing-val">4px</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Line Gap</label>
+                  <div class="studio-range">
+                    <input type="range" min="5" max="40" value="16" id="line-gap" oninput="updateRangeLabel(this,'line-gap-val','px');updatePreview()">
+                    <span class="range-value" id="line-gap-val">16px</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Layout Template -->
+              <div class="control-section">
+                <div class="control-section-title">
+                  <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                  Layout Template
+                </div>
+                <div class="layout-options">
+                  <button class="layout-option active" data-layout="centered" onclick="selectLayout(this)">
+                    <div class="layout-line" style="width:60%;height:3px;"></div>
+                    <div class="layout-line" style="width:80%;height:2px;"></div>
+                    <div class="layout-line" style="width:50%;height:2px;"></div>
+                    <span>Centered</span>
+                  </button>
+                  <button class="layout-option" data-layout="left" onclick="selectLayout(this)">
+                    <div class="layout-line" style="width:70%;height:3px;align-self:flex-start;"></div>
+                    <div class="layout-line" style="width:90%;height:2px;align-self:flex-start;"></div>
+                    <div class="layout-line" style="width:60%;height:2px;align-self:flex-start;"></div>
+                    <span>Left Align</span>
+                  </button>
+                  <button class="layout-option" data-layout="right" onclick="selectLayout(this)">
+                    <div class="layout-line" style="width:70%;height:3px;align-self:flex-end;"></div>
+                    <div class="layout-line" style="width:90%;height:2px;align-self:flex-end;"></div>
+                    <div class="layout-line" style="width:60%;height:2px;align-self:flex-end;"></div>
+                    <span>Right Align</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Decorative Elements -->
+              <div class="control-section">
+                <div class="control-section-title">
+                  <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  Decorative Elements
+                </div>
+                <div class="sidebar-checks" style="display:flex;flex-direction:column;gap:var(--space-3);">
+                  <label class="sidebar-check">
+                    <input type="checkbox" id="decor-border" checked onchange="updatePreview()"><div class="cb-box"></div><span class="cb-label">Decorative Border</span>
+                  </label>
+                  <label class="sidebar-check">
+                    <input type="checkbox" id="decor-laurel" checked onchange="updatePreview()"><div class="cb-box"></div><span class="cb-label">Laurel Wreath</span>
+                  </label>
+                  <label class="sidebar-check">
+                    <input type="checkbox" id="decor-stars" onchange="updatePreview()"><div class="cb-box"></div><span class="cb-label">Star Motifs</span>
+                  </label>
+                  <label class="sidebar-check">
+                    <input type="checkbox" id="decor-lines" checked onchange="updatePreview()"><div class="cb-box"></div><span class="cb-label">Dividing Lines</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Engraving Color -->
+              <div class="control-section">
+                <div class="control-section-title">
+                  <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  Engraving Color
+                </div>
+                <div class="color-swatches">
+                  <button class="color-swatch-btn active" style="background:#C6A15B;" data-color="#C6A15B" onclick="selectColor(this)" title="Gold"></button>
+                  <button class="color-swatch-btn" style="background:#E8E8E8;" data-color="#E8E8E8" onclick="selectColor(this)" title="Silver"></button>
+                  <button class="color-swatch-btn" style="background:#F8F5EF;" data-color="#F8F5EF" onclick="selectColor(this)" title="Ivory White"></button>
+                  <button class="color-swatch-btn" style="background:#4169E1;" data-color="#4169E1" onclick="selectColor(this)" title="Royal Blue"></button>
+                  <button class="color-swatch-btn" style="background:#702D3B;" data-color="#702D3B" onclick="selectColor(this)" title="Burgundy Red"></button>
+                  <button class="color-swatch-btn" style="background:#2A2A2A;" data-color="#2A2A2A" onclick="selectColor(this)" title="Deep Black"></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="order-summary">
+              <div class="order-summary-title">Order Summary</div>
+              <div class="order-line"><span>Base Award</span><span id="summary-base">₹4,999</span></div>
+              <div class="order-line"><span>Custom Engraving</span><span style="color:var(--gold);">FREE</span></div>
+              <div class="order-line"><span>Decorative Elements</span><span>₹299</span></div>
+              <div class="order-line"><span>Gift Packaging</span><span>₹199</span></div>
+              <div class="order-line"><span>Quantity</span><span>1 piece</span></div>
+              <div class="order-line order-total">
+                <span>Total</span>
+                <span id="summary-total">₹5,497</span>
+              </div>
+              <button class="btn btn-primary w-full mt-4" style="justify-content:center;" onclick="proceedToOrder()">
+                Proceed to Order
+                <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+              </button>
+              <button class="btn btn-ghost w-full" style="justify-content:center;margin-top:var(--space-3);" onclick="shareDesign()">Share My Design</button>
+            </div>
+          </div>
+
+          <!-- RIGHT: Preview Canvas -->
+          <div class="preview-panel">
+            <div class="preview-header">
+              <div class="preview-title">Live Preview</div>
+              <div class="preview-label">
+                <span class="live-dot"></span> LIVE
+              </div>
+            </div>
+
+            <div class="canvas-wrap">
+              <canvas id="engraving-canvas" width="400" height="400" aria-label="Live engraving preview"></canvas>
+            </div>
+
+            <div class="preview-actions">
+              <button class="preview-action-btn" onclick="downloadPreview()">
+                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download
+              </button>
+              <button class="preview-action-btn" onclick="shareDesign()">
+                <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                Share
+              </button>
+              <button class="preview-action-btn" onclick="zoomPreview()">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                Zoom In
+              </button>
+              <button class="preview-action-btn" onclick="resetDesign()">
+                <svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.91"/></svg>
+                Reset
+              </button>
+            </div>
+
+            <!-- Size reference -->
+            <div style="margin-top:var(--space-4);padding:var(--space-3);background:var(--bg-surface);border-radius:var(--radius-md);text-align:center;">
+              <div style="font-size:var(--fs-xs);color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;">Selected Size</div>
+              <div style="font-family:var(--font-display);font-size:var(--fs-md);font-weight:700;color:var(--gold);margin-top:4px;" id="size-display">Medium — 25cm × 18cm</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 2: HOW IT WORKS
+    =========================================== -->
+    <section class="section" style="background:var(--bg-surface);" aria-labelledby="how-h">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">Simple Process</div>
+          <h2 id="how-h" class="section-title reveal">Design in Minutes,<br><span class="text-gold">Delivered in Days</span></h2>
+        </div>
+        <div class="engraving-steps">
+          <div class="engraving-step reveal">
+            <div class="estep-num">1</div>
+            <div class="estep-content">
+              <h4>Choose Your Award</h4>
+              <p>Select the award shape, size, material and base finish that suits your occasion and budget.</p>
+            </div>
+          </div>
+          <div class="engraving-step reveal reveal-delay-1">
+            <div class="estep-num">2</div>
+            <div class="estep-content">
+              <h4>Add Your Text</h4>
+              <p>Type your award title, recipient name, organization and date. Choose from 6 premium font styles.</p>
+            </div>
+          </div>
+          <div class="engraving-step reveal reveal-delay-2">
+            <div class="estep-num">3</div>
+            <div class="estep-content">
+              <h4>Preview & Approve</h4>
+              <p>See your live design, download a preview PDF and make unlimited tweaks until it's perfect.</p>
+            </div>
+          </div>
+          <div class="engraving-step reveal reveal-delay-3">
+            <div class="estep-num">4</div>
+            <div class="estep-content">
+              <h4>We Craft & Deliver</h4>
+              <p>Our master engravers create your award with precision. Delivered in a premium gift box in 5–7 days.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 3: FONT SHOWCASE
+    =========================================== -->
+    <section class="section" aria-labelledby="fonts-h">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">Typography</div>
+          <h2 id="fonts-h" class="section-title reveal">Choose Your <span class="text-gold">Engraving Style</span></h2>
+          <p class="section-subtitle reveal reveal-delay-1">Six carefully curated font styles, each with distinct character. Every font is optimized for metal, crystal and wood engraving.</p>
+        </div>
+        <div class="grid grid-3" style="gap:var(--space-5);">
+          <div class="card reveal" style="padding:var(--space-8);text-align:center;">
+            <div style="font-family:'Cinzel',serif;font-size:2rem;font-weight:700;color:var(--gold);margin-bottom:var(--space-3);">CINZEL</div>
+            <div style="font-family:'Cinzel',serif;font-size:var(--fs-sm);color:var(--text-secondary);">Achievement Award 2026</div>
+            <div style="margin-top:var(--space-3);font-size:var(--fs-xs);color:var(--text-muted);">Classic Roman Letterforms · Best for formal awards</div>
+          </div>
+          <div class="card reveal reveal-delay-1" style="padding:var(--space-8);text-align:center;">
+            <div style="font-family:Georgia,serif;font-size:2rem;font-weight:700;color:var(--gold);margin-bottom:var(--space-3);">Georgia</div>
+            <div style="font-family:Georgia,serif;font-size:var(--fs-sm);color:var(--text-secondary);font-style:italic;">Achievement Award 2026</div>
+            <div style="margin-top:var(--space-3);font-size:var(--fs-xs);color:var(--text-muted);">Traditional Serif · Elegant and readable</div>
+          </div>
+          <div class="card reveal reveal-delay-2" style="padding:var(--space-8);text-align:center;">
+            <div style="font-family:'Manrope',sans-serif;font-size:2rem;font-weight:700;color:var(--gold);margin-bottom:var(--space-3);">Manrope</div>
+            <div style="font-family:'Manrope',sans-serif;font-size:var(--fs-sm);color:var(--text-secondary);">Achievement Award 2026</div>
+            <div style="margin-top:var(--space-3);font-size:var(--fs-xs);color:var(--text-muted);">Contemporary Sans · Modern corporate style</div>
+          </div>
+          <div class="card reveal" style="padding:var(--space-8);text-align:center;">
+            <div style="font-family:Palatino,serif;font-size:2rem;font-weight:700;color:var(--gold);margin-bottom:var(--space-3);">Palatino</div>
+            <div style="font-family:Palatino,serif;font-size:var(--fs-sm);color:var(--text-secondary);font-style:italic;">Achievement Award 2026</div>
+            <div style="margin-top:var(--space-3);font-size:var(--fs-xs);color:var(--text-muted);">Humanist Serif · Warm and distinguished</div>
+          </div>
+          <div class="card reveal reveal-delay-1" style="padding:var(--space-8);text-align:center;">
+            <div style="font-family:Impact,sans-serif;font-size:2rem;font-weight:900;color:var(--gold);margin-bottom:var(--space-3);">IMPACT</div>
+            <div style="font-family:Impact,sans-serif;font-size:var(--fs-sm);color:var(--text-secondary);">ACHIEVEMENT AWARD 2026</div>
+            <div style="margin-top:var(--space-3);font-size:var(--fs-xs);color:var(--text-muted);">Bold Display · Sports and action awards</div>
+          </div>
+          <div class="card reveal reveal-delay-2" style="padding:var(--space-8);text-align:center;">
+            <div style="font-family:'Courier New',monospace;font-size:1.5rem;font-weight:700;color:var(--gold);margin-bottom:var(--space-3);">Courier</div>
+            <div style="font-family:'Courier New',monospace;font-size:var(--fs-sm);color:var(--text-secondary);">Achievement Award 2026</div>
+            <div style="margin-top:var(--space-3);font-size:var(--fs-xs);color:var(--text-muted);">Typewriter Style · Technical and unique</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 4: UPLOAD LOGO
+    =========================================== -->
+    <section class="section" style="background:var(--bg-surface);" aria-label="Logo Upload">
+      <div class="container">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-16);align-items:center;">
+          <div class="reveal">
+            <div class="section-label no-line" style="justify-content:flex-start;margin-bottom:var(--space-4);">Logo Engraving</div>
+            <h2 class="section-title" style="text-align:left;font-size:var(--fs-3xl);">Your Brand, <span class="text-gold">Immortalized</span></h2>
+            <div class="gold-divider left"></div>
+            <p style="color:var(--text-secondary);margin-top:var(--space-4);margin-bottom:var(--space-5);line-height:1.9;">Upload your company logo or custom artwork and our design team converts it into a precision engraving path — completely free. Supports AI, SVG, EPS, PDF and high-resolution PNG.</p>
+            <ul style="display:flex;flex-direction:column;gap:var(--space-3);margin-bottom:var(--space-6);">
+              <li style="display:flex;gap:var(--space-3);font-size:var(--fs-sm);color:var(--text-secondary);"><svg style="width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:2;flex-shrink:0;margin-top:2px;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Vector conversion included — free of charge</li>
+              <li style="display:flex;gap:var(--space-3);font-size:var(--fs-sm);color:var(--text-secondary);"><svg style="width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:2;flex-shrink:0;margin-top:2px;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Digital proof emailed within 4 hours</li>
+              <li style="display:flex;gap:var(--space-3);font-size:var(--fs-sm);color:var(--text-secondary);"><svg style="width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:2;flex-shrink:0;margin-top:2px;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Unlimited revision rounds before production</li>
+              <li style="display:flex;gap:var(--space-3);font-size:var(--fs-sm);color:var(--text-secondary);"><svg style="width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:2;flex-shrink:0;margin-top:2px;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>3D subsurface engraving available for crystal</li>
+            </ul>
+            <div id="logo-upload-area" style="border:2px dashed var(--border-color);border-radius:var(--radius-xl);padding:var(--space-8);text-align:center;cursor:pointer;transition:all 0.3s;" onclick="triggerUpload()">
+              <svg style="width:40px;height:40px;stroke:var(--gold);fill:none;stroke-width:1.5;margin:0 auto var(--space-3);" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <div style="font-family:var(--font-display);font-size:var(--fs-base);font-weight:700;color:var(--text-primary);margin-bottom:var(--space-2);">Drop your logo here</div>
+              <div style="font-size:var(--fs-sm);color:var(--text-muted);">SVG, AI, EPS, PDF, PNG (300+ DPI) — Max 20MB</div>
+              <input type="file" id="logo-upload" accept=".svg,.ai,.eps,.pdf,.png,.jpg" style="display:none;" onchange="handleLogoUpload(this)">
+            </div>
+          </div>
+          <div class="reveal reveal-delay-2">
+            <img src="images/craftsmanship.jpg" alt="Logo engraving on trophy" style="width:100%;border-radius:var(--radius-xl);box-shadow:var(--shadow-xl);" data-lightbox>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 5: SAMPLE GALLERY
+    =========================================== -->
+    <section class="section" aria-labelledby="samples-h">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">Inspiration Gallery</div>
+          <h2 id="samples-h" class="section-title reveal">Real Engravings,<br><span class="text-gold">Real Stories</span></h2>
+        </div>
+        <div class="gallery-masonry" style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4);">
+          <div style="border-radius:var(--radius-xl);overflow:hidden;height:280px;cursor:pointer;" class="gallery-item reveal">
+            <img src="images/corporate-awards.jpg" alt="Corporate Award Engraving" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s;" data-lightbox>
+          </div>
+          <div style="border-radius:var(--radius-xl);overflow:hidden;height:280px;cursor:pointer;" class="gallery-item reveal reveal-delay-1">
+            <img src="images/crystal-awards.jpg" alt="Crystal Award Engraving" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s;" data-lightbox>
+          </div>
+          <div style="border-radius:var(--radius-xl);overflow:hidden;height:280px;cursor:pointer;" class="gallery-item reveal reveal-delay-2">
+            <img src="images/wooden-plaques.jpg" alt="Wood Plaque Engraving" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s;" data-lightbox>
+          </div>
+          <div style="border-radius:var(--radius-xl);overflow:hidden;height:280px;cursor:pointer;" class="gallery-item reveal reveal-delay-3">
+            <img src="images/medals-collection.jpg" alt="Medal Engraving" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s;" data-lightbox>
+          </div>
+          <div style="border-radius:var(--radius-xl);overflow:hidden;height:280px;cursor:pointer;" class="gallery-item reveal reveal-delay-4">
+            <img src="images/acrylic-award.jpg" alt="Acrylic Award Engraving" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s;" data-lightbox>
+          </div>
+          <div style="border-radius:var(--radius-xl);overflow:hidden;height:280px;cursor:pointer;" class="gallery-item reveal reveal-delay-5">
+            <img src="images/hero-banner.jpg" alt="Premium Trophy Engraving" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s;" data-lightbox>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECTION 6: BULK ENGRAVING
+    =========================================== -->
+    <section class="section" style="background:var(--bg-surface);" aria-label="Bulk Engraving">
+      <div class="container">
+        <div style="background:var(--grad-burgundy);border-radius:var(--radius-xl);padding:var(--space-16) var(--space-12);text-align:center;position:relative;overflow:hidden;" class="reveal">
+          <div style="position:absolute;inset:0;background:url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+          <h2 style="font-size:var(--fs-3xl);font-weight:900;color:var(--ivory);margin-bottom:var(--space-4);position:relative;">Need <span style="color:var(--gold);">50+ Engravings?</span></h2>
+          <p style="font-size:var(--fs-lg);color:rgba(248,245,239,0.8);max-width:600px;margin:0 auto var(--space-8);position:relative;">Our bulk engraving service handles large orders with individual personalization on every single piece. Same quality, competitive pricing, guaranteed deadline.</p>
+          <div style="display:flex;gap:var(--space-4);justify-content:center;flex-wrap:wrap;position:relative;">
+            <a href="contact.html" class="btn btn-primary btn-xl">Get Bulk Quote</a>
+            <a href="pricing.html" class="btn btn-ghost btn-xl" style="color:var(--ivory);border-color:rgba(248,245,239,0.3);">View Bulk Pricing</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    /**
+     * LIVE ENGRAVING PREVIEW ENGINE
+     */
+    const EngravinStudio = {
+      canvas: null,
+      ctx: null,
+      state: {
+        line1: 'EXCELLENCE AWARD',
+        line2: 'John Smith',
+        line3: 'Pinnacle Corp',
+        line4: '2026',
+        font: 'Cinzel',
+        titleSize: 24,
+        letterSpacing: 4,
+        lineGap: 16,
+        layout: 'centered',
+        engravingColor: '#C6A15B',
+        bgColor: '#1a1a1a',
+        shape: 'crystal',
+        decorBorder: true,
+        decorLaurel: true,
+        decorStars: false,
+        decorLines: true
+      },
+
+      init() {
+        this.canvas = document.getElementById('engraving-canvas');
+        this.ctx = this.canvas.getContext('2d');
+        this.render();
+      },
+
+      render() {
+        const canvas = this.canvas;
+        const ctx = this.ctx;
+        const s = this.state;
+        const W = canvas.width;
+        const H = canvas.height;
+
+        // Clear
+        ctx.clearRect(0, 0, W, H);
+
+        // Background
+        ctx.fillStyle = s.bgColor;
+        ctx.fillRect(0, 0, W, H);
+
+        // Shape specific background
+        if (s.shape === 'crystal') {
+          const grad = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, W/2);
+          grad.addColorStop(0, 'rgba(184,223,255,0.08)');
+          grad.addColorStop(1, 'rgba(0,0,0,0)');
+          ctx.fillStyle = grad;
+          ctx.fillRect(0, 0, W, H);
+        } else if (s.bgColor.includes('8B4513') || s.shape === 'plaque') {
+          // Wood grain texture
+          for (let i = 0; i < 20; i++) {
+            ctx.strokeStyle = 'rgba(255,200,100,0.04)';
+            ctx.lineWidth = 8;
+            ctx.beginPath();
+            ctx.moveTo(0, i * 22 + Math.sin(i) * 5);
+            ctx.lineTo(W, i * 22 + Math.cos(i) * 8);
+            ctx.stroke();
+          }
+        }
+
+        // Decorative border
+        if (s.decorBorder) {
+          ctx.strokeStyle = s.engravingColor;
+          ctx.lineWidth = 1.5;
+          ctx.globalAlpha = 0.5;
+          ctx.strokeRect(18, 18, W - 36, H - 36);
+          ctx.strokeRect(24, 24, W - 48, H - 48);
+          ctx.globalAlpha = 1;
+        }
+
+        const align = s.layout === 'centered' ? 'center' : s.layout;
+        const x = align === 'center' ? W / 2 : align === 'left' ? 40 : W - 40;
+
+        ctx.textAlign = align === 'right' ? 'right' : align === 'left' ? 'left' : 'center';
+        ctx.fillStyle = s.engravingColor;
+
+        let yPos = 100;
+
+        // Decorative top line
+        if (s.decorLines) {
+          ctx.globalAlpha = 0.4;
+          ctx.fillStyle = s.engravingColor;
+          ctx.fillRect(align === 'center' ? W/2 - 60 : 40, yPos - 20, 120, 1);
+          ctx.globalAlpha = 1;
+          ctx.fillStyle = s.engravingColor;
+          yPos += 20;
+        }
+
+        // Laurel / Trophy decoration
+        if (s.decorLaurel) {
+          ctx.save();
+          ctx.globalAlpha = 0.7;
+          ctx.strokeStyle = s.engravingColor;
+          ctx.lineWidth = 1.6;
+          const cx = x;
+          const cy = yPos - 12;
+          ctx.beginPath();
+          ctx.moveTo(cx - 9, cy - 9);
+          ctx.lineTo(cx + 9, cy - 9);
+          ctx.lineTo(cx + 6, cy + 2);
+          ctx.quadraticCurveTo(cx, cy + 8, cx - 6, cy + 2);
+          ctx.closePath();
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(cx - 10, cy - 4, 3.5, 0, Math.PI * 2);
+          ctx.arc(cx + 10, cy - 4, 3.5, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(cx, cy + 8);
+          ctx.lineTo(cx, cy + 13);
+          ctx.moveTo(cx - 7, cy + 13);
+          ctx.lineTo(cx + 7, cy + 13);
+          ctx.stroke();
+          ctx.restore();
+          yPos += 34;
+        }
+
+        // Line 1 — Title
+        const ls = s.letterSpacing / 100;
+        ctx.font = `bold ${s.titleSize}px "${s.font}", serif`;
+        ctx.letterSpacing = s.letterSpacing + 'px';
+        ctx.fillStyle = s.engravingColor;
+        ctx.fillText(s.line1, x, yPos);
+        yPos += s.titleSize + s.lineGap + 8;
+
+        // Divider
+        if (s.decorLines) {
+          ctx.globalAlpha = 0.3;
+          const dw = 100;
+          const dx = align === 'center' ? W/2 - dw/2 : align === 'left' ? 40 : W - 40 - dw;
+          ctx.fillRect(dx, yPos, dw, 1);
+          ctx.globalAlpha = 1;
+          yPos += 16;
+        }
+
+        // Line 2 — Name
+        ctx.font = `${Math.round(s.titleSize * 0.85)}px "${s.font}", serif`;
+        ctx.letterSpacing = '2px';
+        ctx.fillText(s.line2, x, yPos);
+        yPos += Math.round(s.titleSize * 0.85) + s.lineGap;
+
+        // Line 3 — Org
+        ctx.globalAlpha = 0.75;
+        ctx.font = `${Math.round(s.titleSize * 0.6)}px Manrope, sans-serif`;
+        ctx.letterSpacing = '4px';
+        ctx.fillText(s.line3.toUpperCase(), x, yPos);
+        yPos += Math.round(s.titleSize * 0.6) + s.lineGap;
+
+        // Line 4 — Year
+        ctx.globalAlpha = 0.6;
+        ctx.font = `${Math.round(s.titleSize * 0.55)}px "${s.font}", serif`;
+        ctx.letterSpacing = '6px';
+        ctx.fillText(s.line4, x, yPos);
+        ctx.globalAlpha = 1;
+        yPos += 30;
+
+        // Bottom divider
+        if (s.decorLines) {
+          ctx.globalAlpha = 0.3;
+          const bw = 80;
+          const bx = align === 'center' ? W/2 - bw/2 : align === 'left' ? 40 : W - 40 - bw;
+          ctx.fillStyle = s.engravingColor;
+          ctx.fillRect(bx, yPos, bw, 1);
+          ctx.globalAlpha = 1;
+        }
+
+        // Stars
+        if (s.decorStars) {
+          ctx.globalAlpha = 0.5;
+          ctx.font = '14px serif';
+          ctx.fillText('★ ★ ★', x, yPos + 20);
+          ctx.globalAlpha = 1;
+        }
+      }
+    };
+
+    // UI interactions
+    function updatePreview() {
+      const s = EngravinStudio.state;
+      s.line1 = document.getElementById('line1-input').value || 'EXCELLENCE AWARD';
+      s.line2 = document.getElementById('line2-input').value || 'Recipient Name';
+      s.line3 = document.getElementById('line3-input').value || 'Organization';
+      s.line4 = document.getElementById('line4-input').value || '2026';
+      s.titleSize = parseInt(document.getElementById('title-size').value);
+      s.letterSpacing = parseInt(document.getElementById('letter-spacing').value);
+      s.lineGap = parseInt(document.getElementById('line-gap').value);
+      s.decorBorder = document.getElementById('decor-border').checked;
+      s.decorLaurel = document.getElementById('decor-laurel').checked;
+      s.decorStars = document.getElementById('decor-stars').checked;
+      s.decorLines = document.getElementById('decor-lines').checked;
+      EngravinStudio.render();
+    }
+
+    function selectFont(btn) {
+      document.querySelectorAll('.font-option').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      EngravinStudio.state.font = btn.dataset.font;
+      EngravinStudio.render();
+    }
+
+    function selectLayout(btn) {
+      document.querySelectorAll('.layout-option').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      EngravinStudio.state.layout = btn.dataset.layout;
+      EngravinStudio.render();
+    }
+
+    function selectShape(btn) {
+      document.querySelectorAll('.shape-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      EngravinStudio.state.shape = btn.dataset.shape;
+      EngravinStudio.render();
+    }
+
+    function selectMaterial(btn) {
+      document.querySelectorAll('.color-swatch-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const materialBg = {
+        black: '#1a1a1a', gold: '#4a3808', silver: '#2a2a2a',
+        walnut: '#2d1a0a', burgundy: '#3a0f1a', crystal: '#0a1a2a'
+      };
+      EngravinStudio.state.bgColor = materialBg[btn.dataset.material] || '#1a1a1a';
+      EngravinStudio.render();
+    }
+
+    function selectColor(btn) {
+      document.querySelectorAll('.color-swatch-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      EngravinStudio.state.engravingColor = btn.dataset.color;
+      EngravinStudio.render();
+    }
+
+    function updateRangeLabel(input, labelId, suffix = 'px') {
+      document.getElementById(labelId).textContent = input.value + suffix;
+    }
+
+    function resetDesign() {
+      document.getElementById('line1-input').value = 'EXCELLENCE AWARD';
+      document.getElementById('line2-input').value = 'John Smith';
+      document.getElementById('line3-input').value = 'Pinnacle Corp';
+      document.getElementById('line4-input').value = '2026';
+      document.getElementById('title-size').value = 24;
+      document.getElementById('letter-spacing').value = 4;
+      document.getElementById('line-gap').value = 16;
+      document.getElementById('decor-border').checked = true;
+      document.getElementById('decor-laurel').checked = true;
+      document.getElementById('decor-stars').checked = false;
+      document.getElementById('decor-lines').checked = true;
+      updateRangeLabel(document.getElementById('title-size'), 'title-size-val');
+      updateRangeLabel(document.getElementById('letter-spacing'), 'letter-spacing-val');
+      updateRangeLabel(document.getElementById('line-gap'), 'line-gap-val');
+      EngravinStudio.state = { ...EngravinStudio.state, line1:'EXCELLENCE AWARD', line2:'John Smith', line3:'Pinnacle Corp', line4:'2026', titleSize:24, letterSpacing:4, lineGap:16, decorBorder:true, decorLaurel:true, decorStars:false, decorLines:true };
+      EngravinStudio.render();
+      Toast.show('Design reset to defaults', 'info');
+    }
+
+    function saveDesign() {
+      Toast.show('Design saved! Check your email for the proof.', 'success');
+    }
+
+    function shareDesign() {
+      if (navigator.share) {
+        navigator.share({ title: 'My Custom Engraving Design', url: window.location.href });
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+        Toast.show('Design link copied to clipboard!', 'success');
+      }
+    }
+
+    function downloadPreview() {
+      const canvas = document.getElementById('engraving-canvas');
+      const link = document.createElement('a');
+      link.download = 'engraving-preview.png';
+      link.href = canvas.toDataURL();
+      link.click();
+      Toast.show('Preview downloaded!', 'success');
+    }
+
+    function zoomPreview() {
+      const canvas = document.getElementById('engraving-canvas');
+      Lightbox.open(canvas.toDataURL(), 'Engraving Preview');
+    }
+
+    function proceedToOrder() {
+      Toast.show('Redirecting to order page...', 'info');
+      setTimeout(() => window.location.href = 'contact.html', 1500);
+    }
+
+    function triggerUpload() {
+      document.getElementById('logo-upload').click();
+    }
+
+    function handleLogoUpload(input) {
+      if (input.files && input.files[0]) {
+        Toast.show('Logo uploaded! Our team will send you a proof within 4 hours.', 'success');
+        document.getElementById('logo-upload-area').innerHTML = `
+          <div style="width:44px;height:44px;border-radius:50%;background:rgba(198,161,91,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto var(--space-3);color:var(--gold);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div style="font-family:var(--font-display);font-weight:700;color:var(--text-primary);">${input.files[0].name}</div>
+          <div style="font-size:var(--fs-sm);color:var(--text-muted);margin-top:var(--space-2);">Logo uploaded successfully! Proof in 4 hours.</div>
+        `;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      EngravinStudio.init();
+    });
+  </script>
+</body>
+</html>

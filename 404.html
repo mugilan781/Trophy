@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Page not found — T&A Engraving. The page you are looking for doesn't exist. Return home or browse our award collections.">
+  <title>404 — Page Not Found | T&A Engraving</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* 404 PAGE */
+    .error-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--space-8) var(--space-6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated background */
+    .error-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .error-bg-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.15) saturate(0.3);
+    }
+
+    .error-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(32,33,36,0.5) 0%, rgba(32,33,36,0.95) 80%);
+    }
+
+    /* Floating particles */
+    .particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0;
+      animation: particleFly 6s infinite ease-in-out;
+    }
+
+    @keyframes particleFly {
+      0% { transform: translateY(100vh) scale(0); opacity: 0; }
+      20% { opacity: 0.3; }
+      80% { opacity: 0.1; }
+      100% { transform: translateY(-20vh) scale(1); opacity: 0; }
+    }
+
+    /* Content */
+    .error-content { position: relative; z-index: 1; max-width: 640px; }
+
+    .error-number {
+      font-family: var(--font-display);
+      font-size: clamp(8rem, 20vw, 15rem);
+      font-weight: 900;
+      line-height: 0.9;
+      background: var(--grad-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: var(--space-4);
+      position: relative;
+      display: inline-block;
+    }
+
+    .error-number::after {
+      content: attr(data-text);
+      position: absolute;
+      inset: 0;
+      background: none;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 60px rgba(198,161,91,0.2);
+      z-index: -1;
+    }
+
+    .error-trophy {
+      font-size: 4rem;
+      margin-bottom: var(--space-4);
+      animation: trophy-bounce 3s ease-in-out infinite;
+    }
+
+    @keyframes trophy-bounce {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      25% { transform: translateY(-15px) rotate(0deg); }
+      75% { transform: translateY(-8px) rotate(5deg); }
+    }
+
+    .error-title {
+      font-size: var(--fs-3xl);
+      font-weight: 900;
+      color: var(--text-primary);
+      margin-bottom: var(--space-4);
+    }
+
+    .error-subtitle {
+      font-size: var(--fs-lg);
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: var(--space-8);
+    }
+
+    .error-actions {
+      display: flex;
+      gap: var(--space-4);
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: var(--space-10);
+    }
+
+    /* Quick links */
+    .error-links {
+      display: flex;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: var(--space-8);
+    }
+
+    .error-link {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      font-size: var(--fs-sm);
+      color: var(--text-muted);
+      transition: all var(--transition-fast);
+      text-decoration: none;
+    }
+
+    .error-link:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* Search */
+    .error-search {
+      display: flex;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .error-search input {
+      flex: 1;
+      border-radius: var(--radius-md) 0 0 var(--radius-md);
+    }
+
+    .error-search button {
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: var(--space-3) var(--space-5);
+    }
+
+    /* Fun award quote */
+    .error-quote {
+      margin-top: var(--space-8);
+      padding: var(--space-5) var(--space-6);
+      background: rgba(198,161,91,0.05);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .error-quote-text {
+      font-family: var(--font-display);
+      font-size: var(--fs-base);
+      font-style: italic;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .error-quote-cite { font-size: var(--fs-xs); color: var(--gold); margin-top: var(--space-3); display: block; }
+
+    @media (max-width: 640px) {
+      .error-number { font-size: 7rem; }
+      .error-actions { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background -->
+  <div class="error-bg">
+    <img class="error-bg-img" src="images/awards-collection.jpg" alt="">
+    <div class="error-bg-overlay"></div>
+  </div>
+
+  <!-- Particles -->
+  <div class="particles" id="particles" aria-hidden="true"></div>
+
+  <main id="main" class="error-page">
+    <div class="error-content">
+
+      <div class="error-trophy" role="img" aria-label="Trophy">
+        <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 20px rgba(198,161,91,0.5));">
+          <path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2"/>
+          <path d="M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/>
+          <path d="M6 3h12v7a6 6 0 0 1-12 0V3z"/>
+          <line x1="12" y1="16" x2="12" y2="20"/>
+          <line x1="8" y1="20" x2="16" y2="20"/>
+        </svg>
+      </div>
+
+      <div class="error-number" data-text="404" aria-label="Error 404">404</div>
+
+      <h1 class="error-title">Award Not Found</h1>
+
+      <p class="error-subtitle">
+        The page you're looking for has left the podium. It may have been moved,
+        renamed or never existed — much like an award for "Best 404 Page."
+      </p>
+
+      <!-- Search -->
+      <div class="error-search" style="margin-bottom:var(--space-6);">
+        <input type="text" class="form-control" placeholder="Search for products, guides..." id="error-search-input" style="border-radius:var(--radius-md) 0 0 var(--radius-md);">
+        <button class="btn btn-primary" onclick="doSearch()" style="border-radius:0 var(--radius-md) var(--radius-md) 0;padding:0 var(--space-5);">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+      </div>
+
+      <div class="error-actions">
+        <a href="index.html" class="btn btn-primary btn-xl">Go to Homepage</a>
+        <a href="products.html" class="btn btn-outline btn-xl">Browse Awards</a>
+      </div>
+
+      <!-- Quick Nav -->
+      <div style="margin-bottom:var(--space-4);font-size:var(--fs-xs);color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;">Or jump to:</div>
+      <div class="error-links">
+        <a href="products.html" class="error-link">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2"/><path d="M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/><path d="M6 3h12v7a6 6 0 0 1-12 0V3z"/><line x1="12" y1="16" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></svg>
+          Trophies
+        </a>
+        <a href="products.html" class="error-link">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="6 3 18 3 22 9 12 22 2 9"/></svg>
+          Crystal Awards
+        </a>
+        <a href="products.html" class="error-link">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="14" r="7"/><polyline points="8 3 12 10 16 3"/></svg>
+          Medals
+        </a>
+        <a href="engraving.html" class="error-link">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/></svg>
+          Custom Engraving
+        </a>
+        <a href="pricing.html" class="error-link">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.5"/></svg>
+          Pricing
+        </a>
+        <a href="contact.html" class="error-link">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Contact Us
+        </a>
+        <a href="blog.html" class="error-link">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Blog
+        </a>
+        <a href="about.html" class="error-link">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          About Us
+        </a>
+      </div>
+
+      <!-- Error Quote -->
+      <div class="error-quote">
+        <div class="error-quote-text">"Not all who wander are lost — but this page definitely is. Let us guide you back to something truly worth finding."</div>
+        <span class="error-quote-cite">— T&A Engraving</span>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Generate particles
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 20; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random() * 6 + 2;
+      p.style.cssText = `
+        width: ${size}px;
+        height: ${size}px;
+        left: ${Math.random() * 100}%;
+        animation-delay: ${Math.random() * 6}s;
+        animation-duration: ${Math.random() * 4 + 4}s;
+      `;
+      container.appendChild(p);
+    }
+
+    function doSearch() {
+      const q = document.getElementById('error-search-input').value;
+      if (q) {
+        Toast.show('Searching for "' + q + '"...', 'info');
+        setTimeout(() => window.location.href = 'products.html', 1200);
+      }
+    }
+
+    document.getElementById('error-search-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') doSearch();
+    });
+  </script>
+</body>
+</html>
