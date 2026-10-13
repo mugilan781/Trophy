@@ -140,98 +140,11 @@
       background: rgba(198,161,91,0.08);
     }
 
-    /* Products Header */
-    .products-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: var(--space-6);
-      flex-wrap: wrap;
-      gap: var(--space-3);
-    }
+    /* Main grid — 3 cards per row */
+    #products-grid { grid-template-columns: repeat(3, 1fr); }
 
-    .products-count {
-      font-size: var(--fs-sm);
-      color: var(--text-muted);
-    }
-
-    .products-count strong { color: var(--text-primary); }
-
-    .products-sort {
-      display: flex;
-      align-items: center;
-      gap: var(--space-3);
-    }
-
-    .sort-label { font-size: var(--fs-sm); color: var(--text-muted); white-space: nowrap; }
-
-    .sort-select {
-      padding: var(--space-2) var(--space-4);
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      color: var(--text-primary);
-      font-size: var(--fs-sm);
-      cursor: pointer;
-    }
-
-    .sort-select:focus { outline: none; border-color: var(--gold); }
-
-    .view-toggle {
-      display: flex;
-      gap: var(--space-1);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-    }
-
-    .view-btn {
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: transparent;
-      color: var(--text-muted);
-      border: none;
-      cursor: pointer;
-      transition: all var(--transition-fast);
-    }
-
-    .view-btn.active { background: var(--bg-surface); color: var(--gold); }
-    .view-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; }
-
-    /* Load More */
-    .load-more-wrap { text-align: center; margin-top: var(--space-10); }
-
-    .load-more-bar {
-      height: 3px;
-      background: var(--bg-surface);
-      border-radius: 3px;
-      margin-bottom: var(--space-4);
-      position: relative;
-    }
-
-    .load-more-bar::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 65%;
-      background: var(--grad-gold);
-      border-radius: 3px;
-    }
-
-    .load-more-text { font-size: var(--fs-sm); color: var(--text-muted); margin-bottom: var(--space-4); }
-
-    /* List View */
-    .products-list-view .product-card-item {
-      display: grid;
-      grid-template-columns: 200px 1fr;
-    }
-
-    .products-list-view .product-img-wrap { aspect-ratio: 1; }
+    /* Straight-aligned card content (both grids on this page) */
+    .product-grid .product-name { min-height: 2.5em; }
 
     /* Promotional Banner */
     .promo-banner {
@@ -252,6 +165,14 @@
       .products-layout { grid-template-columns: 1fr; }
       .sidebar { position: static; }
     }
+
+    @media (max-width: 1100px) {
+      #products-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      #products-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -271,25 +192,7 @@
     </header>
 
     <!-- ==========================================
-         SECTION 1: CATEGORY QUICK FILTERS
-    =========================================== -->
-    <section class="section-sm" style="background:var(--bg-surface);">
-      <div class="container">
-        <div class="filter-tabs" role="tablist" id="main-filter-tabs">
-          <button class="filter-tab active" data-filter="all" role="tab">All Products</button>
-          <button class="filter-tab" data-filter="trophies" role="tab">Trophies</button>
-          <button class="filter-tab" data-filter="medals" role="tab">Medals</button>
-          <button class="filter-tab" data-filter="crystal" role="tab">Crystal</button>
-          <button class="filter-tab" data-filter="plaques" role="tab">Plaques</button>
-          <button class="filter-tab" data-filter="corporate" role="tab">Corporate</button>
-          <button class="filter-tab" data-filter="sports" role="tab">Sports</button>
-          <button class="filter-tab" data-filter="academic" role="tab">Academic</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==========================================
-         SECTION 2: PROMO BANNER
+         PROMO BANNER (right after hero)
     =========================================== -->
     <section style="padding:var(--space-6) 0;">
       <div class="container">
@@ -321,12 +224,12 @@
             <div class="sidebar-section">
               <div class="sidebar-title">Category</div>
               <div class="sidebar-checks">
-                <label class="sidebar-check"><input type="checkbox" checked><div class="cb-box"></div><span class="cb-label">All Categories</span></label>
-                <label class="sidebar-check"><input type="checkbox"><div class="cb-box"></div><span class="cb-label">Trophies</span><span class="cb-count">180</span></label>
-                <label class="sidebar-check"><input type="checkbox"><div class="cb-box"></div><span class="cb-label">Crystal Awards</span><span class="cb-count">95</span></label>
-                <label class="sidebar-check"><input type="checkbox"><div class="cb-box"></div><span class="cb-label">Medals</span><span class="cb-count">120</span></label>
-                <label class="sidebar-check"><input type="checkbox"><div class="cb-box"></div><span class="cb-label">Plaques</span><span class="cb-count">145</span></label>
-                <label class="sidebar-check"><input type="checkbox"><div class="cb-box"></div><span class="cb-label">Personalized</span><span class="cb-count">60</span></label>
+                <label class="sidebar-check"><input type="checkbox" checked data-cat="all"><div class="cb-box"></div><span class="cb-label">All Categories</span></label>
+                <label class="sidebar-check"><input type="checkbox" data-cat="trophies"><div class="cb-box"></div><span class="cb-label">Trophies</span><span class="cb-count">180</span></label>
+                <label class="sidebar-check"><input type="checkbox" data-cat="crystal"><div class="cb-box"></div><span class="cb-label">Crystal Awards</span><span class="cb-count">95</span></label>
+                <label class="sidebar-check"><input type="checkbox" data-cat="medals"><div class="cb-box"></div><span class="cb-label">Medals</span><span class="cb-count">120</span></label>
+                <label class="sidebar-check"><input type="checkbox" data-cat="plaques"><div class="cb-box"></div><span class="cb-label">Plaques</span><span class="cb-count">145</span></label>
+                <label class="sidebar-check"><input type="checkbox" data-cat="personalized"><div class="cb-box"></div><span class="cb-label">Personalized</span><span class="cb-count">60</span></label>
               </div>
             </div>
 
@@ -357,55 +260,37 @@
             <div class="sidebar-section">
               <div class="sidebar-title">Occasion</div>
               <div class="sidebar-checks">
-                <label class="sidebar-check"><input type="checkbox"><div class="cb-box"></div><span class="cb-label">Corporate Events</span></label>
-                <label class="sidebar-check"><input type="checkbox"><div class="cb-box"></div><span class="cb-label">Sports Tournaments</span></label>
-                <label class="sidebar-check"><input type="checkbox"><div class="cb-box"></div><span class="cb-label">Academic Excellence</span></label>
-                <label class="sidebar-check"><input type="checkbox"><div class="cb-box"></div><span class="cb-label">Employee Recognition</span></label>
-                <label class="sidebar-check"><input type="checkbox"><div class="cb-box"></div><span class="cb-label">Personal Gifts</span></label>
+                <label class="sidebar-check"><input type="checkbox" data-occ="corporate"><div class="cb-box"></div><span class="cb-label">Corporate Events</span></label>
+                <label class="sidebar-check"><input type="checkbox" data-occ="sports"><div class="cb-box"></div><span class="cb-label">Sports Tournaments</span></label>
+                <label class="sidebar-check"><input type="checkbox" data-occ="academic"><div class="cb-box"></div><span class="cb-label">Academic Excellence</span></label>
+                <label class="sidebar-check"><input type="checkbox" data-occ="corporate"><div class="cb-box"></div><span class="cb-label">Employee Recognition</span></label>
+                <label class="sidebar-check"><input type="checkbox" data-occ="personalized"><div class="cb-box"></div><span class="cb-label">Personal Gifts</span></label>
               </div>
             </div>
 
             <!-- Clear Filters -->
-            <button class="btn btn-ghost w-full" style="justify-content:center;">Clear All Filters</button>
+            <button class="btn btn-ghost w-full" id="clear-filters" style="justify-content:center;">Clear All Filters</button>
           </aside>
 
           <!-- Products Area -->
           <div>
-            <!-- Header -->
-            <div class="products-header">
-              <div class="products-count"><strong>48</strong> products found</div>
-              <div class="products-sort">
-                <span class="sort-label">Sort by:</span>
-                <select class="sort-select" id="sort-select">
-                  <option>Featured</option>
-                  <option>Price: Low to High</option>
-                  <option>Price: High to Low</option>
-                  <option>Newest First</option>
-                  <option>Most Popular</option>
-                  <option>Best Rated</option>
-                </select>
-                <div class="view-toggle">
-                  <button class="view-btn active" id="grid-view-btn" aria-label="Grid view">
-                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-                  </button>
-                  <button class="view-btn" id="list-view-btn" aria-label="List view">
-                    <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-                  </button>
-                </div>
-              </div>
+            <!-- Category Quick Filters (above product cards) -->
+            <div class="filter-tabs" role="tablist" id="main-filter-tabs" style="margin-bottom:var(--space-6);">
+              <button class="filter-tab active" data-filter="all" role="tab">All Products</button>
+              <button class="filter-tab" data-filter="trophies" role="tab">Trophies</button>
+              <button class="filter-tab" data-filter="medals" role="tab">Medals</button>
+              <button class="filter-tab" data-filter="crystal" role="tab">Crystal</button>
+              <button class="filter-tab" data-filter="plaques" role="tab">Plaques</button>
+              <button class="filter-tab" data-filter="corporate" role="tab">Corporate</button>
+              <button class="filter-tab" data-filter="sports" role="tab">Sports</button>
+              <button class="filter-tab" data-filter="academic" role="tab">Academic</button>
             </div>
-
             <!-- Product Grid -->
             <div class="product-grid" id="products-grid">
               <!-- 8 Product Cards -->
-              <article class="product-card-item reveal" data-category="trophies,sports">
+              <article class="product-card-item reveal" data-category="trophies,sports,personalized" data-price="2499" data-rating="4.9" data-mat="gold">
                 <div class="product-img-wrap">
                   <img class="card-img" src="images/sports-trophies.jpg" alt="Grand Championship Cup" loading="lazy">
-                  <div class="product-overlay">
-                    <a href="product-details.html" class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
-                    <button class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-                    <button class="product-overlay-btn"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
-                  </div>
                   <span class="badge badge-gold" style="position:absolute;top:1rem;left:1rem;">Bestseller</span>
                 </div>
                 <div class="product-info">
@@ -416,17 +301,13 @@
                     <div class="product-price"><span class="from">from</span>₹2,499</div>
                     <div class="product-rating"><span class="stars">★★★★★</span> 4.9</div>
                   </div>
+                  <a href="product-details.html" class="btn btn-outline btn-sm w-full" style="justify-content:center;margin-top:var(--space-4);">Details</a>
                 </div>
               </article>
 
-              <article class="product-card-item reveal reveal-delay-1" data-category="crystal,corporate">
+              <article class="product-card-item reveal reveal-delay-1" data-category="crystal,corporate,personalized" data-price="4999" data-rating="5.0" data-mat="crystal">
                 <div class="product-img-wrap">
                   <img class="card-img" src="images/crystal-awards.jpg" alt="Diamond Excellence Trophy" loading="lazy">
-                  <div class="product-overlay">
-                    <a href="product-details.html" class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
-                    <button class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-                    <button class="product-overlay-btn"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
-                  </div>
                   <span class="badge badge-burgundy" style="position:absolute;top:1rem;left:1rem;">Premium</span>
                 </div>
                 <div class="product-info">
@@ -437,17 +318,13 @@
                     <div class="product-price"><span class="from">from</span>₹4,999</div>
                     <div class="product-rating"><span class="stars">★★★★★</span> 5.0</div>
                   </div>
+                  <a href="product-details.html" class="btn btn-outline btn-sm w-full" style="justify-content:center;margin-top:var(--space-4);">Details</a>
                 </div>
               </article>
 
-              <article class="product-card-item reveal reveal-delay-2" data-category="medals,sports">
+              <article class="product-card-item reveal reveal-delay-2" data-category="medals,sports" data-price="299" data-rating="4.8" data-mat="bronze">
                 <div class="product-img-wrap">
                   <img class="card-img" src="images/medals-collection.jpg" alt="Championship Medal Set" loading="lazy">
-                  <div class="product-overlay">
-                    <a href="product-details.html" class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
-                    <button class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-                    <button class="product-overlay-btn"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
-                  </div>
                 </div>
                 <div class="product-info">
                   <div class="product-category">Sports Medals</div>
@@ -457,17 +334,13 @@
                     <div class="product-price"><span class="from">from</span>₹299</div>
                     <div class="product-rating"><span class="stars">★★★★★</span> 4.8</div>
                   </div>
+                  <a href="product-details.html" class="btn btn-outline btn-sm w-full" style="justify-content:center;margin-top:var(--space-4);">Details</a>
                 </div>
               </article>
 
-              <article class="product-card-item reveal reveal-delay-3" data-category="plaques,corporate">
+              <article class="product-card-item reveal reveal-delay-3" data-category="plaques,corporate" data-price="1899" data-rating="4.6" data-mat="wood">
                 <div class="product-img-wrap">
                   <img class="card-img" src="images/wooden-plaques.jpg" alt="Presidential Award Plaque" loading="lazy">
-                  <div class="product-overlay">
-                    <a href="product-details.html" class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
-                    <button class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-                    <button class="product-overlay-btn"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
-                  </div>
                   <span class="badge badge-outline" style="position:absolute;top:1rem;left:1rem;">New</span>
                 </div>
                 <div class="product-info">
@@ -478,17 +351,13 @@
                     <div class="product-price"><span class="from">from</span>₹1,899</div>
                     <div class="product-rating"><span class="stars">★★★★☆</span> 4.6</div>
                   </div>
+                  <a href="product-details.html" class="btn btn-outline btn-sm w-full" style="justify-content:center;margin-top:var(--space-4);">Details</a>
                 </div>
               </article>
 
-              <article class="product-card-item reveal" data-category="corporate,trophies">
+              <article class="product-card-item reveal" data-category="corporate,trophies" data-price="5499" data-rating="4.9" data-mat="silver">
                 <div class="product-img-wrap">
                   <img class="card-img" src="images/corporate-awards.jpg" alt="Executive Leadership Award" loading="lazy">
-                  <div class="product-overlay">
-                    <a href="product-details.html" class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
-                    <button class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-                    <button class="product-overlay-btn"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
-                  </div>
                 </div>
                 <div class="product-info">
                   <div class="product-category">Corporate Award</div>
@@ -498,17 +367,13 @@
                     <div class="product-price"><span class="from">from</span>₹5,499</div>
                     <div class="product-rating"><span class="stars">★★★★★</span> 4.9</div>
                   </div>
+                  <a href="product-details.html" class="btn btn-outline btn-sm w-full" style="justify-content:center;margin-top:var(--space-4);">Details</a>
                 </div>
               </article>
 
-              <article class="product-card-item reveal reveal-delay-1" data-category="academic,medals">
+              <article class="product-card-item reveal reveal-delay-1" data-category="academic,medals,personalized" data-price="349" data-rating="4.5" data-mat="silver">
                 <div class="product-img-wrap">
                   <img class="card-img" src="images/medals-collection.jpg" alt="Academic Excellence Medal" loading="lazy">
-                  <div class="product-overlay">
-                    <a href="product-details.html" class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
-                    <button class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-                    <button class="product-overlay-btn"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
-                  </div>
                 </div>
                 <div class="product-info">
                   <div class="product-category">Academic Medal</div>
@@ -518,17 +383,13 @@
                     <div class="product-price"><span class="from">from</span>₹349</div>
                     <div class="product-rating"><span class="stars">★★★★☆</span> 4.5</div>
                   </div>
+                  <a href="product-details.html" class="btn btn-outline btn-sm w-full" style="justify-content:center;margin-top:var(--space-4);">Details</a>
                 </div>
               </article>
 
-              <article class="product-card-item reveal reveal-delay-2" data-category="crystal,trophies">
+              <article class="product-card-item reveal reveal-delay-2" data-category="crystal,trophies,personalized" data-price="3799" data-rating="4.8" data-mat="acrylic">
                 <div class="product-img-wrap">
                   <img class="card-img" src="images/acrylic-award.jpg" alt="LED Acrylic Innovation Award" loading="lazy">
-                  <div class="product-overlay">
-                    <a href="product-details.html" class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
-                    <button class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-                    <button class="product-overlay-btn"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
-                  </div>
                   <span class="badge badge-gold" style="position:absolute;top:1rem;left:1rem;">Hot</span>
                 </div>
                 <div class="product-info">
@@ -539,17 +400,13 @@
                     <div class="product-price"><span class="from">from</span>₹3,799</div>
                     <div class="product-rating"><span class="stars">★★★★★</span> 4.8</div>
                   </div>
+                  <a href="product-details.html" class="btn btn-outline btn-sm w-full" style="justify-content:center;margin-top:var(--space-4);">Details</a>
                 </div>
               </article>
 
-              <article class="product-card-item reveal reveal-delay-3" data-category="sports,trophies">
+              <article class="product-card-item reveal reveal-delay-3" data-category="sports,trophies" data-price="12999" data-rating="5.0" data-mat="gold">
                 <div class="product-img-wrap">
                   <img class="card-img" src="images/hero-banner.jpg" alt="Global Excellence Award" loading="lazy">
-                  <div class="product-overlay">
-                    <a href="product-details.html" class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
-                    <button class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-                    <button class="product-overlay-btn"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
-                  </div>
                 </div>
                 <div class="product-info">
                   <div class="product-category">Prestige Trophy</div>
@@ -559,16 +416,27 @@
                     <div class="product-price"><span class="from">from</span>₹12,999</div>
                     <div class="product-rating"><span class="stars">★★★★★</span> 5.0</div>
                   </div>
+                  <a href="product-details.html" class="btn btn-outline btn-sm w-full" style="justify-content:center;margin-top:var(--space-4);">Details</a>
+                </div>
+              </article>
+              <article class="product-card-item reveal" data-category="trophies,corporate,personalized" data-price="7999" data-rating="4.9" data-mat="gold">
+                <div class="product-img-wrap">
+                  <img class="card-img" src="images/awards-collection.jpg" alt="Prestige Collection Gift Set" loading="lazy">
+                  <span class="badge badge-gold" style="position:absolute;top:1rem;left:1rem;">Curated</span>
+                </div>
+                <div class="product-info">
+                  <div class="product-category">Curated Set</div>
+                  <h3 class="product-name">Prestige Collection Gift Set</h3>
+                  <p class="product-desc">Handpicked trophy, medal and plaque trio in a premium gift box. Ready-to-present corporate gifting.</p>
+                  <div class="product-footer">
+                    <div class="product-price"><span class="from">from</span>₹7,999</div>
+                    <div class="product-rating"><span class="stars">★★★★★</span> 4.9</div>
+                  </div>
+                  <a href="product-details.html" class="btn btn-outline btn-sm w-full" style="justify-content:center;margin-top:var(--space-4);">Details</a>
                 </div>
               </article>
             </div>
-
-            <!-- Load More -->
-            <div class="load-more-wrap reveal">
-              <div class="load-more-text">Showing 8 of 48 products</div>
-              <div class="load-more-bar"></div>
-              <button class="btn btn-outline btn-lg" onclick="Toast.show('Loading more products...','info')">Load More Products</button>
-            </div>
+            <p id="no-results" hidden style="text-align:center;color:var(--text-muted);padding:var(--space-10) 0;">No products match your filters. Try clearing them.</p>
           </div>
         </div>
       </div>
@@ -637,8 +505,8 @@
               <span style="font-family:var(--font-display);font-size:var(--fs-3xl);font-weight:900;color:var(--gold);" data-count="35" data-suffix="%">0%</span>
               <span style="display:block;font-size:var(--fs-sm);color:var(--text-muted);margin-top:var(--space-2);">Off 201–500 pieces</span>
             </div>
-            <div style="background:linear-gradient(135deg,rgba(112,45,59,0.3),rgba(112,45,59,0.1));border:1px solid var(--burgundy);border-radius:var(--radius-xl);padding:var(--space-6);text-align:center;">
-              <span style="font-family:var(--font-display);font-size:var(--fs-3xl);font-weight:900;color:var(--gold);">40%+</span>
+            <div style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:var(--radius-xl);padding:var(--space-6);text-align:center;">
+              <span style="font-family:var(--font-display);font-size:var(--fs-3xl);font-weight:900;color:var(--gold);" data-count="40" data-suffix="%+">40%+</span>
               <span style="display:block;font-size:var(--fs-sm);color:var(--text-muted);margin-top:var(--space-2);">Custom Quote 500+</span>
             </div>
           </div>
@@ -657,20 +525,20 @@
         </div>
         <div class="product-grid">
           <article class="product-card-item reveal" data-category="crystal">
-            <div class="product-img-wrap"><img class="card-img" src="images/crystal-awards.jpg" alt="Visionary Award" loading="lazy"><div class="product-overlay"><a href="product-details.html" class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a></div></div>
-            <div class="product-info"><div class="product-category">Crystal</div><h3 class="product-name">Visionary Obelisk Award</h3><p class="product-desc">Tall obelisk crystal with gold engraving plate. Elegant and modern.</p><div class="product-footer"><div class="product-price"><span class="from">from</span>₹6,299</div><div class="product-rating"><span class="stars">★★★★★</span> 4.9</div></div></div>
+            <div class="product-img-wrap"><img class="card-img" src="images/crystal-awards.jpg" alt="Visionary Award" loading="lazy"></div>
+            <div class="product-info"><div class="product-category">Crystal</div><h3 class="product-name">Visionary Obelisk Award</h3><p class="product-desc">Tall obelisk crystal with gold engraving plate. Elegant and modern.</p><div class="product-footer"><div class="product-price"><span class="from">from</span>₹6,299</div><div class="product-rating"><span class="stars">★★★★★</span> 4.9</div></div><a href="product-details.html" class="btn btn-outline btn-sm w-full" style="justify-content:center;margin-top:var(--space-4);">Details</a></div>
           </article>
           <article class="product-card-item reveal reveal-delay-1" data-category="corporate">
-            <div class="product-img-wrap"><img class="card-img" src="images/corporate-awards.jpg" alt="Apex Trophy" loading="lazy"><div class="product-overlay"><a href="product-details.html" class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a></div></div>
-            <div class="product-info"><div class="product-category">Corporate</div><h3 class="product-name">Apex Star Trophy</h3><p class="product-desc">Five-pointed star on chrome base. Classic corporate recognition design.</p><div class="product-footer"><div class="product-price"><span class="from">from</span>₹2,899</div><div class="product-rating"><span class="stars">★★★★☆</span> 4.7</div></div></div>
+            <div class="product-img-wrap"><img class="card-img" src="images/corporate-awards.jpg" alt="Apex Trophy" loading="lazy"></div>
+            <div class="product-info"><div class="product-category">Corporate</div><h3 class="product-name">Apex Star Trophy</h3><p class="product-desc">Five-pointed star on chrome base. Classic corporate recognition design.</p><div class="product-footer"><div class="product-price"><span class="from">from</span>₹2,899</div><div class="product-rating"><span class="stars">★★★★☆</span> 4.7</div></div><a href="product-details.html" class="btn btn-outline btn-sm w-full" style="justify-content:center;margin-top:var(--space-4);">Details</a></div>
           </article>
           <article class="product-card-item reveal reveal-delay-2" data-category="sports">
-            <div class="product-img-wrap"><img class="card-img" src="images/sports-trophies.jpg" alt="Warrior Shield Trophy" loading="lazy"><div class="product-overlay"><a href="product-details.html" class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a></div></div>
-            <div class="product-info"><div class="product-category">Sports</div><h3 class="product-name">Warrior Shield Trophy</h3><p class="product-desc">Combat sports and martial arts shield trophy. Gold and silver finish available.</p><div class="product-footer"><div class="product-price"><span class="from">from</span>₹1,599</div><div class="product-rating"><span class="stars">★★★★★</span> 4.8</div></div></div>
+            <div class="product-img-wrap"><img class="card-img" src="images/sports-trophies.jpg" alt="Warrior Shield Trophy" loading="lazy"></div>
+            <div class="product-info"><div class="product-category">Sports</div><h3 class="product-name">Warrior Shield Trophy</h3><p class="product-desc">Combat sports and martial arts shield trophy. Gold and silver finish available.</p><div class="product-footer"><div class="product-price"><span class="from">from</span>₹1,599</div><div class="product-rating"><span class="stars">★★★★★</span> 4.8</div></div><a href="product-details.html" class="btn btn-outline btn-sm w-full" style="justify-content:center;margin-top:var(--space-4);">Details</a></div>
           </article>
           <article class="product-card-item reveal reveal-delay-3" data-category="plaques">
-            <div class="product-img-wrap"><img class="card-img" src="images/wooden-plaques.jpg" alt="Heritage Mahogany Plaque" loading="lazy"><div class="product-overlay"><a href="product-details.html" class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a></div></div>
-            <div class="product-info"><div class="product-category">Plaque</div><h3 class="product-name">Heritage Mahogany Plaque</h3><p class="product-desc">Classic bevelled mahogany with gold or silver plate. Timeless professional recognition.</p><div class="product-footer"><div class="product-price"><span class="from">from</span>₹1,299</div><div class="product-rating"><span class="stars">★★★★★</span> 4.7</div></div></div>
+            <div class="product-img-wrap"><img class="card-img" src="images/wooden-plaques.jpg" alt="Heritage Mahogany Plaque" loading="lazy"></div>
+            <div class="product-info"><div class="product-category">Plaque</div><h3 class="product-name">Heritage Mahogany Plaque</h3><p class="product-desc">Classic bevelled mahogany with gold or silver plate. Timeless professional recognition.</p><div class="product-footer"><div class="product-price"><span class="from">from</span>₹1,299</div><div class="product-rating"><span class="stars">★★★★★</span> 4.7</div></div><a href="product-details.html" class="btn btn-outline btn-sm w-full" style="justify-content:center;margin-top:var(--space-4);">Details</a></div>
           </article>
         </div>
       </div>
@@ -690,16 +558,65 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      // View toggle
-      document.getElementById('grid-view-btn').addEventListener('click', function() {
-        document.getElementById('products-grid').classList.remove('products-list-view');
-        this.classList.add('active');
-        document.getElementById('list-view-btn').classList.remove('active');
+      // Unified product filtering (tabs + sidebar + price)
+      const grid = document.getElementById('products-grid');
+      const cards = [...grid.querySelectorAll('.product-card-item')];
+      const noResults = document.getElementById('no-results');
+      const priceSlider = document.getElementById('price-slider');
+      let activeTab = 'all';
+
+      // Start with full price range so all products show
+      priceSlider.value = priceSlider.max;
+      updatePrice(priceSlider);
+
+      function applyFilters() {
+        const checkedCats = [...document.querySelectorAll('input[data-cat]:checked')].map(i => i.getAttribute('data-cat'));
+        const checkedOcc = [...document.querySelectorAll('input[data-occ]:checked')].map(i => i.getAttribute('data-occ'));
+        const swatchEl = document.querySelector('.material-swatch.active');
+        const activeSwatch = swatchEl ? swatchEl.textContent.trim().toLowerCase() : 'all';
+        const maxPrice = parseInt(priceSlider.value, 10);
+        let visible = 0;
+
+        cards.forEach(card => {
+          const cats = (card.dataset.category || '').split(',');
+          const passTab = activeTab === 'all' || cats.includes(activeTab);
+          const passCat = checkedCats.length === 0 || checkedCats.includes('all') || cats.some(c => checkedCats.includes(c));
+          const passOcc = checkedOcc.length === 0 || cats.some(c => checkedOcc.includes(c));
+          const passMat = activeSwatch === 'all' || (card.dataset.mat || '') === activeSwatch;
+          const passPrice = parseInt(card.dataset.price || '0', 10) <= maxPrice;
+          const show = passTab && passCat && passOcc && passMat && passPrice;
+          card.style.display = show ? '' : 'none';
+          if (show) visible++;
+        });
+
+        noResults.hidden = visible !== 0;
+      }
+
+      // Category quick tabs
+      document.querySelectorAll('#main-filter-tabs .filter-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+          document.querySelectorAll('#main-filter-tabs .filter-tab').forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          activeTab = this.dataset.filter || 'all';
+          applyFilters();
+        });
       });
-      document.getElementById('list-view-btn').addEventListener('click', function() {
-        document.getElementById('products-grid').classList.add('products-list-view');
-        this.classList.add('active');
-        document.getElementById('grid-view-btn').classList.remove('active');
+
+      // Sidebar checkboxes (All resets the group)
+      document.querySelectorAll('input[data-cat]').forEach(box => {
+        box.addEventListener('change', function() {
+          if (this.getAttribute('data-cat') === 'all' && this.checked) {
+            document.querySelectorAll('input[data-cat]').forEach(b => { if (b !== this) b.checked = false; });
+          } else if (this.checked) {
+            const allBox = document.querySelector('input[data-cat="all"]');
+            if (allBox) allBox.checked = false;
+          }
+          applyFilters();
+        });
+      });
+
+      document.querySelectorAll('input[data-occ]').forEach(box => {
+        box.addEventListener('change', applyFilters);
       });
 
       // Material swatches
@@ -707,11 +624,25 @@
         sw.addEventListener('click', function() {
           document.querySelectorAll('.material-swatch').forEach(s => s.classList.remove('active'));
           this.classList.add('active');
+          applyFilters();
         });
       });
 
-      // Products filter
-      ProductFilter.init('#products-grid', '#main-filter-tabs .filter-tab');
+      // Price slider
+      priceSlider.addEventListener('input', applyFilters);
+
+      // Clear all filters
+      document.getElementById('clear-filters').addEventListener('click', function() {
+        document.querySelectorAll('input[data-cat]').forEach(b => { b.checked = b.getAttribute('data-cat') === 'all'; });
+        document.querySelectorAll('input[data-occ]').forEach(b => { b.checked = false; });
+        document.querySelectorAll('.material-swatch').forEach((s, i) => s.classList.toggle('active', i === 0));
+        priceSlider.value = priceSlider.max;
+        updatePrice(priceSlider);
+        document.querySelectorAll('#main-filter-tabs .filter-tab').forEach((t, i) => t.classList.toggle('active', i === 0));
+        activeTab = 'all';
+        applyFilters();
+      });
+
     });
   </script>
 </body>
