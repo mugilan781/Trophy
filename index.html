@@ -27,31 +27,46 @@
     .features-bar-inner {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: var(--space-5);
+      justify-content: center;
+      gap: var(--space-2);
     }
 
     .feature-bar-item {
+      flex: 1 1 0;
+      min-width: 0;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: var(--space-3);
       font-size: var(--fs-sm);
       font-weight: 600;
       color: var(--text-secondary);
+      padding: var(--space-2) var(--space-3);
+    }
+
+    .feature-bar-item > div {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+      min-width: 0;
+    }
+
+    .feature-bar-item strong {
+      color: var(--text-primary);
+      white-space: nowrap;
     }
 
     .feature-bar-item svg {
-      width: 22px;
-      height: 22px;
+      width: 26px;
+      height: 26px;
       stroke: var(--gold);
       fill: none;
       stroke-width: 1.8;
       flex-shrink: 0;
     }
 
-    .feature-bar-item span { color: var(--text-muted); font-weight: 400; }
-    .feature-bar-sep { width: 1px; height: 28px; background: var(--border-subtle); }
+    .feature-bar-item span { color: var(--text-muted); font-weight: 400; font-size: var(--fs-xs); white-space: nowrap; }
+    .feature-bar-sep { width: 1px; height: 44px; background: var(--border-subtle); flex-shrink: 0; }
 
     /* About Section */
     .about-split {
@@ -430,6 +445,9 @@
     @media (max-width: 900px) {
       .about-split { grid-template-columns: 1fr; }
       .about-img-stack { height: 300px; margin-bottom: var(--space-8); }
+      .features-bar-inner { flex-wrap: wrap; gap: var(--space-4) var(--space-2); }
+      .feature-bar-item { flex: 1 1 40%; justify-content: flex-start; }
+      .feature-bar-sep { display: none; }
       .category-grid { grid-template-columns: repeat(2, 1fr); }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .process-steps { grid-template-columns: repeat(2, 1fr); }
@@ -446,7 +464,10 @@
       .stat-item-band { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
       .process-steps { grid-template-columns: 1fr; }
       .gallery-masonry { grid-template-columns: 1fr; }
-      .features-bar-sep { display: none; }
+      .features-bar-inner { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+      .feature-bar-item { justify-content: flex-start; }
+      .feature-bar-item strong, .feature-bar-item span { white-space: normal; }
+      .feature-bar-item:last-child { grid-column: span 2; justify-content: center; }
       .testimonial-card-wrap { min-width: 100%; }
       .cta-section { padding: var(--space-10) var(--space-6); }
     }
