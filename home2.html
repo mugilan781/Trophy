@@ -31,6 +31,33 @@
 
     [dir="rtl"] .marquee-track { animation-direction: reverse; }
 
+    /* HOME2 — always-filled navbar (this page only, other pages unaffected) */
+    .navbar,
+    .navbar:not(.scrolled) {
+      background: rgba(32, 33, 36, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    [data-theme="light"] .navbar,
+    [data-theme="light"] .navbar:not(.scrolled) {
+      background: rgba(248, 245, 239, 0.97);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    }
+
+    [data-theme="light"] .navbar:not(.scrolled) .nav-links > li > a { color: var(--text-primary); text-shadow: none; }
+    [data-theme="light"] .navbar:not(.scrolled) .nav-icon-btn { color: var(--text-secondary); border-color: var(--border-subtle); background: transparent; }
+    [data-theme="light"] .navbar:not(.scrolled) .nav-hamburger span { background: var(--text-primary); box-shadow: none; }
+    [data-theme="light"] .navbar:not(.scrolled) .nav-logo .logo-main { text-shadow: none; }
+    [data-theme="light"] .navbar:not(.scrolled) .nav-logo .logo-sub { color: var(--text-muted); text-shadow: none; }
+
+    /* HOME2 — brand contrast: gold logotype is weak on the ivory filled bar */
+    [data-theme="light"] .navbar .nav-logo .logo-main { color: var(--gold-dark); }
+    /* "Engraving" span is pinned ivory globally — unreadable on ivory bar at top */
+    [data-theme="light"] .navbar .nav-logo .logo-main span { color: var(--obsidian); }
+
     @keyframes marqueeScroll {
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
@@ -56,9 +83,10 @@
       flex-shrink: 0;
     }
 
-    /* Editorial Hero */
+    /* Editorial Hero — fits exactly one viewport height */
     .editorial-hero {
-      min-height: 100vh;
+      height: 100vh;
+      min-height: 640px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       overflow: hidden;
@@ -70,12 +98,13 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: var(--space-20) var(--space-12) var(--space-20) var(--space-16);
+      padding: var(--space-12) var(--space-10) var(--space-10) var(--space-12);
+      padding-inline-start: max(var(--space-6), calc((100vw - var(--content-width)) / 2 + var(--space-2)));
     }
 
     .editorial-hero-num {
       font-family: var(--font-display);
-      font-size: 9rem;
+      font-size: 6.5rem;
       font-weight: 900;
       color: var(--border-subtle);
       line-height: 1;
@@ -92,7 +121,7 @@
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: var(--space-6);
+      margin-bottom: var(--space-4);
       display: flex;
       align-items: center;
       gap: var(--space-3);
@@ -107,12 +136,12 @@
     }
 
     .editorial-left h1 {
-      font-size: clamp(3rem, 5.5vw, 5.5rem);
+      font-size: clamp(2.5rem, 4.2vw, 3.75rem);
       font-weight: 900;
       line-height: 0.95;
       letter-spacing: -0.03em;
       color: var(--text-primary);
-      margin-bottom: var(--space-6);
+      margin-bottom: var(--space-5);
     }
 
     .editorial-left h1 .line2 { color: var(--gold); display: block; }
@@ -122,53 +151,34 @@
       color: var(--text-secondary);
       line-height: 1.9;
       max-width: 420px;
-      margin-bottom: var(--space-8);
+      margin-bottom: var(--space-6);
     }
 
     .editorial-ctas { display: flex; flex-direction: column; gap: var(--space-4); max-width: 300px; }
 
+    /* HOME2 — 2nd CTA properly visible on both themes */
+    .editorial-ctas .btn-ghost {
+      border: 1.5px solid rgba(198, 161, 91, 0.6);
+      color: var(--text-primary);
+      background: transparent;
+    }
+
+    .editorial-ctas .btn-ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(198, 161, 91, 0.08);
+    }
+
     .editorial-right {
       position: relative;
       overflow: hidden;
+      min-height: 0;
     }
 
     .editorial-right img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-    }
-
-    .editorial-right-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to right, var(--bg-primary) 0%, transparent 30%);
-    }
-
-    .editorial-scroll-indicator {
-      position: absolute;
-      bottom: var(--space-8);
-      left: var(--space-12);
-      display: flex;
-      align-items: center;
-      gap: var(--space-3);
-      font-size: var(--fs-xs);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      animation: bounce 2s infinite;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(6px); }
-    }
-
-    .editorial-scroll-indicator svg {
-      width: 20px;
-      height: 20px;
-      stroke: var(--gold);
-      fill: none;
-      stroke-width: 2;
     }
 
     /* Bento Grid */
@@ -230,7 +240,7 @@
     .bento-c5 { grid-column: 10/13; grid-row: 2/3; }
     .bento-c6 { grid-column: 1/5; grid-row: 3/4; }
     .bento-c7 { grid-column: 5/9; grid-row: 3/4; }
-    .bento-c8 { grid-column: 9/13; grid-row: 3/4; background: var(--bg-card); display:flex;flex-direction:column;align-items:center;justify-content:center; text-align:center; border:1px solid var(--border-color); }
+    .bento-c8 { grid-column: 9/13; grid-row: 3/4; background: var(--bg-card); display:flex;flex-direction:column;align-items:center;justify-content:center; text-align:center; border:2px solid rgba(198,161,91,0.5); }
 
     .bento-stat-num {
       font-family: var(--font-display);
@@ -246,13 +256,11 @@
       margin-top: var(--space-2);
     }
 
-    /* Material Showcase */
+    /* Material Showcase — 3 separate cards */
     .material-showcase {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-xl);
-      overflow: hidden;
+      gap: var(--space-6);
     }
 
     .material-panel {
@@ -260,6 +268,14 @@
       height: 480px;
       cursor: pointer;
       overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      transition: border-color var(--transition-base), box-shadow var(--transition-base);
+    }
+
+    .material-panel:hover {
+      border-color: var(--border-color);
+      box-shadow: var(--shadow-gold);
     }
 
     .material-panel img {
@@ -314,14 +330,18 @@
       font-size: var(--fs-sm);
       color: var(--platinum);
       line-height: 1.6;
+      max-height: 0;
       opacity: 0;
+      overflow: hidden;
       transform: translateY(10px);
       transition: all 0.4s var(--ease-out);
     }
 
     .material-panel:hover .material-desc {
+      max-height: 140px;
       opacity: 1;
       transform: translateY(0);
+      margin-top: var(--space-2);
     }
 
     /* Blog Peek */
@@ -404,8 +424,10 @@
 
     .blog-mini img {
       width: 120px;
-      height: 100px;
+      height: 100%;
+      min-height: 120px;
       object-fit: cover;
+      display: block;
     }
 
     .blog-mini-content { padding: var(--space-4) var(--space-4) var(--space-4) 0; }
@@ -451,6 +473,8 @@
       min-width: 380px;
       max-width: 380px;
       flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
     }
 
     .testimonial-mini .quote {
@@ -459,6 +483,7 @@
       font-style: italic;
       line-height: 1.8;
       margin-bottom: var(--space-4);
+      flex: 1;
     }
 
     .testimonial-mini-author {
@@ -468,18 +493,19 @@
     }
 
     .testimonial-mini-author .avatar {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      background: var(--grad-gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-display);
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--obsidian);
+      overflow: hidden;
+      border: 2px solid var(--gold);
       flex-shrink: 0;
+    }
+
+    .testimonial-mini-author .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .testimonial-mini-author .name {
@@ -495,7 +521,7 @@
     }
 
     @media (max-width: 900px) {
-      .editorial-hero { grid-template-columns: 1fr; min-height: auto; }
+      .editorial-hero { grid-template-columns: 1fr; height: auto; min-height: auto; }
       .editorial-right { height: 50vh; }
       .editorial-left { padding: var(--space-12) var(--space-6); }
       .bento-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
@@ -509,7 +535,7 @@
     @media (max-width: 640px) {
       .bento-grid { grid-template-columns: 1fr; }
       .blog-mini { grid-template-columns: 80px 1fr; }
-      .blog-mini img { width: 80px; height: 80px; }
+      .blog-mini img { width: 80px; height: 100%; min-height: 88px; }
       .testimonial-mini { min-width: 300px; }
     }
   </style>
@@ -519,7 +545,28 @@
 
   <main id="main">
 
-    <!-- Marquee Top -->
+    <!-- ==========================================
+         SECTION 1: EDITORIAL HERO
+    =========================================== -->
+    <section class="editorial-hero" aria-label="Hero">
+      <div class="editorial-left">
+        <div class="eyebrow">Award-Winning Craftsmanship</div>
+        <h1>
+          Honour <br>
+          <span class="line2">Greatness</span>
+        </h1>
+        <p class="desc">We don't just make trophies — we forge legacies. Every award is a declaration that this moment, this achievement, this person deserves to be remembered.</p>
+        <div class="editorial-ctas">
+          <a href="engraving.html" class="btn btn-primary btn-lg w-full" style="justify-content:center;">Design Your Award</a>
+          <a href="products.html" class="btn btn-ghost btn-lg w-full" style="justify-content:center;">Explore Collection</a>
+        </div>
+      </div>
+      <div class="editorial-right">
+        <img src="images/awards-collection.jpg" alt="Premium Awards Collection" loading="eager">
+      </div>
+    </section>
+
+    <!-- Marquee (after hero) -->
     <div class="marquee-band" aria-hidden="true">
       <div class="marquee-track">
         <span class="marquee-item"><span class="marquee-dot"></span>Premium Trophies</span>
@@ -540,32 +587,6 @@
         <span class="marquee-item"><span class="marquee-dot"></span>72-Hour Production</span>
       </div>
     </div>
-
-    <!-- ==========================================
-         SECTION 1: EDITORIAL HERO
-    =========================================== -->
-    <section class="editorial-hero" aria-label="Hero">
-      <div class="editorial-left">
-        <div class="eyebrow">Award-Winning Craftsmanship</div>
-        <h1>
-          Honour <br>
-          <span class="line2">Greatness</span>
-        </h1>
-        <p class="desc">We don't just make trophies — we forge legacies. Every award is a declaration that this moment, this achievement, this person deserves to be remembered.</p>
-        <div class="editorial-ctas">
-          <a href="engraving.html" class="btn btn-primary btn-lg w-full" style="justify-content:center;">Design Your Award</a>
-          <a href="products.html" class="btn btn-ghost btn-lg w-full" style="justify-content:center;">Explore Collection</a>
-        </div>
-        <div class="editorial-scroll-indicator" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
-          Scroll to Explore
-        </div>
-      </div>
-      <div class="editorial-right">
-        <img src="images/awards-collection.jpg" alt="Premium Awards Collection" loading="eager">
-        <div class="editorial-right-overlay"></div>
-      </div>
-    </section>
 
     <!-- ==========================================
          SECTION 2: BENTO GALLERY
@@ -701,7 +722,7 @@
             <div class="stars" style="margin-bottom:var(--space-3);">★★★★★</div>
             <p class="quote">"The crystal trophies for our annual gala were absolutely breathtaking. Every recipient was moved to tears. T&A Engraving exceeded every expectation."</p>
             <div class="testimonial-mini-author">
-              <div class="avatar">SK</div>
+              <div class="avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=96&q=80" alt="Suresh Kumar" loading="lazy"></div>
               <div>
                 <div class="name">Suresh Kumar</div>
                 <div class="role">CEO, Pinnacle Corp</div>
@@ -712,7 +733,7 @@
             <div class="stars" style="margin-bottom:var(--space-3);">★★★★★</div>
             <p class="quote">"Ordered 200 medals for our state championship. Perfect quality, on time and the custom engraving was flawless. Will order again without hesitation."</p>
             <div class="testimonial-mini-author">
-              <div class="avatar">PM</div>
+              <div class="avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=96&q=80" alt="Priya Menon" loading="lazy"></div>
               <div>
                 <div class="name">Priya Menon</div>
                 <div class="role">Sports Director, Karnataka</div>
@@ -723,7 +744,7 @@
             <div class="stars" style="margin-bottom:var(--space-3);">★★★★★</div>
             <p class="quote">"The personalized wooden plaques for our board members were exquisite. The grain, the engraving depth, the finish — pure luxury. Highly recommended."</p>
             <div class="testimonial-mini-author">
-              <div class="avatar">AR</div>
+              <div class="avatar"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=96&q=80" alt="Anjali Rao" loading="lazy"></div>
               <div>
                 <div class="name">Anjali Rao</div>
                 <div class="role">HR Director, TechGiant India</div>
@@ -734,7 +755,7 @@
             <div class="stars" style="margin-bottom:var(--space-3);">★★★★★</div>
             <p class="quote">"Fast, professional and the live preview tool made ordering so easy. Our school awards ceremony was a massive success thanks to these beautiful trophies."</p>
             <div class="testimonial-mini-author">
-              <div class="avatar">VP</div>
+              <div class="avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=96&q=80" alt="Vijay Patel" loading="lazy"></div>
               <div>
                 <div class="name">Vijay Patel</div>
                 <div class="role">Principal, Delhi International School</div>
@@ -746,7 +767,7 @@
             <div class="stars" style="margin-bottom:var(--space-3);">★★★★★</div>
             <p class="quote">"The crystal trophies for our annual gala were absolutely breathtaking. Every recipient was moved to tears. T&A Engraving exceeded every expectation."</p>
             <div class="testimonial-mini-author">
-              <div class="avatar">SK</div>
+              <div class="avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=96&q=80" alt="Suresh Kumar" loading="lazy"></div>
               <div>
                 <div class="name">Suresh Kumar</div>
                 <div class="role">CEO, Pinnacle Corp</div>
@@ -757,7 +778,7 @@
             <div class="stars" style="margin-bottom:var(--space-3);">★★★★★</div>
             <p class="quote">"Ordered 200 medals for our state championship. Perfect quality, on time and the custom engraving was flawless. Will order again without hesitation."</p>
             <div class="testimonial-mini-author">
-              <div class="avatar">PM</div>
+              <div class="avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=96&q=80" alt="Priya Menon" loading="lazy"></div>
               <div>
                 <div class="name">Priya Menon</div>
                 <div class="role">Sports Director, Karnataka</div>
@@ -768,7 +789,7 @@
             <div class="stars" style="margin-bottom:var(--space-3);">★★★★★</div>
             <p class="quote">"The personalized wooden plaques for our board members were exquisite. The grain, the engraving depth, the finish — pure luxury. Highly recommended."</p>
             <div class="testimonial-mini-author">
-              <div class="avatar">AR</div>
+              <div class="avatar"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=96&q=80" alt="Anjali Rao" loading="lazy"></div>
               <div>
                 <div class="name">Anjali Rao</div>
                 <div class="role">HR Director, TechGiant India</div>
@@ -779,7 +800,7 @@
             <div class="stars" style="margin-bottom:var(--space-3);">★★★★★</div>
             <p class="quote">"Fast, professional and the live preview tool made ordering so easy. Our school awards ceremony was a massive success thanks to these beautiful trophies."</p>
             <div class="testimonial-mini-author">
-              <div class="avatar">VP</div>
+              <div class="avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=96&q=80" alt="Vijay Patel" loading="lazy"></div>
               <div>
                 <div class="name">Vijay Patel</div>
                 <div class="role">Principal, Delhi International School</div>
@@ -795,7 +816,7 @@
     =========================================== -->
     <section class="section" style="background:var(--bg-surface);" aria-labelledby="blog-h2">
       <div class="container">
-        <div class="flex-between" style="margin-bottom:var(--space-10);">
+        <div class="flex-between" style="margin-bottom:var(--space-10);align-items:flex-end;">
           <div>
             <div class="section-label no-line" style="justify-content:flex-start;margin-bottom:var(--space-3);">Latest Articles</div>
             <h2 id="blog-h2" class="section-title reveal" style="text-align:left;">From Our <span class="text-gold">Journal</span></h2>
