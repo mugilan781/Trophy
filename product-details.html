@@ -11,6 +11,34 @@
   <link rel="stylesheet" href="css/style.css">
   <style>
     /* PRODUCT DETAILS PAGE */
+
+    /* Always-filled navbar (this page only, other pages unaffected) */
+    .navbar,
+    .navbar:not(.scrolled) {
+      background: rgba(32, 33, 36, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    [data-theme="light"] .navbar,
+    [data-theme="light"] .navbar:not(.scrolled) {
+      background: rgba(248, 245, 239, 0.97);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    }
+
+    [data-theme="light"] .navbar:not(.scrolled) .nav-links > li > a { color: var(--text-primary); text-shadow: none; }
+    [data-theme="light"] .navbar:not(.scrolled) .nav-icon-btn { color: var(--text-secondary); border-color: var(--border-subtle); background: transparent; }
+    [data-theme="light"] .navbar:not(.scrolled) .nav-hamburger span { background: var(--text-primary); box-shadow: none; }
+    [data-theme="light"] .navbar:not(.scrolled) .nav-logo .logo-main { text-shadow: none; }
+    [data-theme="light"] .navbar:not(.scrolled) .nav-logo .logo-sub { color: var(--text-muted); text-shadow: none; }
+    [data-theme="light"] .navbar .nav-logo .logo-main { color: var(--gold-dark); }
+    [data-theme="light"] .navbar .nav-logo .logo-main span { color: var(--obsidian); }
+
+    /* Complete the Set — straight-aligned card text */
+    .product-grid .product-name { min-height: 2.5em; }
+
     .product-detail-layout {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -298,14 +326,8 @@
     <!-- ==========================================
          SECTION 1: PRODUCT DETAIL
     =========================================== -->
-    <section class="section" aria-label="Product Details">
+    <section class="section" style="padding-top:calc(var(--space-24) + var(--navbar-h));" aria-label="Product Details">
       <div class="container">
-        <nav class="breadcrumb" style="margin-bottom:var(--space-8);" aria-label="Breadcrumb">
-          <a href="index.html">Home</a><span class="sep">›</span>
-          <a href="products.html">Products</a><span class="sep">›</span>
-          <span>Diamond Excellence Trophy</span>
-        </nav>
-
         <div class="product-detail-layout">
 
           <!-- Gallery -->
@@ -425,7 +447,7 @@
     <!-- ==========================================
          SECTION 2: DETAIL TABS
     =========================================== -->
-    <section class="section-sm" aria-label="Product Information">
+    <section class="section-sm" style="background:var(--bg-surface);" aria-label="Product Information">
       <div class="container">
         <div class="detail-tabs">
           <div class="detail-tab-links" role="tablist">
@@ -603,17 +625,17 @@
     <!-- ==========================================
          SECTION 3: RELATED PRODUCTS
     =========================================== -->
-    <section class="section" style="background:var(--bg-surface);" aria-label="Related Products">
+    <section class="section" aria-label="Related Products">
       <div class="container">
         <div class="section-header" style="margin-bottom:var(--space-10);">
           <div class="section-label">Complete the Set</div>
           <h2 class="section-title reveal">You Might Also <span class="text-gold">Love</span></h2>
         </div>
         <div class="product-grid">
-          <article class="product-card-item reveal" data-category="crystal"><div class="product-img-wrap"><img class="card-img" src="images/acrylic-award.jpg" alt="Innovation LED Award" loading="lazy"><div class="product-overlay"><a href="product-details.html" class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a></div></div><div class="product-info"><div class="product-category">Acrylic Award</div><h3 class="product-name">Innovation LED Award</h3><p class="product-desc">Modern LED base with colour-changing crystal. Perfect tech-industry award.</p><div class="product-footer"><div class="product-price"><span class="from">from</span>₹3,799</div><div class="product-rating"><span class="stars">★★★★★</span> 4.8</div></div></div></article>
-          <article class="product-card-item reveal reveal-delay-1" data-category="medals"><div class="product-img-wrap"><img class="card-img" src="images/medals-collection.jpg" alt="Championship Medal" loading="lazy"><div class="product-overlay"><a href="product-details.html" class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a></div></div><div class="product-info"><div class="product-category">Medal</div><h3 class="product-name">Executive Medal of Honour</h3><p class="product-desc">Premium die-cast medals for corporate recognition events. Custom engraving.</p><div class="product-footer"><div class="product-price"><span class="from">from</span>₹599</div><div class="product-rating"><span class="stars">★★★★★</span> 4.9</div></div></div></article>
-          <article class="product-card-item reveal reveal-delay-2" data-category="plaques"><div class="product-img-wrap"><img class="card-img" src="images/wooden-plaques.jpg" alt="Heritage Plaque" loading="lazy"><div class="product-overlay"><a href="product-details.html" class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a></div></div><div class="product-info"><div class="product-category">Plaque</div><h3 class="product-name">Heritage Wood Plaque</h3><p class="product-desc">Dark walnut with engraved brass plate and corner ornaments.</p><div class="product-footer"><div class="product-price"><span class="from">from</span>₹1,899</div><div class="product-rating"><span class="stars">★★★★☆</span> 4.6</div></div></div></article>
-          <article class="product-card-item reveal reveal-delay-3" data-category="corporate"><div class="product-img-wrap"><img class="card-img" src="images/corporate-awards.jpg" alt="Corporate Award" loading="lazy"><div class="product-overlay"><a href="product-details.html" class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a></div></div><div class="product-info"><div class="product-category">Corporate</div><h3 class="product-name">Pinnacle Leadership Trophy</h3><p class="product-desc">Architectural brushed metal on solid marble base. C-suite standard.</p><div class="product-footer"><div class="product-price"><span class="from">from</span>₹7,499</div><div class="product-rating"><span class="stars">★★★★★</span> 5.0</div></div></div></article>
+          <article class="product-card-item reveal" data-category="crystal"><div class="product-img-wrap"><img class="card-img" src="images/acrylic-award.jpg" alt="Innovation LED Award" loading="lazy"><div class="product-overlay"><a href="product-details.html?id=led-innovation" class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a></div></div><div class="product-info"><div class="product-category">Acrylic Award</div><h3 class="product-name">Innovation LED Award</h3><p class="product-desc">Modern LED base with colour-changing crystal. Perfect tech-industry award.</p><div class="product-footer"><div class="product-price"><span class="from">from</span>₹3,799</div><div class="product-rating"><span class="stars">★★★★★</span> 4.8</div></div></div></article>
+          <article class="product-card-item reveal reveal-delay-1" data-category="medals"><div class="product-img-wrap"><img class="card-img" src="images/medals-collection.jpg" alt="Championship Medal" loading="lazy"><div class="product-overlay"><a href="product-details.html?id=exec-medal-honour" class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a></div></div><div class="product-info"><div class="product-category">Medal</div><h3 class="product-name">Executive Medal of Honour</h3><p class="product-desc">Premium die-cast medals for corporate recognition events. Custom engraving.</p><div class="product-footer"><div class="product-price"><span class="from">from</span>₹599</div><div class="product-rating"><span class="stars">★★★★★</span> 4.9</div></div></div></article>
+          <article class="product-card-item reveal reveal-delay-2" data-category="plaques"><div class="product-img-wrap"><img class="card-img" src="images/wooden-plaques.jpg" alt="Heritage Plaque" loading="lazy"><div class="product-overlay"><a href="product-details.html?id=heritage-wood-plaque" class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a></div></div><div class="product-info"><div class="product-category">Plaque</div><h3 class="product-name">Heritage Wood Plaque</h3><p class="product-desc">Dark walnut with engraved brass plate and corner ornaments.</p><div class="product-footer"><div class="product-price"><span class="from">from</span>₹1,899</div><div class="product-rating"><span class="stars">★★★★☆</span> 4.6</div></div></div></article>
+          <article class="product-card-item reveal reveal-delay-3" data-category="corporate"><div class="product-img-wrap"><img class="card-img" src="images/corporate-awards.jpg" alt="Corporate Award" loading="lazy"><div class="product-overlay"><a href="product-details.html?id=pinnacle-leadership" class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a></div></div><div class="product-info"><div class="product-category">Corporate</div><h3 class="product-name">Pinnacle Leadership Trophy</h3><p class="product-desc">Architectural brushed metal on solid marble base. C-suite standard.</p><div class="product-footer"><div class="product-price"><span class="from">from</span>₹7,499</div><div class="product-rating"><span class="stars">★★★★★</span> 5.0</div></div></div></article>
         </div>
       </div>
     </section>
@@ -621,7 +643,7 @@
     <!-- ==========================================
          SECTIONS 4–6 condensed
     =========================================== -->
-    <section class="section" aria-label="Delivery Information">
+    <section class="section" style="background:var(--bg-surface);" aria-label="Delivery Information">
       <div class="container">
         <div class="section-header">
           <div class="section-label">Order Information</div>
@@ -667,7 +689,7 @@
 
     document.getElementById('gallery-zoom-btn').addEventListener('click', () => {
       const src = document.getElementById('main-gallery-img').src;
-      Lightbox.open(src, 'Diamond Excellence Trophy');
+      Lightbox.open(src, currentProductName);
     });
 
     // Tabs
@@ -702,12 +724,179 @@
     // Add to cart
     function addToCart() {
       const qty = document.getElementById('qty-input').value;
-      Toast.show(`${qty}x Diamond Excellence Trophy added to your order!`, 'success');
+      Toast.show(`${qty}x ${currentProductName} added to your order!`, 'success');
     }
 
     function addToWishlist() {
       Toast.show('Saved to your wishlist!', 'info');
     }
+
+    /* ==================================================
+       DYNAMIC PRODUCT (?id=...) — one HTML file serves
+       every product card. Falls back to the default
+       Diamond Excellence Trophy when no id matches.
+       ================================================== */
+    let currentProductName = 'Diamond Excellence Trophy';
+
+    const PRODUCT_CATALOG = {
+      'grand-championship-cup': { n1: 'Grand Championship', n2: 'Cup', cat: 'Sports Trophy · Championship Collection', img: 'images/sports-trophies.jpg', price: 2499, rating: 4.9, reviews: 189, includes: 'Base engraving, premium gift box, velvet lining',
+        blurb1: 'The Grand Championship Cup is built for finals day — a towering hand-polished gold-plated trophy with ornate handles that looks as heavy as the victory feels.',
+        blurb2: 'Available in three heights with a solid weighted base, every cup takes custom base engraving so winners names live on long after the medals fade.',
+        bullets: ['24K gold-plated finish with mirror polish', 'Three sizes: S, M and L heights', 'Free custom base engraving included', 'Weighted base for a premium podium feel'] },
+      'diamond-excellence': { n1: 'Diamond Excellence', n2: 'Trophy', cat: 'Crystal Award · Corporate Collection', img: 'images/crystal-awards.jpg', price: 4999, rating: 5.0, reviews: 247, includes: 'Base engraving, premium gift box, velvet lining',
+        blurb1: 'The Diamond Excellence Trophy is our flagship crystal award, designed to make an unforgettable statement at your most prestigious events.',
+        blurb2: 'Cut from optically pure K9 crystal, your personalized engraving is laser-etched from inside the crystal, giving a stunning 3D floating effect.',
+        bullets: ['Optically pure K9 crystal clarity', 'Subsurface 3D laser engraving capability', 'Choice of black, gold, silver or walnut base', 'Delivered in premium gift box with velvet lining'] },
+      'championship-medal-set': { n1: 'Championship Medal', n2: 'Set', cat: 'Sports Medals · Tournament Collection', img: 'images/medals-collection.jpg', price: 299, rating: 4.8, reviews: 312, includes: 'Custom ribbon, engraving on request, presentation sleeve',
+        blurb1: 'Gold, silver and bronze die-cast medals struck for podium moments — crisp relief detailing that photographs beautifully under stadium lights.',
+        blurb2: 'Pair them with custom neck ribbons in your event colours. Minimum order 25 pieces with free medal engraving on bulk runs.',
+        bullets: ['Die-cast gold, silver & bronze finishes', 'Custom ribbon colours available', 'Free engraving on 25+ piece orders', 'Presentation sleeves included'] },
+      'presidential-plaque': { n1: 'Presidential Award', n2: 'Plaque', cat: 'Award Plaque · Executive Collection', img: 'images/wooden-plaques.jpg', price: 1899, rating: 4.6, reviews: 158, includes: 'Brass plate engraving, gift box, wall-mount fittings',
+        blurb1: 'Solid walnut, an engraved brass plate and furniture-grade polish — the Presidential Award Plaque is boardroom recognition at its most classic.',
+        blurb2: 'Choose walnut, mahogany or cherry finishes, each deep-carved to reveal the natural grain around your message.',
+        bullets: ['Solid walnut, mahogany or cherry wood', 'Deep-carved personalised engraving', 'Wall-mount fittings included', 'Hand-polished furniture finish'] },
+      'executive-shield': { n1: 'Executive Leadership', n2: 'Shield', cat: 'Corporate Award · Leadership Collection', img: 'images/corporate-awards.jpg', price: 5499, rating: 4.9, reviews: 203, includes: 'Logo engraving, heavy base, premium gift box',
+        blurb1: 'An architectural metal shield on a heavy stone base — the Executive Leadership Shield carries real weight, literally and symbolically.',
+        blurb2: 'Made for C-suite recognition and milestone achievements, with precision laser engraving for logos, names and citations.',
+        bullets: ['Architectural brushed-metal design', 'Heavy weighted presentation base', 'Precision logo & citation engraving', 'Signature gift packaging included'] },
+      'scholar-medal': { n1: 'Scholar of Excellence', n2: 'Medal', cat: 'Academic Medal · Education Collection', img: 'images/medals-collection.jpg', price: 349, rating: 4.5, reviews: 176, includes: 'Custom ribbon, name engraving, sleeves for 25+ orders',
+        blurb1: 'A premium academic medal with a classic graduation motif — the finishing touch for school, college and university ceremonies.',
+        blurb2: 'Ribbon colours are fully customizable to match your institution, with student names engraved on request.',
+        bullets: ['Classic graduation relief motif', 'Customizable ribbon colours', 'Student-name engraving available', 'Bulk pricing for institutions'] },
+      'led-innovation': { n1: 'LED Innovation', n2: 'Award', cat: 'Acrylic Award · Modern Collection', img: 'images/acrylic-award.jpg', price: 3799, rating: 4.8, reviews: 141, includes: 'Logo engraving, USB cable, gift box',
+        blurb1: 'Modern acrylic on a colour-changing LED base — the LED Innovation Award is made for startups, hackathons and tech ceremonies.',
+        blurb2: 'Your logo and text are laser engraved into the acrylic, glowing through every colour cycle. Rechargeable via USB.',
+        bullets: ['Colour-changing LED base included', 'Laser-engraved logo and text', 'USB rechargeable, long glow life', 'Modern trophy for tech events'] },
+      'global-excellence': { n1: 'Global Excellence', n2: 'Award', cat: 'Prestige Trophy · Flagship Collection', img: 'images/hero-banner.jpg', price: 12999, rating: 5.0, reviews: 98, includes: 'Full customization, white-glove packing, insured shipping',
+        blurb1: 'Our flagship trophy — a stunning blend of crystal and 24K gold plating. The ultimate statement award for elite global events.',
+        blurb2: 'Each piece is individually numbered and fully customized, from base engraving to bespoke gift presentation.',
+        bullets: ['Crystal fused with 24K gold plating', 'Individually numbered editions', 'Fully bespoke engraving & packing', 'Insured white-glove delivery'] },
+      'prestige-gift-set': { n1: 'Prestige Collection', n2: 'Gift Set', cat: 'Curated Set · Gifting Collection', img: 'images/awards-collection.jpg', price: 7999, rating: 4.9, reviews: 87, includes: 'Trio engraving, premium gift box, greeting card',
+        blurb1: 'A handpicked trophy, medal and plaque trio in one premium gift box — ready-to-present corporate gifting without the guesswork.',
+        blurb2: 'Every piece in the set carries matching engraving, so the whole collection feels like one thoughtful gesture.',
+        bullets: ['Trophy, medal & plaque trio', 'Matching engraving across the set', 'Premium ready-to-gift box', 'Handwritten greeting card option'] },
+      'visionary-obelisk': { n1: 'Visionary Obelisk', n2: 'Award', cat: 'Crystal Award · Modern Collection', img: 'images/crystal-awards.jpg', price: 6299, rating: 4.9, reviews: 112, includes: 'Gold plate engraving, gift box, velvet lining',
+        blurb1: 'A tall obelisk crystal crowned with a gold engraving plate — elegant, modern and quietly commanding.',
+        blurb2: 'The slender silhouette suits individual excellence awards, with deep-etch personalization that lasts forever.',
+        bullets: ['Tall modern obelisk silhouette', 'Gold engraving plate included', 'Deep-etch personalization', 'Velvet-lined gift box'] },
+      'apex-star': { n1: 'Apex Star', n2: 'Trophy', cat: 'Corporate Award · Recognition Collection', img: 'images/corporate-awards.jpg', price: 2899, rating: 4.7, reviews: 134, includes: 'Base engraving, chrome polish, gift box',
+        blurb1: 'A five-pointed star on a polished chrome base — the classic corporate recognition design, executed flawlessly.',
+        blurb2: 'A dependable favourite for quarterly awards and employee recognition programs of every size.',
+        bullets: ['Classic five-point star design', 'Polished chrome base', 'Free base engraving', 'Ideal for recognition programs'] },
+      'warrior-shield': { n1: 'Warrior Shield', n2: 'Trophy', cat: 'Sports Trophy · Combat Collection', img: 'images/sports-trophies.jpg', price: 1599, rating: 4.8, reviews: 201, includes: 'Shield engraving, gift sleeve, ribbon on request',
+        blurb1: 'A combat-shield trophy in gold and silver finishes — made for martial arts, wrestling and contact-sport podiums.',
+        blurb2: 'Tough die-cast construction with sharp detailing that survives the roughest victory celebrations.',
+        bullets: ['Gold and silver finish options', 'Rugged die-cast construction', 'Free shield engraving', 'Custom ribbons on request'] },
+      'heritage-mahogany': { n1: 'Heritage Mahogany', n2: 'Plaque', cat: 'Award Plaque · Classic Collection', img: 'images/wooden-plaques.jpg', price: 1299, rating: 4.7, reviews: 167, includes: 'Plate engraving, gift box, wall fittings',
+        blurb1: 'Classic bevelled mahogany with a gold or silver plate — timeless professional recognition for offices and institutions.',
+        blurb2: 'The deep bevel catches the light beautifully, framing your message in warm natural wood.',
+        bullets: ['Bevelled solid mahogany', 'Gold or silver plate options', 'Wall-mount fittings included', 'Timeless professional styling'] },
+      'exec-medal-honour': { n1: 'Executive Medal of', n2: 'Honour', cat: 'Medal · Corporate Collection', img: 'images/medals-collection.jpg', price: 599, rating: 4.9, reviews: 143, includes: 'Ribbon, custom engraving, presentation case',
+        blurb1: 'A premium die-cast medal struck for corporate recognition events — weighty, detailed and boardroom-ready.',
+        blurb2: 'Custom engraving on the reverse and a choice of premium ribbons make each medal feel personal.',
+        bullets: ['Premium die-cast striking', 'Custom reverse engraving', 'Choice of premium ribbons', 'Presentation case included'] },
+      'heritage-wood-plaque': { n1: 'Heritage Wood', n2: 'Plaque', cat: 'Plaque · Heritage Collection', img: 'images/wooden-plaques.jpg', price: 1899, rating: 4.6, reviews: 121, includes: 'Brass engraving, gift box, corner ornaments',
+        blurb1: 'Dark walnut, an engraved brass plate and classic corner ornaments — heritage styling for lasting tributes.',
+        blurb2: 'Equally at home on an office wall or a retirement mantelpiece.',
+        bullets: ['Dark walnut heritage finish', 'Engraved brass plate', 'Classic corner ornaments', 'Gift box included'] },
+      'pinnacle-leadership': { n1: 'Pinnacle Leadership', n2: 'Trophy', cat: 'Corporate Trophy · C-Suite Collection', img: 'images/corporate-awards.jpg', price: 7499, rating: 5.0, reviews: 76, includes: 'Full customization, marble base, insured shipping',
+        blurb1: 'Architectural brushed metal rising from a solid marble base — the C-suite standard for leadership recognition.',
+        blurb2: 'Fully customized from base inscription to finish, and delivered with insured white-glove care.',
+        bullets: ['Brushed metal on solid marble', 'Fully bespoke inscription', 'C-suite presentation standard', 'Insured premium delivery'] }
+    };
+
+    function addToWishlist() {
+      Toast.show('Saved to your wishlist!', 'info');
+    }
+
+    function formatINR(n) {
+      return '₹' + n.toLocaleString('en-IN');
+    }
+
+    // Render the requested product (?id=...). No id = default page content.
+    (function loadProductFromQuery() {
+      let id = null;
+      try { id = new URLSearchParams(window.location.search).get('id'); } catch (e) { id = null; }
+      const p = id && PRODUCT_CATALOG[id];
+      if (!p) return;
+
+      currentProductName = p.n1 + ' ' + p.n2;
+      document.title = currentProductName + ' | T&A Engraving Premium Awards';
+
+      const cat = document.querySelector('.product-detail-category');
+      if (cat) cat.textContent = p.cat;
+      const name = document.querySelector('.product-detail-name');
+      if (name) name.innerHTML = p.n1 + '<br><span class="text-gold">' + p.n2 + '</span>';
+
+      const stars = p.rating >= 4.8 ? '★★★★★' : '★★★★☆';
+      document.querySelectorAll('.rating-stars').forEach(el => { el.textContent = stars; });
+      const score = document.querySelector('.rating-score');
+      if (score) score.textContent = p.rating.toFixed(1);
+      const count = document.querySelector('.rating-count');
+      if (count) count.textContent = '(' + p.reviews + ' reviews)';
+
+      const amount = document.querySelector('.price-amount');
+      if (amount) amount.textContent = formatINR(p.price);
+      const includes = document.querySelector('.price-includes');
+      if (includes) includes.textContent = 'Includes: ' + p.includes;
+
+      // Gallery
+      const alts = ['images/acrylic-award.jpg', 'images/corporate-awards.jpg', 'images/awards-collection.jpg', 'images/crystal-awards.jpg'].filter(s => s !== p.img).slice(0, 3);
+      const views = [p.img].concat(alts);
+      const mainImg = document.getElementById('main-gallery-img');
+      if (mainImg) { mainImg.src = p.img; mainImg.alt = currentProductName + ' — Main View'; }
+      document.querySelectorAll('.gallery-thumb').forEach((t, i) => {
+        const src = views[i % views.length];
+        t.dataset.img = src;
+        const im = t.querySelector('img');
+        if (im) { im.src = src; im.alt = currentProductName + ' View ' + (i + 1); }
+        t.classList.toggle('active', i === 0);
+        t.setAttribute('aria-label', 'View ' + (i + 1));
+      });
+
+      // Size options scaled from base price
+      const sizeWrap = document.querySelector('.size-options');
+      if (sizeWrap) {
+        const mult = [1, 1.3, 1.8, 2.6];
+        const codes = ['S', 'M', 'L', 'XL'];
+        const labels = ['Small (S)', 'Medium (M)', 'Large (L)', 'Extra Large (XL)'];
+        sizeWrap.innerHTML = labels.map((lb, i) => {
+          const pr = formatINR(Math.round(p.price * mult[i] / 100) * 100 - 1);
+          return '<button class="size-btn' + (i === 0 ? ' active' : '') + '" onclick="selectSize(this,\'' + lb + '\',\'' + pr + '\')">' + lb.split(' ')[0] + ' — ' + codes[i] + '</button>';
+        }).join('');
+        const selSize = document.getElementById('selected-size');
+        if (selSize) selSize.textContent = '— ' + labels[0];
+      }
+
+      // Description tab
+      const descPanel = document.getElementById('tab-description');
+      if (descPanel) {
+        const h2 = descPanel.querySelector('h2');
+        if (h2) h2.innerHTML = p.n1 + ' <span class="text-gold">' + p.n2 + '</span>';
+        const paras = descPanel.querySelectorAll('p');
+        if (paras[0]) paras[0].textContent = p.blurb1;
+        if (paras[1]) paras[1].textContent = p.blurb2;
+        const ul = descPanel.querySelector('ul');
+        if (ul) {
+          ul.innerHTML = p.bullets.map(b => '<li style="display:flex;gap:var(--space-3);font-size:var(--fs-sm);color:var(--text-secondary);"><svg style="width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:2.5;flex-shrink:0;margin-top:2px;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>' + b + '</li>').join('');
+        }
+        const dimg = descPanel.querySelector('img');
+        if (dimg) { dimg.src = p.img; dimg.alt = currentProductName + ' Detail'; }
+      }
+
+      // Reviews tab numbers
+      const revPanel = document.getElementById('tab-reviews');
+      if (revPanel) {
+        const big = revPanel.querySelector('div[style*="font-size:4rem"]');
+        if (big) big.textContent = p.rating.toFixed(1);
+        const sumStars = revPanel.querySelector('.stars');
+        if (sumStars) sumStars.textContent = stars;
+        const vCount = Array.from(revPanel.querySelectorAll('div')).find(d => /verified reviews/.test(d.textContent));
+        if (vCount) vCount.textContent = p.reviews + ' verified reviews';
+      }
+      const revTabBtn = document.querySelectorAll('.detail-tab-btn')[3];
+      if (revTabBtn) revTabBtn.textContent = 'Reviews (' + p.reviews + ')';
+    })();
   </script>
 </body>
 </html>
