@@ -17,6 +17,9 @@
   <style>
     /* HOME 1 SPECIFIC STYLES */
 
+    /* Featured Collection — keep card text rows straight-aligned */
+    #featured-grid .product-name { min-height: 2.5em; }
+
     /* Features Bar */
     .features-bar {
       background: var(--bg-card);
@@ -239,23 +242,29 @@
       color: var(--platinum);
     }
 
-    /* Stats Band */
+    /* Stats Band — curved rectangle card */
     .stats-band {
-      background: linear-gradient(135deg, var(--burgundy-dark) 0%, var(--burgundy) 50%, var(--burgundy-dark) 100%);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .stats-band::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      background: transparent;
+      padding: var(--space-10) 0;
     }
 
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
+      background: linear-gradient(135deg, var(--burgundy-dark) 0%, var(--burgundy) 50%, var(--burgundy-dark) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stats-grid::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
     }
 
     .stat-item-band {
@@ -584,6 +593,32 @@
     </div>
 
     <!-- ==========================================
+         STATS BAND
+    =========================================== -->
+    <div class="stats-band" aria-label="Company Statistics">
+      <div class="container-wide">
+        <div class="stats-grid">
+          <div class="stat-item-band reveal">
+            <span class="num" data-count="50000" data-suffix="+">0</span>
+            <span class="lbl">Awards Crafted</span>
+          </div>
+          <div class="stat-item-band reveal reveal-delay-1">
+            <span class="num" data-count="37" data-suffix="+">0</span>
+            <span class="lbl">Years Experience</span>
+          </div>
+          <div class="stat-item-band reveal reveal-delay-2">
+            <span class="num" data-count="98" data-suffix="%">0</span>
+            <span class="lbl">Client Satisfaction</span>
+          </div>
+          <div class="stat-item-band reveal reveal-delay-3">
+            <span class="num" data-count="5000" data-suffix="+">0</span>
+            <span class="lbl">Corporate Clients</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
          SECTION 2: ABOUT (SPLIT)
     =========================================== -->
     <section class="section" id="about-preview" aria-labelledby="about-heading">
@@ -688,32 +723,6 @@
     </section>
 
     <!-- ==========================================
-         STATS BAND
-    =========================================== -->
-    <div class="stats-band" aria-label="Company Statistics">
-      <div class="container-wide">
-        <div class="stats-grid">
-          <div class="stat-item-band reveal">
-            <span class="num" data-count="50000" data-suffix="+">0</span>
-            <span class="lbl">Awards Crafted</span>
-          </div>
-          <div class="stat-item-band reveal reveal-delay-1">
-            <span class="num" data-count="37" data-suffix="+">0</span>
-            <span class="lbl">Years Experience</span>
-          </div>
-          <div class="stat-item-band reveal reveal-delay-2">
-            <span class="num" data-count="98" data-suffix="%">0</span>
-            <span class="lbl">Client Satisfaction</span>
-          </div>
-          <div class="stat-item-band reveal reveal-delay-3">
-            <span class="num" data-count="5000" data-suffix="+">0</span>
-            <span class="lbl">Corporate Clients</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ==========================================
          SECTION 4: FEATURED PRODUCTS
     =========================================== -->
     <section class="section" id="featured-products" aria-labelledby="fp-heading">
@@ -742,12 +751,6 @@
                 <a href="product-details.html" class="product-overlay-btn" aria-label="View details">
                   <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                 </a>
-                <button class="product-overlay-btn" aria-label="Add to wishlist">
-                  <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                </button>
-                <button class="product-overlay-btn" aria-label="Quick order">
-                  <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-                </button>
               </div>
               <span class="badge badge-gold" style="position:absolute;top:1rem;left:1rem;">Bestseller</span>
             </div>
@@ -775,8 +778,6 @@
                 <a href="product-details.html" class="product-overlay-btn" aria-label="View details">
                   <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                 </a>
-                <button class="product-overlay-btn" aria-label="Wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-                <button class="product-overlay-btn" aria-label="Order"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
               </div>
               <span class="badge badge-burgundy" style="position:absolute;top:1rem;left:1rem;">Premium</span>
             </div>
@@ -797,8 +798,6 @@
               <img class="card-img" src="images/corporate-awards.jpg" alt="Corporate Leadership Award" loading="lazy">
               <div class="product-overlay">
                 <a href="product-details.html" class="product-overlay-btn" aria-label="View details"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
-                <button class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-                <button class="product-overlay-btn"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
               </div>
             </div>
             <div class="product-info">
@@ -818,8 +817,6 @@
               <img class="card-img" src="images/medals-collection.jpg" alt="Championship Medals Collection" loading="lazy">
               <div class="product-overlay">
                 <a href="product-details.html" class="product-overlay-btn" aria-label="View details"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
-                <button class="product-overlay-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-                <button class="product-overlay-btn"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
               </div>
               <span class="badge badge-outline" style="position:absolute;top:1rem;left:1rem;">New</span>
             </div>
