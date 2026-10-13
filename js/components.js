@@ -89,79 +89,84 @@ function renderFooter() {
 <footer class="footer" role="contentinfo">
   <div class="container">
     <div class="footer-grid">
-      <!-- Brand -->
+      <!-- Column 1: Company -->
       <div class="footer-brand reveal">
         <span class="logo-main">T&A Engraving</span>
         <span class="logo-sub">Premium Awards Since 1987</span>
         <p>Crafting extraordinary trophies, medals, plaques and custom awards that celebrate achievement and prestige. Every piece tells a story of excellence.</p>
         <div class="footer-social">
-          <a href="#" aria-label="Facebook">f</a>
-          <a href="#" aria-label="Instagram">in</a>
-          <a href="#" aria-label="Twitter">x</a>
-          <a href="#" aria-label="LinkedIn">li</a>
-          <a href="#" aria-label="Pinterest">p</a>
+          <a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://x.com" target="_blank" rel="noopener" aria-label="X (Twitter)">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.47l8.6-9.83L0 1.15h7.59l5.24 6.93 6.07-6.93zm-1.29 17.5h2.04L6.48 3.24H4.3l13.31 15.41z"/></svg>
+          </a>
+          <a href="https://www.youtube.com" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.92 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+          </a>
         </div>
       </div>
 
-      <!-- Quick Links -->
+      <!-- Column 2: Quick Links (mirrors main navbar) -->
       <div class="footer-col reveal reveal-delay-1">
         <h4>Quick Links</h4>
-        <nav class="footer-links">
+        <nav class="footer-links" aria-label="Footer">
           <a href="index.html">Home</a>
-          <a href="about.html">About Us</a>
+          <a href="home2.html">Home 2</a>
+          <a href="about.html">About</a>
           <a href="products.html">Products</a>
-          <a href="engraving.html">Custom Engraving</a>
+          <a href="engraving.html">Engrave</a>
           <a href="pricing.html">Pricing</a>
           <a href="blog.html">Blog</a>
           <a href="contact.html">Contact</a>
         </nav>
       </div>
 
-      <!-- Categories -->
+      <!-- Column 3: Contact -->
       <div class="footer-col reveal reveal-delay-2">
-        <h4>Award Categories</h4>
-        <nav class="footer-links">
-          <a href="products.html">Corporate Awards</a>
-          <a href="products.html">Sports Trophies</a>
-          <a href="products.html">Academic Medals</a>
-          <a href="products.html">Crystal Awards</a>
-          <a href="products.html">Wooden Plaques</a>
-          <a href="products.html">Personalized Gifts</a>
-          <a href="products.html">Bulk Orders</a>
-        </nav>
-      </div>
-
-      <!-- Contact -->
-      <div class="footer-col reveal reveal-delay-3">
         <h4>Contact Us</h4>
         <div class="footer-contact-item">
-          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span>42 Prestige Avenue, Gold District<br>Mumbai, Maharashtra 400001</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span><a href="https://maps.google.com" target="_blank" rel="noopener">42 Prestige Avenue, Gold District<br>Mumbai, Maharashtra 400001</a></span>
         </div>
         <div class="footer-contact-item">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <span>+91 98765 43210</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span><a href="tel:+919876543210">+91 98765 43210</a></span>
         </div>
         <div class="footer-contact-item">
-          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <span>orders@trophyawards.com</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span><a href="mailto:orders@trophyawards.com">orders@trophyawards.com</a></span>
         </div>
         <div class="footer-contact-item">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <span>Mon–Sat: 9 AM – 7 PM<br>Sun: 10 AM – 4 PM</span>
         </div>
+      </div>
+
+      <!-- Column 4: Newsletter -->
+      <div class="footer-col footer-newsletter reveal reveal-delay-3">
+        <h4>Newsletter</h4>
+        <p>Subscribe for new arrivals, engraving ideas, bulk offers and event-season updates.</p>
+        <form class="newsletter-form" id="footer-newsletter-form" novalidate>
+          <input type="email" name="email" class="newsletter-input" placeholder="Enter your email address" aria-label="Email address" required>
+          <button type="submit" class="btn btn-primary btn-sm newsletter-btn">Subscribe</button>
+        </form>
       </div>
     </div>
 
     <!-- Bottom Bar -->
     <div class="footer-bottom">
-      <p>© ${new Date().getFullYear()} T&A Engraving Shop. All rights reserved. Crafted with <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--burgundy-light)" style="vertical-align:middle;margin:0 2px;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></p>
-      <div class="footer-bottom-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Cookie Policy</a>
-        <a href="maintenance.html">Status</a>
-      </div>
+      <p>© ${new Date().getFullYear()} T&A Engraving Shop. All rights reserved.</p>
+      <nav class="footer-bottom-links" aria-label="Legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <span class="sep" aria-hidden="true">|</span>
+        <a href="terms-conditions.html">Terms &amp; Conditions</a>
+        <span class="sep" aria-hidden="true">|</span>
+        <a href="sitemap.html">Sitemap</a>
+      </nav>
     </div>
   </div>
 </footer>
@@ -187,5 +192,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const footerPlaceholder = document.getElementById('footer-placeholder');
   if (footerPlaceholder) {
     footerPlaceholder.innerHTML = renderFooter();
+
+    // Footer newsletter — frontend only, reuses global Toast when available
+    const newsletterForm = document.getElementById('footer-newsletter-form');
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const input = newsletterForm.querySelector('input[type="email"]');
+        const value = (input.value || '').trim();
+        const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        const notify = (msg, type) => {
+          if (typeof Toast !== 'undefined' && Toast && typeof Toast.show === 'function') {
+            Toast.show(msg, type);
+          }
+        };
+        if (!valid) {
+          input.focus();
+          notify('Please enter a valid email address.', 'error');
+          return;
+        }
+        newsletterForm.reset();
+        notify('Thank you for subscribing!', 'success');
+      });
+    }
   }
 });

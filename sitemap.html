@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sitemap of T&A Engraving — browse every page: home, about, products, custom engraving, pricing, blog, contact, account and legal pages.">
+  <title>Sitemap | T&A Engraving — Premium Trophy & Awards Shop</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* SITEMAP PAGE */
+    .sitemap-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+    }
+    .sitemap-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6) var(--space-8);
+      transition: all var(--transition-base);
+    }
+    .sitemap-card:hover { border-color: var(--border-color); box-shadow: var(--shadow-gold); }
+    .sitemap-card h2 {
+      font-family: var(--font-display);
+      font-size: var(--fs-base);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: var(--space-5);
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .sitemap-links { display: flex; flex-direction: column; gap: var(--space-1); }
+    .sitemap-links a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-sm);
+      font-size: var(--fs-sm);
+      color: var(--text-secondary);
+      transition: all var(--transition-fast);
+    }
+    .sitemap-links a small {
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      text-align: right;
+      max-width: 55%;
+    }
+    .sitemap-links a:hover { color: var(--gold); background: rgba(198,161,91,0.08); padding-left: var(--space-4); }
+    .sitemap-links a .arrow { color: var(--gold); flex-shrink: 0; }
+    @media (max-width: 900px) {
+      .sitemap-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .sitemap-grid { grid-template-columns: 1fr; }
+      .sitemap-links a small { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <main id="main">
+
+    <!-- PAGE HERO -->
+    <header class="page-hero">
+      <img class="page-hero-bg" src="images/corporate-awards.jpg" alt="Corporate awards display">
+      <div class="page-hero-overlay"></div>
+      <div class="page-hero-content">
+        <div class="container">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="sep">›</span>
+            <span>Sitemap</span>
+          </nav>
+          <h1 class="page-hero-title">Website <span style="color:var(--gold);">Sitemap</span></h1>
+          <p class="page-hero-subtitle">Every page on T&A Engraving — find anything in one click.</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="section" aria-label="Sitemap">
+      <div class="container">
+        <div class="sitemap-grid">
+
+          <div class="sitemap-card reveal">
+            <h2>Main Pages</h2>
+            <nav class="sitemap-links" aria-label="Main pages">
+              <a href="index.html">Home <span class="arrow">→</span></a>
+              <a href="home2.html">Home 2 <span class="arrow">→</span></a>
+              <a href="about.html">About <span class="arrow">→</span></a>
+              <a href="products.html">Products <span class="arrow">→</span></a>
+              <a href="engraving.html">Engrave <span class="arrow">→</span></a>
+              <a href="pricing.html">Pricing <span class="arrow">→</span></a>
+              <a href="blog.html">Blog <span class="arrow">→</span></a>
+              <a href="contact.html">Contact <span class="arrow">→</span></a>
+            </nav>
+          </div>
+
+          <div class="sitemap-card reveal reveal-delay-1">
+            <h2>Shop &amp; Support</h2>
+            <nav class="sitemap-links" aria-label="Shop and support pages">
+              <a href="products.html">All Products <span class="arrow">→</span></a>
+              <a href="product-details.html">Product Details <span class="arrow">→</span></a>
+              <a href="engraving.html">Custom Engraving Studio <span class="arrow">→</span></a>
+              <a href="pricing.html">Bulk &amp; Volume Pricing <span class="arrow">→</span></a>
+              <a href="blog.html">Blog &amp; Guides <span class="arrow">→</span></a>
+              <a href="blog-details.html">Featured Article <span class="arrow">→</span></a>
+              <a href="login.html">Login <span class="arrow">→</span></a>
+              <a href="signup.html">Create Account <span class="arrow">→</span></a>
+            </nav>
+          </div>
+
+          <div class="sitemap-card reveal reveal-delay-2">
+            <h2>Company &amp; Legal</h2>
+            <nav class="sitemap-links" aria-label="Company and legal pages">
+              <a href="about.html">Our Story <span class="arrow">→</span></a>
+              <a href="contact.html">Contact &amp; Showroom <span class="arrow">→</span></a>
+              <a href="privacy-policy.html">Privacy Policy <span class="arrow">→</span></a>
+              <a href="terms-conditions.html">Terms &amp; Conditions <span class="arrow">→</span></a>
+              <a href="sitemap.html">Sitemap <span class="arrow">→</span></a>
+              <a href="maintenance.html">Service Status <span class="arrow">→</span></a>
+            </nav>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
