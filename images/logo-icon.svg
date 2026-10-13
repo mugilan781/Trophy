@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" fill="none">
+  <defs>
+    <!-- Metallic Gold Gradient -->
+    <linearGradient id="primaryGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8E7B9"/>
+      <stop offset="25%" stop-color="#D4B06A"/>
+      <stop offset="55%" stop-color="#C6A15B"/>
+      <stop offset="80%" stop-color="#A37E36"/>
+      <stop offset="100%" stop-color="#6E511D"/>
+    </linearGradient>
+
+    <!-- Bright Gold Highlight -->
+    <linearGradient id="goldHighlight" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#A8864A"/>
+      <stop offset="40%" stop-color="#FFF4D4"/>
+      <stop offset="70%" stop-color="#E0BF7A"/>
+      <stop offset="100%" stop-color="#C6A15B"/>
+    </linearGradient>
+
+    <!-- Deep Shield Gradient -->
+    <linearGradient id="shieldSurface" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2C2E33"/>
+      <stop offset="50%" stop-color="#202124"/>
+      <stop offset="100%" stop-color="#151618"/>
+    </linearGradient>
+
+    <!-- Burgundy Ambient Glow -->
+    <radialGradient id="royalBurgundyGlow" cx="50%" cy="48%" r="45%">
+      <stop offset="0%" stop-color="#702D3B" stop-opacity="0.5"/>
+      <stop offset="65%" stop-color="#702D3B" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#202124" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Subtle Drop Shadow -->
+    <filter id="crestShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+
+    <filter id="goldShine" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#C6A15B" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Outer Heraldic Shield / Crest -->
+  <path d="M60 6 L104 22 C104 68 82 98 60 114 C38 98 16 68 16 22 Z" 
+        fill="url(#shieldSurface)" 
+        stroke="url(#primaryGold)" 
+        stroke-width="3" 
+        stroke-linejoin="round"
+        filter="url(#crestShadow)"/>
+
+  <!-- Inner Inscribed Gold Rim -->
+  <path d="M60 14 L96 27 C96 64 78 89 60 103 C42 89 24 64 24 27 Z" 
+        fill="none" 
+        stroke="url(#goldHighlight)" 
+        stroke-width="1.2" 
+        opacity="0.75"/>
+
+  <!-- Ambient Royal Burgundy Aura -->
+  <circle cx="60" cy="56" r="34" fill="url(#royalBurgundyGlow)"/>
+
+  <!-- Star of Achievement & Prestige at Crown -->
+  <g filter="url(#goldShine)">
+    <path d="M60 18 L62.5 25 L69.5 27.5 L62.5 30 L60 37 L57.5 30 L50.5 27.5 L57.5 25 Z" 
+          fill="url(#goldHighlight)"/>
+    <circle cx="60" cy="27.5" r="1.5" fill="#FFF"/>
+  </g>
+
+  <!-- Flanking Laurel Wreath (Honor & Excellence) -->
+  <!-- Left Wreath Leaves -->
+  <g stroke="url(#primaryGold)" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.9">
+    <path d="M36 84 C31 77 28 68 30 58"/>
+    <path d="M29 74 C26 73 24 69 26 66 C28 68 30 70 30 73" fill="url(#primaryGold)" stroke-width="0.5"/>
+    <path d="M31 64 C28 62 26 58 29 55 C31 57 32 60 32 63" fill="url(#primaryGold)" stroke-width="0.5"/>
+    <path d="M34 53 C31 50 30 46 33 43 C35 45 36 49 35 52" fill="url(#primaryGold)" stroke-width="0.5"/>
+  </g>
+
+  <!-- Right Wreath Leaves -->
+  <g stroke="url(#primaryGold)" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.9">
+    <path d="M84 84 C89 77 92 68 90 58"/>
+    <path d="M91 74 C94 73 96 69 94 66 C92 68 90 70 90 73" fill="url(#primaryGold)" stroke-width="0.5"/>
+    <path d="M89 64 C92 62 94 58 91 55 C89 57 88 60 88 63" fill="url(#primaryGold)" stroke-width="0.5"/>
+    <path d="M86 53 C89 50 90 46 87 43 C85 45 84 49 85 52" fill="url(#primaryGold)" stroke-width="0.5"/>
+  </g>
+
+  <!-- Trophy Handles -->
+  <!-- Left Sweeping Royal Handle -->
+  <path d="M46 44 C34 44 32 58 42 66 C45 68 47 69 49 69" 
+        fill="none" 
+        stroke="url(#primaryGold)" 
+        stroke-width="2.6" 
+        stroke-linecap="round"/>
+  <!-- Right Sweeping Royal Handle -->
+  <path d="M74 44 C86 44 88 58 78 66 C75 68 73 69 71 69" 
+        fill="none" 
+        stroke="url(#primaryGold)" 
+        stroke-width="2.6" 
+        stroke-linecap="round"/>
+
+  <!-- Main Trophy Chalice -->
+  <path d="M44 41 L76 41 C76 41 77 59 68 68 C64 72 60 74 60 74 C60 74 56 72 52 68 C43 59 44 41 44 41 Z" 
+        fill="url(#goldHighlight)" 
+        stroke="url(#primaryGold)" 
+        stroke-width="1.5"/>
+
+  <!-- Chalice Lip / Beveled Rim -->
+  <rect x="42" y="39.5" width="36" height="3" rx="1.5" 
+        fill="url(#primaryGold)" 
+        stroke="url(#goldHighlight)" 
+        stroke-width="0.8"/>
+
+  <!-- Diamond Facet Shading on Cup -->
+  <!-- Shadow side -->
+  <path d="M60 41 L60 74 C60 74 56 72 52 68 C43 59 44 41 44 41 Z" 
+        fill="#000000" 
+        opacity="0.18"/>
+  <!-- Highlight facet -->
+  <polygon points="60,45 64,54 60,63 56,54" fill="#FFFFFF" opacity="0.35"/>
+
+  <!-- Trophy Stem Connector -->
+  <path d="M57 74 L63 74 L62 82 L58 82 Z" fill="url(#primaryGold)"/>
+  <ellipse cx="60" cy="82" rx="5" ry="1.5" fill="url(#goldHighlight)"/>
+
+  <!-- Stepped Pedestal / Marble & Gold Base -->
+  <rect x="48" y="83" width="24" height="4.5" rx="1" 
+        fill="url(#primaryGold)" 
+        stroke="url(#goldHighlight)" 
+        stroke-width="0.6"/>
+  <rect x="43" y="87.5" width="34" height="8" rx="1.5" 
+        fill="url(#shieldSurface)" 
+        stroke="url(#primaryGold)" 
+        stroke-width="1.4"/>
+
+  <!-- Engraved Nameplate on Base -->
+  <rect x="48" y="89.5" width="24" height="4" rx="0.8" 
+        fill="url(#primaryGold)"/>
+  <line x1="51" y1="91.5" x2="69" y2="91.5" 
+        stroke="#202124" 
+        stroke-width="1" 
+        stroke-linecap="round"/>
+</svg>

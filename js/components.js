@@ -39,9 +39,14 @@ function renderNavbar(activePage = '') {
 <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
   <div class="navbar-inner">
     <!-- Logo -->
-    <a href="index.html" class="nav-logo" aria-label="Trophy & Awards Engraving Shop Home">
-      <span class="logo-main">T&A Engraving</span>
-      <span class="logo-sub">Premium Awards Since 1987</span>
+    <a href="index.html" class="nav-logo" aria-label="Trophy &amp; Awards Engraving Shop Home">
+      <div class="nav-logo-mark">
+        <img src="images/logo-icon.svg" alt="T&amp;A Engraving Crest Emblem" width="42" height="42">
+      </div>
+      <div class="nav-logo-text">
+        <span class="logo-main">T&amp;A <span>Engraving</span></span>
+        <span class="logo-sub">Trophies &amp; Awards · Est. 1987</span>
+      </div>
     </a>
 
     <!-- Desktop Links -->
@@ -91,8 +96,15 @@ function renderFooter() {
     <div class="footer-grid">
       <!-- Column 1: Company -->
       <div class="footer-brand reveal">
-        <span class="logo-main">T&A Engraving</span>
-        <span class="logo-sub">Premium Awards Since 1987</span>
+        <a href="index.html" class="footer-logo" aria-label="T&amp;A Engraving Home">
+          <div class="footer-logo-mark">
+            <img src="images/logo-icon.svg" alt="T&amp;A Engraving Crest Emblem" width="48" height="48">
+          </div>
+          <div class="footer-logo-text">
+            <span class="logo-main">T&amp;A Engraving</span>
+            <span class="logo-sub">Trophies &amp; Awards · Est. 1987</span>
+          </div>
+        </a>
         <p>Crafting extraordinary trophies, medals, plaques and custom awards that celebrate achievement and prestige. Every piece tells a story of excellence.</p>
         <div class="footer-social">
           <a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
