@@ -99,6 +99,24 @@
       stroke-width: 2;
     }
 
+    /* Blog filter band — tabs vertically centered in the section */
+    .blog-filter-band {
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+    }
+
+    .blog-filter-band .container { width: 100%; }
+
+    /* Blog filter tabs — uniform vertical alignment */
+    #blog-filter-tabs { align-items: center; }
+    #blog-filter-tabs .filter-tab {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+    }
+
     /* Blog grid */
     .blog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); margin-bottom: var(--space-8); }
 
@@ -108,7 +126,8 @@
       border-radius: var(--radius-xl);
       overflow: hidden;
       transition: all var(--transition-base);
-      display: block;
+      display: flex;
+      flex-direction: column;
     }
 
     .blog-card:hover {
@@ -131,7 +150,12 @@
 
     .blog-card:hover .blog-card-img img { transform: scale(1.06); }
 
-    .blog-card-body { padding: var(--space-6); }
+    .blog-card-body {
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
 
     .blog-card-title {
       font-family: var(--font-display);
@@ -141,6 +165,7 @@
       line-height: 1.3;
       margin-bottom: var(--space-3);
       transition: color var(--transition-fast);
+      min-height: 3.9em;
     }
 
     .blog-card:hover .blog-card-title { color: var(--gold); }
@@ -150,7 +175,10 @@
       color: var(--text-muted);
       line-height: 1.7;
       margin-bottom: var(--space-4);
+      flex: 1;
     }
+
+    .blog-card-body .blog-tag { align-self: flex-start; }
 
     .blog-read-more {
       font-size: var(--fs-sm);
@@ -267,45 +295,6 @@
     /* Newsletter widget */
     .newsletter-widget input { margin-bottom: var(--space-3); }
 
-    /* Pagination */
-    .pagination {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--space-2);
-      margin-top: var(--space-8);
-    }
-
-    .page-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: var(--radius-md);
-      border: 1.5px solid var(--border-subtle);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: var(--fs-sm);
-      font-weight: 600;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: all var(--transition-fast);
-      background: transparent;
-    }
-
-    .page-btn:hover, .page-btn.active {
-      border-color: var(--gold);
-      color: var(--gold);
-      background: rgba(198,161,91,0.08);
-    }
-
-    .page-btn.active {
-      background: var(--grad-gold);
-      color: var(--obsidian);
-      border-color: transparent;
-    }
-
-    .page-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
-
     /* Email subscribe */
     .email-cta {
       background: var(--grad-burgundy);
@@ -340,7 +329,7 @@
     <!-- ==========================================
          SECTION 1: BLOG CATEGORIES FILTER
     =========================================== -->
-    <section class="section-sm" style="background:var(--bg-surface);">
+    <section class="section-sm blog-filter-band" style="background:var(--bg-surface);">
       <div class="container">
         <div class="filter-tabs" id="blog-filter-tabs">
           <button class="filter-tab active" data-filter="all">All Articles</button>
@@ -363,7 +352,7 @@
           <!-- Main Content -->
           <div>
             <!-- Featured Post -->
-            <a href="blog-details.html" class="blog-featured reveal" aria-label="Read: The Lost Art of Hand Engraving">
+            <a href="blog-details.html?id=hand-engraving" class="blog-featured reveal" aria-label="Read: The Lost Art of Hand Engraving">
               <img src="images/craftsmanship.jpg" alt="Master craftsman engraving">
               <div class="blog-featured-overlay"></div>
               <div class="blog-featured-content">
@@ -379,7 +368,7 @@
 
             <!-- Blog Grid -->
             <div class="blog-grid" id="blog-grid">
-              <a href="blog-details.html" class="blog-card reveal" data-category="guide">
+              <a href="blog-details.html?id=crystal-guide" class="blog-card reveal" data-category="guide">
                 <div class="blog-card-img"><img src="images/crystal-awards.jpg" alt="Crystal Trophy Guide" loading="lazy"></div>
                 <div class="blog-card-body">
                   <span class="blog-tag guide">Guide</span>
@@ -393,7 +382,7 @@
                 </div>
               </a>
 
-              <a href="blog-details.html" class="blog-card reveal reveal-delay-1" data-category="corporate">
+              <a href="blog-details.html?id=corporate-culture" class="blog-card reveal reveal-delay-1" data-category="corporate">
                 <div class="blog-card-img"><img src="images/corporate-awards.jpg" alt="Corporate Awards" loading="lazy"></div>
                 <div class="blog-card-body">
                   <span class="blog-tag corporate">Corporate</span>
@@ -407,7 +396,7 @@
                 </div>
               </a>
 
-              <a href="blog-details.html" class="blog-card reveal" data-category="sports">
+              <a href="blog-details.html?id=medal-trends" class="blog-card reveal" data-category="sports">
                 <div class="blog-card-img"><img src="images/medals-collection.jpg" alt="Sports Medals" loading="lazy"></div>
                 <div class="blog-card-body">
                   <span class="blog-tag sports">Sports</span>
@@ -421,7 +410,7 @@
                 </div>
               </a>
 
-              <a href="blog-details.html" class="blog-card reveal reveal-delay-1" data-category="craftsmanship">
+              <a href="blog-details.html?id=wood-beauty" class="blog-card reveal reveal-delay-1" data-category="craftsmanship">
                 <div class="blog-card-img"><img src="images/wooden-plaques.jpg" alt="Wood Plaque" loading="lazy"></div>
                 <div class="blog-card-body">
                   <span class="blog-tag craftsmanship">Craftsmanship</span>
@@ -435,7 +424,7 @@
                 </div>
               </a>
 
-              <a href="blog-details.html" class="blog-card reveal" data-category="trends">
+              <a href="blog-details.html?id=laser-vs-hand" class="blog-card reveal" data-category="trends">
                 <div class="blog-card-img"><img src="images/hero-slider3.jpg" alt="Laser Engraving Technology" loading="lazy"></div>
                 <div class="blog-card-body">
                   <span class="blog-tag trends">Trends</span>
@@ -449,7 +438,7 @@
                 </div>
               </a>
 
-              <a href="blog-details.html" class="blog-card reveal reveal-delay-1" data-category="guide">
+              <a href="blog-details.html?id=ceremony-guide" class="blog-card reveal reveal-delay-1" data-category="guide">
                 <div class="blog-card-img"><img src="images/acrylic-award.jpg" alt="Planning Corporate Awards" loading="lazy"></div>
                 <div class="blog-card-body">
                   <span class="blog-tag guide">Guide</span>
@@ -463,17 +452,6 @@
                 </div>
               </a>
             </div>
-
-            <!-- Pagination -->
-            <nav class="pagination" aria-label="Blog pagination">
-              <button class="page-btn" aria-label="Previous page"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-              <button class="page-btn active">1</button>
-              <button class="page-btn">2</button>
-              <button class="page-btn">3</button>
-              <span style="color:var(--text-muted);">...</span>
-              <button class="page-btn">12</button>
-              <button class="page-btn" aria-label="Next page"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
-            </nav>
           </div>
 
           <!-- Sidebar -->
@@ -505,28 +483,28 @@
             <!-- Recent Posts -->
             <div class="sidebar-widget">
               <div class="widget-title">Recent Posts</div>
-              <a href="blog-details.html" class="recent-post" style="text-decoration:none;">
+              <a href="blog-details.html?id=crystal-guide" class="recent-post" style="text-decoration:none;">
                 <img class="recent-post-img" src="images/crystal-awards.jpg" alt="Crystal Trophy">
                 <div>
                   <div class="recent-post-title">Choosing Crystal Grade for Awards</div>
                   <div class="recent-post-date">Oct 8, 2026</div>
                 </div>
               </a>
-              <a href="blog-details.html" class="recent-post" style="text-decoration:none;">
+              <a href="blog-details.html?id=medal-trends" class="recent-post" style="text-decoration:none;">
                 <img class="recent-post-img" src="images/medals-collection.jpg" alt="Medals">
                 <div>
                   <div class="recent-post-title">Medal Design Trends 2026</div>
                   <div class="recent-post-date">Oct 2, 2026</div>
                 </div>
               </a>
-              <a href="blog-details.html" class="recent-post" style="text-decoration:none;">
+              <a href="blog-details.html?id=wood-beauty" class="recent-post" style="text-decoration:none;">
                 <img class="recent-post-img" src="images/wooden-plaques.jpg" alt="Wood Plaques">
                 <div>
                   <div class="recent-post-title">Why Walnut Makes the Best Plaques</div>
                   <div class="recent-post-date">Sep 28, 2026</div>
                 </div>
               </a>
-              <a href="blog-details.html" class="recent-post" style="text-decoration:none;">
+              <a href="blog-details.html?id=ceremony-guide" class="recent-post" style="text-decoration:none;">
                 <img class="recent-post-img" src="images/corporate-awards.jpg" alt="Corporate Awards">
                 <div>
                   <div class="recent-post-title">Corporate Award Ceremony Planning Guide</div>
@@ -664,14 +642,6 @@
         e.target.reset();
       });
 
-      // Pagination buttons
-      document.querySelectorAll('.page-btn:not([aria-label])').forEach(btn => {
-        btn.addEventListener('click', function() {
-          document.querySelectorAll('.page-btn:not([aria-label])').forEach(b => b.classList.remove('active'));
-          this.classList.add('active');
-          window.scrollTo({ top: 400, behavior: 'smooth' });
-        });
-      });
     });
   </script>
 </body>

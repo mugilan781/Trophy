@@ -11,6 +11,31 @@
   <link rel="stylesheet" href="css/style.css">
   <style>
     /* BLOG DETAILS */
+
+    /* Always-filled navbar (this page only, other pages unaffected) */
+    .navbar,
+    .navbar:not(.scrolled) {
+      background: rgba(32, 33, 36, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    [data-theme="light"] .navbar,
+    [data-theme="light"] .navbar:not(.scrolled) {
+      background: rgba(248, 245, 239, 0.97);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    }
+
+    [data-theme="light"] .navbar:not(.scrolled) .nav-links > li > a { color: var(--text-primary); text-shadow: none; }
+    [data-theme="light"] .navbar:not(.scrolled) .nav-icon-btn { color: var(--text-secondary); border-color: var(--border-subtle); background: transparent; }
+    [data-theme="light"] .navbar:not(.scrolled) .nav-hamburger span { background: var(--text-primary); box-shadow: none; }
+    [data-theme="light"] .navbar:not(.scrolled) .nav-logo .logo-main { text-shadow: none; }
+    [data-theme="light"] .navbar:not(.scrolled) .nav-logo .logo-sub { color: var(--text-muted); text-shadow: none; }
+    [data-theme="light"] .navbar .nav-logo .logo-main { color: var(--gold-dark); }
+    [data-theme="light"] .navbar .nav-logo .logo-main span { color: var(--obsidian); }
+
     .article-layout {
       display: grid;
       grid-template-columns: 1fr 320px;
@@ -321,12 +346,6 @@
     =========================================== -->
     <section class="section" aria-label="Article">
       <div class="container">
-        <nav class="breadcrumb" style="margin-bottom:var(--space-6);" aria-label="Breadcrumb">
-          <a href="index.html">Home</a><span class="sep">›</span>
-          <a href="blog.html">Blog</a><span class="sep">›</span>
-          <span>The Lost Art of Hand Engraving</span>
-        </nav>
-
         <div class="article-layout">
 
           <!-- Main Article -->
@@ -478,14 +497,14 @@
             <!-- Related widget -->
             <div class="sidebar-widget" style="background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius-xl);padding:var(--space-5);">
               <div class="widget-title" style="font-size:var(--fs-xs);font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:var(--space-4);padding-bottom:var(--space-3);border-bottom:1px solid var(--border-subtle);">Related Posts</div>
-              <a href="blog-details.html" style="display:flex;gap:var(--space-3);padding:var(--space-3) 0;border-bottom:1px solid var(--border-subtle);text-decoration:none;">
+              <a href="blog-details.html?id=crystal-guide" style="display:flex;gap:var(--space-3);padding:var(--space-3) 0;border-bottom:1px solid var(--border-subtle);text-decoration:none;">
                 <img src="images/crystal-awards.jpg" alt="Crystal Trophy" style="width:64px;height:48px;object-fit:cover;border-radius:var(--radius-md);flex-shrink:0;">
                 <div>
                   <div style="font-size:var(--fs-sm);font-weight:600;color:var(--text-primary);line-height:1.3;">How to Choose Crystal Trophy Grade</div>
                   <div style="font-size:var(--fs-xs);color:var(--text-muted);margin-top:4px;">Oct 8, 2026</div>
                 </div>
               </a>
-              <a href="blog-details.html" style="display:flex;gap:var(--space-3);padding:var(--space-3) 0;text-decoration:none;">
+              <a href="blog-details.html?id=wood-beauty" style="display:flex;gap:var(--space-3);padding:var(--space-3) 0;text-decoration:none;">
                 <img src="images/wooden-plaques.jpg" alt="Wooden Plaques" style="width:64px;height:48px;object-fit:cover;border-radius:var(--radius-md);flex-shrink:0;">
                 <div>
                   <div style="font-size:var(--fs-sm);font-weight:600;color:var(--text-primary);line-height:1.3;">Why Walnut Makes the Best Award Plaques</div>
@@ -572,21 +591,21 @@
           <h2 id="related-h" class="section-title reveal">You Might Also <span class="text-gold">Enjoy</span></h2>
         </div>
         <div class="related-grid">
-          <a href="blog-details.html" class="related-card reveal">
+          <a href="blog-details.html?id=crystal-guide" class="related-card reveal">
             <img src="images/crystal-awards.jpg" alt="Crystal Trophy Guide" loading="lazy">
             <div class="related-card-body">
               <div class="related-card-tag">Guide</div>
               <div class="related-card-title">How to Choose the Perfect Crystal Trophy Grade for Your Event</div>
             </div>
           </a>
-          <a href="blog-details.html" class="related-card reveal reveal-delay-1">
+          <a href="blog-details.html?id=medal-trends" class="related-card reveal reveal-delay-1">
             <img src="images/medals-collection.jpg" alt="Medal Design" loading="lazy">
             <div class="related-card-body">
               <div class="related-card-tag">Trends</div>
               <div class="related-card-title">2026 Medal Design Trends: Innovation in Sports Recognition</div>
             </div>
           </a>
-          <a href="blog-details.html" class="related-card reveal reveal-delay-2">
+          <a href="blog-details.html?id=corporate-culture" class="related-card reveal reveal-delay-2">
             <img src="images/corporate-awards.jpg" alt="Corporate Awards" loading="lazy">
             <div class="related-card-body">
               <div class="related-card-tag">Corporate</div>
@@ -633,6 +652,262 @@
       navigator.clipboard.writeText(window.location.href);
       Toast.show('Link copied to clipboard!', 'success');
     }
+
+    // Forms
+    document.addEventListener('DOMContentLoaded', () => {
+      FormValidator.init('#comment-form');
+      document.getElementById('article-newsletter').addEventListener('submit', e => {
+        e.preventDefault();
+        Toast.show('You are now subscribed! Thank you.', 'success');
+        e.target.reset();
+      });
+    });
+
+    /* ==================================================
+       DYNAMIC ARTICLE (?id=...) — one HTML file serves
+       every blog post. No id = default hand-engraving
+       article already in the markup.
+       ================================================== */
+    const ARTICLE_CATALOG = {
+      'crystal-guide': {
+        tag: 'Guide', date: 'October 8, 2026', read: '6 min read',
+        title: 'How to Choose the Perfect Crystal Trophy for Your Corporate Event',
+        subtitle: 'K9, Bohemian, leaded or lead-free — what crystal grades really mean for brilliance, durability and price.',
+        author: 'Meera Trophywala', role: 'Creative Director', initials: 'MT',
+        bio: 'Meera leads the T&A design studio and oversees every bespoke crystal commission. An NIFT graduate, she writes about design, materials and award aesthetics.',
+        hero: 'images/crystal-awards.jpg', heroAlt: 'Crystal trophies catching the light',
+        img2: 'images/acrylic-award.jpg', img2Alt: 'Crystal award detailing up close',
+        h2: ['Know Your Crystal Grades', 'Match the Award to the Occasion', 'What to Check Before You Order', 'Caring for Crystal Awards'],
+        ps: [
+          'Not all crystal is equal. The difference between a ₹2,000 glass trophy and a ₹20,000 K9 masterpiece comes down to composition, clarity and cut — and buyers who understand the grades always make better choices.',
+          'In this guide, our design studio breaks down everything a corporate buyer needs to know before commissioning crystal awards, from lead content to light refraction.',
+          'K9 optical crystal is the industry gold standard — high clarity, excellent weight and brilliant refraction at a sensible price. Bohemian crystal carries heritage prestige and a higher price tag.',
+          'Leaded crystal (typically 24%+ lead oxide) offers unmatched sparkle and heft but costs significantly more. Lead-free crystalline is lighter, safer for handling and ideal for large-volume orders.',
+          'The single biggest factor in perceived quality is cut precision. Machine-polished facets with consistent angles throw far more light than cheap pressed glass, whatever the label claims.',
+          'Board-level ceremonies and national awards deserve K9 or above with deep-etch personalization. Team events and large tournaments are better served by quality crystalline at volume pricing.',
+          'Always ask for the crystal grade in writing, a photograph of the actual blank (not a render) and the engraving depth your text requires for readability.',
+          'Every reputable supplier provides these without hesitation. If a seller cannot name the grade, walk away — genuine K9 suppliers certify it.',
+          'Surface laser engraving suits names and dates. Subsurface 3D engraving floats logos and portraits inside the crystal itself.',
+          'Deep-etch sand carving gives the most luxurious tactile feel for hero pieces. Match the technique to the viewing distance of your ceremony stage.',
+          'Keep crystal out of direct harsh sunlight for display longevity, dust with a dry microfibre cloth and never use abrasive cleaners on engraved faces.',
+          'With basic care, a quality crystal award looks identical in fifty years. That permanence is exactly why institutions choose crystal for their highest honours.'
+        ],
+        lis: ['<strong>Ask the grade</strong> — genuine K9 suppliers certify it in writing', '<strong>Check the weight</strong> — real crystal feels substantially heavier than glass', '<strong>Inspect the cut</strong> — consistent facets mean machine-polished quality', '<strong>Confirm engraving depth</strong> — readability depends on it', '<strong>Request a proof</strong> — digital proofs should arrive within hours', '<strong>Compare total cost</strong> — include engraving, box and delivery, not just the blank'],
+        quote: 'Buy the best crystal your budget allows. A trophy is judged in the three seconds it catches the light.',
+        cite: 'Meera Trophywala, Creative Director',
+        callout: 'Planning a bulk crystal order? Share your event date and quantity with our studio for grade recommendations and volume pricing within 2 business hours.',
+        tags: ['Crystal', 'Buyers Guide', 'K9 Crystal', 'Corporate Events', 'Engraving', 'Awards'],
+        toc: ['Crystal Grades', 'Matching the Occasion', 'Checks Before Ordering', 'Engraving Techniques', 'Crystal Care']
+      },
+      'corporate-culture': {
+        tag: 'Corporate', date: 'October 5, 2026', read: '7 min read',
+        title: '5 Ways Custom Awards Transform Company Culture and Boost Retention',
+        subtitle: 'Recognition backed by research: how premium awards create lasting motivational impact across teams.',
+        author: 'Kavitha Rajan', role: 'Head of Client Relations', initials: 'KR',
+        bio: 'Kavitha manages corporate partnerships and bulk order portfolios at T&A. She writes about recognition strategy and building cultures people stay for.',
+        hero: 'images/corporate-awards.jpg', heroAlt: 'Corporate awards ceremony stage',
+        img2: 'images/awards-collection.jpg', img2Alt: 'Corporate recognition awards lineup',
+        h2: ['Recognition Is a Retention Strategy', 'Make Awards Specific and Timely', 'Let Peers Do the Nominating', 'Measure What Matters'],
+        ps: [
+          'Research consistently shows recognition programs increase employee engagement dramatically — yet most companies still treat awards as an afterthought ordered two days before the event.',
+          'After supplying thousands of corporate ceremonies, we have seen exactly which recognition habits move retention numbers and which ones waste budgets.',
+          'Employees who feel genuinely recognized are far more likely to stay, and far more likely to recommend their employer. A trophy on a desk works as daily proof that effort gets noticed.',
+          'The effect compounds: recognized teams refer stronger candidates, onboard faster and defend the culture that attracted them in the first place.',
+          'Generic "good job" trophies gather dust. Awards tied to a specific achievement — with the story engraved on the base — become identity objects people keep for decades.',
+          'Present within weeks of the achievement, never months later. Timeliness signals that leadership was actually paying attention.',
+          'Manager-only nominations miss quiet contributors. Peer-nominated categories surface the mentors, helpers and culture-carriers that performance dashboards never catch.',
+          'Rotate categories yearly so recognition stays fresh: innovation, mentorship, customer obsession, resilience and rising-star awards cover every strength.',
+          'Track retention in recognized cohorts versus company averages, eNPS movement after ceremonies and referral rates from award winners.',
+          'One client measured an 18% retention improvement in recognized teams within a year. Recognition spend showed the best ROI of any HR initiative they ran.',
+          'Start with one meaningful annual ceremony, three thoughtful categories and awards worth displaying. Quality beats quantity — a single prestigious trophy motivates more than ten forgettable ones.',
+          'Then scale what works. The companies with the strongest cultures treat recognition as infrastructure, not decoration.'
+        ],
+        lis: ['<strong>Be specific</strong> — engrave the achievement story, not just a name', '<strong>Be timely</strong> — present within weeks, never quarters later', '<strong>Include peers</strong> — nominations should come from every level', '<strong>Rotate categories</strong> — keep recognition fresh every year', '<strong>Display proudly</strong> — ceremonies matter as much as the award', '<strong>Measure impact</strong> — track retention in recognized cohorts'],
+        quote: 'People forget bonuses. Nobody forgets the night the whole company stood up and applauded them.',
+        cite: 'Kavitha Rajan, Head of Client Relations',
+        callout: 'Designing a recognition program? Our corporate team builds category structures, nomination flows and award sets for companies of 50 to 50,000.',
+        tags: ['Corporate', 'Culture', 'Retention', 'Recognition', 'HR Strategy', 'Awards'],
+        toc: ['Retention Strategy', 'Specific and Timely', 'Peer Nominations', 'Measuring Impact', 'Getting Started']
+      },
+      'medal-trends': {
+        tag: 'Sports', date: 'October 2, 2026', read: '5 min read',
+        title: '2026 Medal Design Trends: What Is Winning in Sports Recognition',
+        subtitle: 'Eco metals, AR QR codes and bold relief work — the innovations redefining sports medals this season.',
+        author: 'Aditya Sharma', role: 'Head of Production', initials: 'AS',
+        bio: 'Aditya heads production at T&A and oversees every die-cast and laser line. He writes about manufacturing, materials and the technology behind modern awards.',
+        hero: 'images/medals-collection.jpg', heroAlt: 'Championship medals collection',
+        img2: 'images/sports-trophies.jpg', img2Alt: 'Sports trophies and medals display',
+        h2: ['Relief Depth Is the New Standard', 'Sustainable Metals Go Mainstream', 'Smart Medals Carry QR Stories', 'Ribbons Complete the Podium Look'],
+        ps: [
+          'Sports medals used to be flat, light and forgettable. The 2026 season has rewritten the rulebook — athletes now expect medals with presence, weight and a story.',
+          'As the team producing medals for state and national championships, here are the four trends dominating every podium this year.',
+          'High-relief 3D sculpting is now the baseline expectation. Shallow stamped medals read as cheap in photographs; deep relief catches stadium light and looks magnificent around a neck.',
+          'Custom die work costs less than organizers assume at 100+ quantities, and the perceived value jump is enormous.',
+          'Recycled zinc and copper alloys now match virgin metals for finish quality. Eco credentials printed on the ribbon or sleeve resonate strongly with young athletes and institutional buyers.',
+          'Ask your supplier for material certification — genuine recycled content comes documented, and events increasingly require it for sustainability reporting.',
+          'Laser-etched QR codes linking to race footage, certificates or highlight reels turn a medal into a digital keepsake athletes actually scan and share.',
+          'The code must survive handling, so subsurface or deep-etch placement beats surface printing every time.',
+          'Sublimated custom ribbons in event colours now outsell stock ribbons three to one. A great medal with a generic ribbon photographs like an average medal.',
+          'Budget the ribbon properly — it is the most visible square centimetres of the entire award in podium photos.',
+          'Order timelines have tightened as seasons compress. Confirm die readiness, ribbon stock and engraving capacity before announcing dates.',
+          'The organizers who plan medals early get custom work; the ones who order late get whatever is in stock.'
+        ],
+        lis: ['<strong>Go deep-relief</strong> — 3D sculpting beats flat stamping visibly', '<strong>Certify eco metals</strong> — documented recycled content only', '<strong>Add QR stories</strong> — deep-etch codes that survive handling', '<strong>Design the ribbon</strong> — custom colours outsell stock 3 to 1', '<strong>Confirm capacity</strong> — dies, ribbons and engraving slots early', '<strong>Plan backwards</strong> — announce dates only after supply is locked'],
+        quote: 'Athletes keep medals for life. Design like it — every gram of relief is remembered.',
+        cite: 'Aditya Sharma, Head of Production',
+        callout: 'Organizing a tournament? Send your event date, quantity and sport for die recommendations and a locked production slot.',
+        tags: ['Sports', 'Medals', 'Trends 2026', 'Design', 'Tournaments', 'Awards'],
+        toc: ['Relief Standards', 'Sustainable Metals', 'Smart QR Medals', 'Ribbon Design', 'Planning Timelines']
+      },
+      'wood-beauty': {
+        tag: 'Craftsmanship', date: 'September 28, 2026', read: '6 min read',
+        title: 'The Beauty of Wood: Why Walnut and Mahogany Make the Finest Award Plaques',
+        subtitle: 'Grain, warmth and permanence — why natural wood remains the most prestigious plaque material.',
+        author: 'Rajesh Trophywala', role: 'Founder & Master Engraver', initials: 'RT',
+        bio: 'Rajesh founded T&A Engraving in 1987 and has trained over 200 engravers. He writes about craft, precision and honouring human achievement.',
+        hero: 'images/wooden-plaques.jpg', heroAlt: 'Walnut and mahogany award plaques',
+        img2: 'images/craftsmanship.jpg', img2Alt: 'Hand-finishing a wooden plaque',
+        h2: ['No Two Plaques Are Ever Identical', 'Walnut vs Mahogany vs Cherry', 'Deep Carving Reveals the Grain', 'Finishing Makes or Breaks It'],
+        ps: [
+          'Every piece of walnut has a unique grain story — mineral streaks, cathedral arches, quiet straight grain. No two plaques from our workshop have ever been identical, and that is precisely the point.',
+          'In an age of identical acrylic, a wooden plaque tells the recipient their award is one of one. Here is what four decades of woodwork have taught us.',
+          'Walnut offers deep chocolate tones and dramatic grain — the traditional choice for executive and judicial recognition. Mahogany brings reddish warmth and a formal, institutional character.',
+          'Cherry starts lighter and deepens beautifully with age, making it ideal for awards meant to be kept for decades. All three take brass and silver plates superbly.',
+          'Shallow laser marking sits on the surface; deep carving cuts into it, letting stain and light play inside the letters. For hero pieces, always choose depth.',
+          'Hand-rubbed oil finishes penetrate the wood and age gracefully, while lacquer gives immediate high gloss. We finish according to where the plaque will live.',
+          'The most common failure we repair from other suppliers is rushed finishing — raised grain, cloudy lacquer, sharp un-sanded edges. Each of our plaques passes through five sanding stages.',
+          'Edges should feel like glass, corners should be eased, and the back should be finished as carefully as the front. Recipients handle plaques; every surface speaks.',
+          'Pair wood with engraved brass for tradition, silver for modern contrast, or direct deep-carve for a pure craftsman statement.',
+          'Wall-mount fittings must be rated well above the plaque weight, and we include them fitted — never as an afterthought in a plastic bag.',
+          'Store finished plaques away from direct harsh sunlight and extreme dryness to protect both wood and finish for generations.',
+          'Done right, a wooden plaque outlives the career it honours — and often becomes a family heirloom.'
+        ],
+        lis: ['<strong>Choose real hardwood</strong> — walnut, mahogany or cherry, never veneer over MDF', '<strong>Carve deep</strong> — depth is what separates premium from ordinary', '<strong>Sand five stages</strong> — edges should feel like glass', '<strong>Finish for location</strong> — oil for warmth, lacquer for gloss', '<strong>Fit the mountings</strong> — rated fittings, pre-fitted', '<strong>Protect from sun</strong> — harsh light ages wood prematurely'],
+        quote: 'Wood remembers the hand that shaped it. So does everyone who holds the finished plaque.',
+        cite: 'Rajesh Trophywala, Master Engraver',
+        callout: 'Commissioning executive plaques? Tell us the occasion and quantity for wood recommendations and carved samples.',
+        tags: ['Wood', 'Plaques', 'Craftsmanship', 'Walnut', 'Executive Gifts', 'Awards'],
+        toc: ['Unique Grain', 'Wood Compared', 'Deep Carving', 'Finishing Secrets', 'Plaque Care']
+      },
+      'laser-vs-hand': {
+        tag: 'Trends', date: 'September 22, 2026', read: '9 min read',
+        title: 'Laser vs. Hand Engraving: Which Technique Is Right for Your Award?',
+        subtitle: 'Precision, cost, turnaround and soul — an honest comparison from a studio that masters both.',
+        author: 'Aditya Sharma', role: 'Head of Production', initials: 'AS',
+        bio: 'Aditya heads production at T&A and runs both the fiber-laser lines and the hand-engraving atelier. He writes about technique, tooling and honest trade-offs.',
+        hero: 'images/hero-slider3.jpg', heroAlt: 'Laser engraving machine at work',
+        img2: 'images/craftsmanship.jpg', img2Alt: 'Hand engraving with traditional graver',
+        h2: ['How Each Technique Actually Works', 'Precision vs Character', 'Cost and Turnaround Compared', 'Our Honest Recommendation'],
+        ps: [
+          'Clients ask us constantly which engraving technique to choose, expecting us to pick a side. The truth from a studio running both daily: each wins different jobs, and the best awards often combine them.',
+          'Here is the unvarnished comparison we give every customer before they spend a rupee.',
+          'Fiber lasers vaporize material at micron precision, repeating identical marks thousands of times. Hand engraving cuts with a graver, varying pressure and angle with every stroke.',
+          'One is programmable perfection; the other is controlled human expression. Understanding that difference decides everything else.',
+          'Laser wins on consistency — 200 medals with identical text, zero variation. Hand wins on character — line-weight shading that catches light like calligraphy and cannot be programmed.',
+          'For readable small text and QR codes, laser is objectively superior. For hero names on prestige pieces, most recipients find hand work more moving.',
+          'Laser setup is fast and unit costs fall steeply with volume, making it ideal for bulk runs. Hand engraving is skilled-labour time, priced fairly higher per piece.',
+          'Turnaround follows the same logic: lasers deliver hundreds of pieces in days; hand commissions need scheduling with master engravers weeks ahead for large orders.',
+          'For bulk medals and plaques: go laser, invest the savings in better materials. For retirements, lifetime awards and flagship trophies: commission hand finishing.',
+          'For the best of both, let lasers handle consistent text and hand engravers add borders, flourishes and artwork. Our most celebrated pieces are hybrids.',
+          'Beware suppliers who only own one technology — their advice will always favour their machine. Ask what each technique costs separately.',
+          'Whichever you choose, insist on a proof before production. A photograph of the actual engraved sample beats any render.'
+        ],
+        lis: ['<strong>Bulk consistency</strong> — laser wins identical repeat work', '<strong>Hero character</strong> — hand wins prestige names', '<strong>Small text & codes</strong> — laser reads better at size', '<strong>Budget bulk</strong> — laser unit costs fall with volume', '<strong>Consider hybrids</strong> — laser text plus hand flourishes', '<strong>Always proof first</strong> — real samples, never just renders'],
+        quote: 'We own both technologies, so our only loyalty is to the right result for your award.',
+        cite: 'Aditya Sharma, Head of Production',
+        callout: 'Unsure which technique suits your order? Send your text and quantity for a side-by-side recommendation and pricing.',
+        tags: ['Laser', 'Hand Engraving', 'Comparison', 'Technique', 'Guide', 'Awards'],
+        toc: ['How They Work', 'Precision vs Soul', 'Cost Compared', 'Recommendations', 'Proofing First']
+      },
+      'ceremony-guide': {
+        tag: 'Guide', date: 'September 18, 2026', read: '11 min read',
+        title: 'The Complete Guide to Planning a Corporate Awards Ceremony on Any Budget',
+        subtitle: 'From team lunches to grand galas — a step-by-step playbook for ceremonies people remember.',
+        author: 'Kavitha Rajan', role: 'Head of Client Relations', initials: 'KR',
+        bio: 'Kavitha manages corporate partnerships at T&A and has guided hundreds of ceremonies from brief to stage. She writes about planning, budgets and flawless execution.',
+        hero: 'images/acrylic-award.jpg', heroAlt: 'Modern awards ready for ceremony night',
+        img2: 'images/corporate-awards.jpg', img2Alt: 'Corporate awards lineup for gala event',
+        h2: ['Start With the Story, Not the Stage', 'Budget Backwards From Impact', 'Awards Your Winners Display', 'Rehearse the Ten Minutes'],
+        ps: [
+          'The most memorable ceremonies we supply share one trait: the organizers decided what the night should mean before booking anything. Everything else — venue, awards, script — serves that story.',
+          'Whether it is a 20-person lunch or a 2,000-guest gala, this playbook scales to any budget because the principles never change.',
+          'List your categories and winners first, then allocate budget to what the audience remembers: the award moment itself, photography of it and the trophy winners take home.',
+          'Décor impresses for an evening; a prestigious trophy motivates for years. When forced to choose, fund the award before the centerpieces.',
+          'Match award prestige to achievement weight: crystal and metal for top honours, quality medals and plaques for broad categories. Every tier should still feel premium.',
+          'Order samples early — holding the actual award ends all internal debate about quality faster than any catalogue photograph.',
+          'Confirm quantities, name spellings and engraving proofs a full month out. Rush fees and overnight shipping quietly destroy more budgets than any venue ever has.',
+          'Build a 10% buffer into trophy counts for last-minute winners and engraving corrections. Unused spares become next year s head start.',
+          'The ten minutes covering winner announcement, walk-up, handshake, photograph and exit deserve a full rehearsal. This is the footage everyone shares.',
+          'Brief presenters on name pronunciations, handshake-side staging and where to look during photos. Amateur handling ruins professional awards.',
+          'Close the night by telling winners exactly where to find their photographs, and share ceremony images within 48 hours while pride is fresh.',
+          'Then survey one question: did the night make winners feel extraordinary? That single metric guides next year s entire plan.'
+        ],
+        lis: ['<strong>Story first</strong> — decide the night s meaning before booking', '<strong>Fund the award</strong> — trophies outlast décor by years', '<strong>Sample early</strong> — holding beats catalogues always', '<strong>Buffer 10%</strong> — spares cover surprises gracefully', '<strong>Rehearse ten minutes</strong> — the walk-up is the shareable moment', '<strong>Follow up fast</strong> — photos within 48 hours'],
+        quote: 'Nobody remembers the centerpieces. Everybody remembers holding their trophy while the room applauded.',
+        cite: 'Kavitha Rajan, Head of Client Relations',
+        callout: 'Planning a ceremony? Share your date, headcount and budget for a complete awards plan with locked pricing.',
+        tags: ['Ceremony', 'Corporate', 'Planning', 'Guide', 'Events', 'Awards'],
+        toc: ['Story First', 'Budgeting', 'Choosing Awards', 'Rehearsal', 'Follow-Up']
+      }
+    };
+
+    function setText(sel, txt) {
+      const el = document.querySelector(sel);
+      if (el) el.textContent = txt;
+    }
+
+    // Render the requested article (?id=...). No id = default markup stays.
+    (function loadArticleFromQuery() {
+      let id = null;
+      try { id = new URLSearchParams(window.location.search).get('id'); } catch (e) { id = null; }
+      const a = id && ARTICLE_CATALOG[id];
+      if (!a) return;
+
+      document.title = a.title + ' | T&A Engraving Blog';
+
+      setText('.article-tag', a.tag);
+      setText('.article-date', a.date);
+      setText('.article-read-time', '· ' + a.read);
+      setText('.article-title', a.title);
+      setText('.article-subtitle', a.subtitle);
+
+      setText('.author-avatar', a.initials);
+      setText('.author-name', a.author);
+      setText('.author-role', a.role);
+      setText('.author-bio-avatar', a.initials);
+      setText('.author-bio-name', a.author);
+      setText('.author-bio-role', a.role);
+      setText('.author-bio-text', a.bio);
+
+      const hero = document.querySelector('.article-hero-img');
+      if (hero) { hero.src = a.hero; hero.alt = a.title; }
+
+      const body = document.getElementById('article-content');
+      if (body) {
+        const ps = body.querySelectorAll(':scope > p');
+        a.ps.forEach((t, i) => { if (ps[i]) ps[i].textContent = t; });
+        const h2s = body.querySelectorAll(':scope > h2');
+        a.h2.forEach((t, i) => { if (h2s[i]) h2s[i].textContent = t; });
+        const lis = body.querySelectorAll('ul li');
+        a.lis.forEach((t, i) => { if (lis[i]) lis[i].innerHTML = t; });
+        const bq = body.querySelector('blockquote');
+        if (bq) {
+          if (bq.childNodes[0]) bq.childNodes[0].textContent = '"' + a.quote + '" ';
+          const cite = bq.querySelector('cite');
+          if (cite) cite.textContent = '— ' + a.cite;
+        }
+        const co = body.querySelector('.callout p');
+        if (co) co.textContent = a.callout;
+        const img2 = body.querySelectorAll(':scope > img')[0];
+        if (img2) { img2.src = a.img2; img2.alt = a.img2Alt; }
+      }
+
+      const pills = document.querySelector('.article-tags');
+      if (pills) pills.innerHTML = a.tags.map(t => '<span class="article-tag-pill">' + t + '</span>').join('');
+
+      const tocLinks = document.querySelectorAll('.toc-link');
+      a.toc.forEach((t, i) => { if (tocLinks[i]) tocLinks[i].textContent = t; });
+    })();
 
     // Forms
     document.addEventListener('DOMContentLoaded', () => {

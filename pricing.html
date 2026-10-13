@@ -33,10 +33,9 @@
       background: var(--grad-burgundy);
       border-color: var(--gold);
       box-shadow: var(--shadow-gold);
-      transform: scale(1.03);
     }
 
-    .pricing-card.featured:hover { transform: scale(1.03) translateY(-4px); }
+    .pricing-card.featured:hover { transform: translateY(-4px); }
 
     .pricing-badge {
       position: absolute;
@@ -114,18 +113,21 @@
     .pricing-feature-text { color: var(--text-secondary); }
     .pricing-card.featured .pricing-feature-text { color: rgba(248,245,239,0.85); }
 
-    .pricing-feature.not-included .pricing-feature-text { color: var(--text-muted); opacity: 0.5; }
-    .pricing-feature.not-included .pricing-feature-icon { opacity: 0.3; }
+    /* Excluded features stay readable; X mark is red */
+    .pricing-feature.not-included .pricing-feature-text { color: var(--text-secondary); opacity: 1; }
+    .pricing-feature.not-included .pricing-feature-icon { color: #E05252; opacity: 1; }
+    .pricing-card.featured .pricing-feature.not-included .pricing-feature-text { color: rgba(248,245,239,0.85); opacity: 1; }
 
-    .pricing-cta { margin-top: var(--space-8); }
+    .pricing-cta { margin-top: auto; padding-top: var(--space-8); }
 
     /* Bulk table */
     .bulk-table {
       width: 100%;
-      border-collapse: collapse;
+      border-collapse: separate;
+      border-spacing: 0;
       overflow: hidden;
       border-radius: var(--radius-xl);
-      border: 1px solid var(--border-subtle);
+      border: 2px solid rgba(198,161,91,0.55);
     }
 
     .bulk-table thead { background: var(--bg-surface); }
@@ -153,7 +155,7 @@
     .bulk-table td.desc { color: var(--text-muted); }
 
     /* Comparison */
-    .comparison-table { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: var(--radius-xl); border: 1px solid var(--border-subtle); }
+    .comparison-table { width: 100%; border-collapse: separate; border-spacing: 0; overflow: hidden; border-radius: var(--radius-xl); border: 2px solid rgba(198,161,91,0.55); }
     .comparison-table th {
       padding: var(--space-4) var(--space-5);
       text-align: center;
@@ -165,6 +167,7 @@
     }
     .comparison-table th:first-child { text-align: left; }
     .comparison-table th.featured-col { background: rgba(112,45,59,0.3); color: var(--gold); }
+    [data-theme="light"] .comparison-table th.featured-col { color: var(--obsidian); }
     .comparison-table td { padding: var(--space-3) var(--space-5); font-size: var(--fs-sm); border-bottom: 1px solid var(--border-subtle); color: var(--text-secondary); }
     .comparison-table td:first-child { color: var(--text-primary); font-weight: 600; }
     .comparison-table td { text-align: center; }
@@ -273,6 +276,12 @@
     =========================================== -->
     <section class="section" aria-labelledby="pricing-h">
       <div class="container">
+
+        <div class="section-header">
+          <div class="section-label">Our Plans</div>
+          <h2 id="pricing-h" class="section-title reveal">Pricing for Every <span class="text-gold">Occasion</span></h2>
+          <p class="section-subtitle reveal reveal-delay-1">Pick a category below — transparent per-piece pricing with free engraving on every order.</p>
+        </div>
 
         <!-- Toggle -->
         <div class="pricing-tabs-wrap reveal">
@@ -575,7 +584,7 @@
             <div class="stars" style="margin-bottom:var(--space-3);">★★★★★</div>
             <p style="font-size:var(--fs-sm);color:var(--text-secondary);font-style:italic;line-height:1.8;margin-bottom:var(--space-4);">"Ordered 150 trophies for our state tournament. The 25% bulk discount saved us ₹22,000 — more than enough to upgrade to the premium finish. Exceptional quality."</p>
             <div style="display:flex;align-items:center;gap:var(--space-3);">
-              <div style="width:36px;height:36px;border-radius:50%;background:var(--grad-gold);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:0.8rem;font-weight:700;color:var(--obsidian);">VP</div>
+              <div style="width:36px;height:36px;border-radius:50%;overflow:hidden;flex-shrink:0;border:1.5px solid var(--gold);"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=96&q=80" alt="Vijay Patel" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
               <div><div style="font-family:var(--font-display);font-size:var(--fs-sm);font-weight:700;">Vijay Patel</div><div style="font-size:var(--fs-xs);color:var(--text-muted);">State Games Secretary, Rajasthan</div></div>
             </div>
           </div>
@@ -583,7 +592,7 @@
             <div class="stars" style="margin-bottom:var(--space-3);">★★★★★</div>
             <p style="font-size:var(--fs-sm);color:var(--text-secondary);font-style:italic;line-height:1.8;margin-bottom:var(--space-4);">"The pricing calculator on the website gave me an accurate quote — final invoice was within 2% of the estimate. Transparent, honest and refreshingly straightforward."</p>
             <div style="display:flex;align-items:center;gap:var(--space-3);">
-              <div style="width:36px;height:36px;border-radius:50%;background:var(--grad-gold);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:0.8rem;font-weight:700;color:var(--obsidian);">SK</div>
+              <div style="width:36px;height:36px;border-radius:50%;overflow:hidden;flex-shrink:0;border:1.5px solid var(--gold);"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=96&q=80" alt="Sunita Krishnamurthy" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
               <div><div style="font-family:var(--font-display);font-size:var(--fs-sm);font-weight:700;">Sunita Krishnamurthy</div><div style="font-size:var(--fs-xs);color:var(--text-muted);">Procurement Manager, HCL</div></div>
             </div>
           </div>
@@ -591,7 +600,7 @@
             <div class="stars" style="margin-bottom:var(--space-3);">★★★★★</div>
             <p style="font-size:var(--fs-sm);color:var(--text-secondary);font-style:italic;line-height:1.8;margin-bottom:var(--space-4);">"Best ROI I've seen in recognition spend. Our employee retention improved 18% in the year after we introduced customized T&A awards. The quality communicates value."</p>
             <div style="display:flex;align-items:center;gap:var(--space-3);">
-              <div style="width:36px;height:36px;border-radius:50%;background:var(--grad-gold);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:0.8rem;font-weight:700;color:var(--obsidian);">AR</div>
+              <div style="width:36px;height:36px;border-radius:50%;overflow:hidden;flex-shrink:0;border:1.5px solid var(--gold);"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=96&q=80" alt="Ananya Reddy" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
               <div><div style="font-family:var(--font-display);font-size:var(--fs-sm);font-weight:700;">Ananya Reddy</div><div style="font-size:var(--fs-xs);color:var(--text-muted);">CHRO, Zensar Technologies</div></div>
             </div>
           </div>
@@ -605,7 +614,7 @@
     <section class="section" style="background:var(--bg-surface);" aria-label="Get Started">
       <div class="container" style="text-align:center;">
         <div class="reveal">
-          <div class="section-label">Ready to Order?</div>
+          <div class="section-label" style="justify-content:center;">Ready to Order?</div>
           <h2 class="section-title" style="margin-bottom:var(--space-4);">Start Your <span class="text-gold">Award Journey</span></h2>
           <p style="color:var(--text-secondary);max-width:560px;margin:0 auto var(--space-8);line-height:1.9;">From single custom pieces to 10,000-unit tournament orders — our team is ready to deliver excellence within your timeline and budget.</p>
           <div style="display:flex;gap:var(--space-4);justify-content:center;flex-wrap:wrap;">
@@ -624,6 +633,74 @@
   <script src="js/components.js"></script>
   <script src="js/main.js"></script>
   <script>
+    /* Pricing plans per category — tabs render the matching 3 cards */
+    const PRICING_DATA = {
+      trophies: [
+        { tier: 'Essential', name: 'Standard Trophy', price: '₹499', from: 'per piece · Includes base engraving', cta: 'Get Started', ctaHref: 'contact.html', ctaBtn: 'btn-outline',
+          features: [['Zinc alloy gold-plated trophy', 1], ['3 lines of text engraving', 1], ['Choice of base colour', 1], ['Standard gift box', 1], ['Logo engraving', 0], ['Custom design', 0], ['Premium packaging', 0]] },
+        { tier: 'Premium', name: 'Prestige Trophy', price: '₹1,999', from: 'per piece · Free engraving + gift box', featured: true, cta: 'Design Now', ctaHref: 'engraving.html', ctaBtn: 'btn-primary',
+          features: [['Solid metal trophy, 30cm height', 1], ['Unlimited text + logo engraving', 1], ['Choice of 4 finishes', 1], ['Digital proof within 4 hours', 1], ['Premium velvet gift box', 1], ['Free tracked delivery', 1], ['Custom die casting', 0]] },
+        { tier: 'Bespoke', name: 'Custom Trophy', price: '₹8,999', from: 'per piece · Full bespoke service', cta: 'Talk to Us', ctaHref: 'contact.html', ctaBtn: 'btn-outline',
+          features: [['Fully custom die-cast design', 1], ['Master sculptor designs mould', 1], ['Any size, shape, finish', 1], ['Unlimited revisions', 1], ['Branded packaging', 1], ['White glove delivery', 1], ['Dedicated account manager', 1]] }
+      ],
+      medals: [
+        { tier: 'Essential', name: 'Standard Medal', price: '₹299', from: 'per piece · Includes ribbon', cta: 'Get Started', ctaHref: 'contact.html', ctaBtn: 'btn-outline',
+          features: [['Die-cast medal, 50mm size', 1], ['Custom ribbon colours', 1], ['Standard presentation sleeve', 1], ['Bulk discounts from 25+', 1], ['Name engraving', 0], ['Custom die design', 0], ['Premium case', 0]] },
+        { tier: 'Premium', name: 'Championship Medal', price: '₹599', from: 'per piece · Free engraving + case', featured: true, cta: 'Design Now', ctaHref: 'engraving.html', ctaBtn: 'btn-primary',
+          features: [['Premium gold/silver/bronze finish', 1], ['Name + event engraving', 1], ['Custom ribbons included', 1], ['Presentation case', 1], ['Free tracked delivery', 1], ['Bulk discounts from 25+', 1], ['Fully custom die', 0]] },
+        { tier: 'Bespoke', name: 'Custom Die Medal', price: '₹1,499', from: 'per piece · Full custom service', cta: 'Talk to Us', ctaHref: 'contact.html', ctaBtn: 'btn-outline',
+          features: [['Fully custom die design', 1], ['Any shape, size, relief', 1], ['Enamel colour inlays', 1], ['Unlimited revisions', 1], ['Branded packaging', 1], ['White glove delivery', 1], ['Dedicated account manager', 1]] }
+      ],
+      crystal: [
+        { tier: 'Essential', name: 'Crystal Classic', price: '₹4,999', from: 'per piece · Includes surface engraving', cta: 'Get Started', ctaHref: 'contact.html', ctaBtn: 'btn-outline',
+          features: [['K9 optical crystal award', 1], ['Surface laser engraving', 1], ['Choice of base finish', 1], ['Standard gift box', 1], ['3D interior engraving', 0], ['Logo etching', 0], ['Premium velvet box', 0]] },
+        { tier: 'Premium', name: 'Diamond Excellence', price: '₹7,999', from: 'per piece · 3D engraving + velvet box', featured: true, cta: 'Design Now', ctaHref: 'engraving.html', ctaBtn: 'btn-primary',
+          features: [['AAA grade K9 crystal', 1], ['3D interior laser engraving', 1], ['Logo + unlimited text', 1], ['4 base finishes', 1], ['Premium velvet gift box', 1], ['Free tracked delivery', 1], ['Bespoke sculpture', 0]] },
+        { tier: 'Bespoke', name: 'Crystal Sculpture', price: '₹19,999', from: 'per piece · Museum-grade bespoke', cta: 'Talk to Us', ctaHref: 'contact.html', ctaBtn: 'btn-outline',
+          features: [['Museum-grade crystal block', 1], ['Master artisan sculpting', 1], ['Any form, any scale', 1], ['Unlimited revisions', 1], ['Branded packaging', 1], ['White glove delivery', 1], ['Dedicated account manager', 1]] }
+      ],
+      plaques: [
+        { tier: 'Essential', name: 'Classic Plaque', price: '₹1,299', from: 'per piece · Includes plate engraving', cta: 'Get Started', ctaHref: 'contact.html', ctaBtn: 'btn-outline',
+          features: [['Solid wood plaque', 1], ['Brass plate engraving', 1], ['Choice of wood finish', 1], ['Standard gift box', 1], ['Deep carving', 0], ['Custom sizes', 0], ['Premium packaging', 0]] },
+        { tier: 'Premium', name: 'Executive Plaque', price: '₹1,899', from: 'per piece · Deep carve + gift box', featured: true, cta: 'Design Now', ctaHref: 'engraving.html', ctaBtn: 'btn-primary',
+          features: [['Walnut/mahogany/cherry wood', 1], ['Deep-carved engraving', 1], ['Brass or silver plate', 1], ['Wall-mount fittings', 1], ['Premium gift box', 1], ['Free tracked delivery', 1], ['Monument sizing', 0]] },
+        { tier: 'Bespoke', name: 'Monument Plaque', price: '₹4,999', from: 'per piece · Full bespoke service', cta: 'Talk to Us', ctaHref: 'contact.html', ctaBtn: 'btn-outline',
+          features: [['Oversized bespoke design', 1], ['Any wood, metal inlay', 1], ['Portrait & logo etching', 1], ['Unlimited revisions', 1], ['Branded packaging', 1], ['White glove delivery', 1], ['Dedicated account manager', 1]] }
+      ]
+    };
+
+    const CHECK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>';
+    const CROSS_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+
+    function renderPricing(cat) {
+      const plans = PRICING_DATA[cat] || PRICING_DATA.trophies;
+      const grid = document.querySelector('#pricing-trophies .pricing-grid');
+      grid.innerHTML = plans.map(plan => `
+        <div class="pricing-card${plan.featured ? ' featured' : ''}">
+          ${plan.featured ? '<div class="pricing-badge">Most Popular</div>' : ''}
+          <div class="pricing-tier">${plan.tier}</div>
+          <div class="pricing-name"${plan.featured ? ' style="color:var(--ivory);"' : ''}>${plan.name}</div>
+          <div class="pricing-price">${plan.price}</div>
+          <div class="pricing-from"${plan.featured ? ' style="color:rgba(248,245,239,0.6);"' : ''}>${plan.from}</div>
+          <div class="pricing-divider"></div>
+          <div class="pricing-features">
+            ${plan.features.map(f => `
+              <div class="pricing-feature${f[1] ? '' : ' not-included'}"><span class="pricing-feature-icon">${f[1] ? CHECK_SVG : CROSS_SVG}</span><span class="pricing-feature-text">${f[0]}</span></div>`).join('')}
+          </div>
+          <div class="pricing-cta">
+            <a href="${plan.ctaHref}" class="btn ${plan.ctaBtn} w-full" style="justify-content:center;">${plan.cta}</a>
+          </div>
+        </div>`).join('');
+    }
+
+    document.querySelectorAll('#pricing-category-tabs .filter-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('#pricing-category-tabs .filter-tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        renderPricing(this.dataset.filter);
+      });
+    });
+
     const DISCOUNTS = { 1: 0, 10: 0.10, 25: 0.15, 50: 0.20, 100: 0.25, 200: 0.30, 500: 0.35 };
 
     function getDiscount(qty) {
