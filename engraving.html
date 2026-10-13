@@ -277,6 +277,13 @@
     .order-total span:first-child { font-weight: 700; color: var(--text-primary); }
     .order-total span:last-child { font-family: var(--font-display); font-size: var(--fs-xl); font-weight: 900; color: var(--gold); }
 
+    /* Order Summary keeps readable contrast in light theme (base is a fixed dark gradient) */
+    [data-theme="light"] .order-summary {
+      background: #FFFFFF;
+      border-color: rgba(198, 161, 91, 0.35);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+    }
+
     /* How it works steps */
     .engraving-steps { display: flex; gap: var(--space-6); flex-wrap: wrap; justify-content: center; }
 
@@ -285,6 +292,17 @@
       align-items: flex-start;
       gap: var(--space-4);
       max-width: 260px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      transition: all var(--transition-base);
+    }
+
+    .engraving-step:hover {
+      border-color: var(--gold);
+      box-shadow: var(--shadow-gold);
+      transform: translateY(-4px);
     }
 
     .estep-num {
@@ -1071,7 +1089,13 @@
       updateRangeLabel(document.getElementById('title-size'), 'title-size-val');
       updateRangeLabel(document.getElementById('letter-spacing'), 'letter-spacing-val');
       updateRangeLabel(document.getElementById('line-gap'), 'line-gap-val');
-      EngravinStudio.state = { ...EngravinStudio.state, line1:'EXCELLENCE AWARD', line2:'John Smith', line3:'Pinnacle Corp', line4:'2026', titleSize:24, letterSpacing:4, lineGap:16, decorBorder:true, decorLaurel:true, decorStars:false, decorLines:true };
+      // Restore default option buttons (font / layout / shape / material / engraving color)
+      document.querySelectorAll('.font-option').forEach((b, i) => b.classList.toggle('active', i === 0));
+      document.querySelectorAll('.layout-option').forEach((b, i) => b.classList.toggle('active', i === 0));
+      document.querySelectorAll('.shape-btn').forEach((b, i) => b.classList.toggle('active', i === 0));
+      document.querySelectorAll('.color-swatch-btn[data-material]').forEach((b, i) => b.classList.toggle('active', i === 0));
+      document.querySelectorAll('.color-swatch-btn[data-color]').forEach((b, i) => b.classList.toggle('active', i === 0));
+      EngravinStudio.state = { ...EngravinStudio.state, line1:'EXCELLENCE AWARD', line2:'John Smith', line3:'Pinnacle Corp', line4:'2026', font:'Cinzel', titleSize:24, letterSpacing:4, lineGap:16, layout:'centered', engravingColor:'#C6A15B', bgColor:'#1a1a1a', shape:'crystal', decorBorder:true, decorLaurel:true, decorStars:false, decorLines:true };
       EngravinStudio.render();
       Toast.show('Design reset to defaults', 'info');
     }
